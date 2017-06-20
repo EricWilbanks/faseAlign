@@ -516,25 +516,9 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename):
 
 
 
-def process_tg_intervals(tmppath,basename,chunk_index,output_intervals):
-
-	out_tg = audiolabel.LabelManager(codec='utf-8')
-
-	for speaker in output_intervals:
-		for tier_type in output_intervals[speaker]:
-			tier_name = speaker + ' : ' + tier_type
-			t = audiolabel.IntervalTier(name=tier_name)
-			for i in output_intervals[speaker][tier_type]:
-				t.add(audiolabel.Label(text=i[2],t1=i[0],t2=i[1]))
-			out_tg.add(t)
-
-
-	return out_tg
-
-
-
-def make_tg_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename):
+def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path):
 	
+	call_htk(tmppath,basename+"_",dict_path)
 	word_index = 0
 	current_speaker = first_speaker
 
@@ -554,6 +538,23 @@ def make_tg_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename
 				output_intervals[speaker]["words"] = []
 			
 			process_mlf_output(section,first_speaker)
+
+
+
+def process_tg_intervals(tmppath,basename,output_intervals):
+
+	out_tg = audiolabel.LabelManager(codec='utf-8')
+
+	for speaker in output_intervals:
+		for tier_type in output_intervals[speaker]:
+			tier_name = speaker + ' : ' + tier_type
+			t = audiolabel.IntervalTier(name=tier_name)
+			for i in output_intervals[speaker][tier_type]:
+				t.add(audiolabel.Label(text=i[2],t1=i[0],t2=i[1]))
+			out_tg.add(t)
+
+
+	return out_tg
 
 
 
@@ -594,15 +595,17 @@ def main(audio, transcript, tmppath, basename, transcript_type, channel_type, ch
 						words_to_add.write(word+'\n')
 				sys.exit('There were missing words in your transcript! Saved to- ' + tmppath + 'missing_words')
 				
+	###########################
 
 	if transcript_type == "txt":
-		call_htk(tmppath,basename+"_",dict_path)
-		make_tg_from_txt(speaker_indices,speaker_list, first_speaker, tmppath, basename)
+		align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path)
 	else:
-		output_intervals = align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename)
-		out_tg = process_tg_intervals(tmppath,basename,chunk_index,output_intervals)
-		with codecs.open(outpath+basename+'_aligned.TextGrid','w','utf-8') as o:
-			o.write(out_tg.as_string('praat_short'))
+		output_intervals = align_from_tg(chunk_index, total_chunks,tmppath,dict_path,basename)
+	out_tg = process_tg_intervals(tmppath,basename,output_intervals)
+	with codecs.open(outpath+basename+'_aligned.TextGrid','w','utf-8') as o:
+		o.write(out_tg.as_string('praat_short'))
+
+	shutil.rmtree(tmppath)
 
 
 
@@ -620,7 +623,7 @@ parser.add_argument('-o', '--outpath', help = 'directory to store output textgri
 parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
 args = parser.parse_args()
 
-repos = "/home/ubuntu/Desktop/Shared/sf_fase_dev/testing/m5_monomix/"
+repos = "/home/ubuntu/Desktop/Shared/sf_fase_dev/testing/m5_monomix/" # TO-DO: map this correctly from setup.py
 
 # Check stereo options
 if ((args.stereo is True and args.left is None) or (args.stereo is True and args.right is None)):
@@ -656,7 +659,7 @@ tmppath = outpath + '/tmp/'
 if args.stereo is True:
 	channel_type = 'stereo'
 	if ((args.left is not None) and (args.right is not None)):
-		chan_1 = '{' + args.left + '}'
+		chan_1 = '{' + args.left + '}' # TO-DO: improve flexibility and parsing of possible inputs (in addition to custom speaker tags)
 		chan_2 = '{' + args.right + '}'
 	else:
 		chan_1 = None
@@ -666,7 +669,4 @@ else:
 	chan_1 = None
 	chan_2 = None
 
-# Main call
 main(args.wav, args.transcript, tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include)
-
-shutil.rmtree(tmppath)
