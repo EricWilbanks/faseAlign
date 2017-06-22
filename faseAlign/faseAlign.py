@@ -29,7 +29,7 @@ def correction(x):
 
 
 
-def makeSections(f):
+def makeSections(f): # TO-DO: check that this still functions for batch scp alignments
 	 ''' This is a generator function. It will return successive sections
 		 of f until EOF.
 
@@ -409,7 +409,7 @@ def call_htk(tmppath,name,dict_path):
 
 
 
-def process_mlf_output(section,speak):
+def process_mlf_output(section,speak,output_intervals):
 
 	for sec in sectionizeMLF(section):
 		for phone_block in sec:
@@ -464,6 +464,8 @@ def process_mlf_output(section,speak):
 					pass
 			output_intervals[speak]["words"].append((word_begin+offset,word_end+offset,word))
 
+	return output_intervals
+
 
 
 def align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename):
@@ -494,7 +496,7 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename):
 				section = [x for x in section if "rec" not in x]
 
 				# Process aligned mlf and add intervals to output_intervals dictionary
-				process_mlf_output(section,speaker)
+				output_intervals = process_mlf_output(section,speaker,output_intervals)
 
 	return output_intervals
 
@@ -521,7 +523,9 @@ def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,d
 				output_intervals[speaker]["phones"] = []
 				output_intervals[speaker]["words"] = []
 			
-			process_mlf_output(section,first_speaker)
+			output_intervals = process_mlf_output(section,first_speaker,output_intervals)
+
+	return output_intervals
 
 
 
