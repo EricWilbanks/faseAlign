@@ -412,6 +412,7 @@ def call_htk(tmppath,name,dict_path):
 def process_mlf_output(section,speak,output_intervals,offset):
 
 	for sec in sectionizeMLF(section):
+		word_index = 0
 		for phone_block in sec:
 			current = phone_block
 
@@ -504,12 +505,9 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename):
 
 def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path):
 	
+	print(basename+"_")
 	call_htk(tmppath,basename+"_",dict_path)
-	word_index = 0
-	current_speaker = first_speaker
 
-	all_lines = []
-	exit()
 	with codecs.open(tmppath + basename + '_aligned.mlf', 'r','utf-8') as input: 
 		f = input.readlines()[2:]
 
