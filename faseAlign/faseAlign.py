@@ -409,7 +409,7 @@ def call_htk(tmppath,name,dict_path):
 
 
 
-def process_mlf_output(section,speak,output_intervals):
+def process_mlf_output(section,speak,output_intervals,offset):
 
 	for sec in sectionizeMLF(section):
 		for phone_block in sec:
@@ -496,7 +496,7 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename):
 				section = [x for x in section if "rec" not in x]
 
 				# Process aligned mlf and add intervals to output_intervals dictionary
-				output_intervals = process_mlf_output(section,speaker,output_intervals)
+				output_intervals = process_mlf_output(section,speaker,output_intervals,offset)
 
 	return output_intervals
 
@@ -523,7 +523,7 @@ def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,d
 				output_intervals[speaker]["phones"] = []
 				output_intervals[speaker]["words"] = []
 			
-			output_intervals = process_mlf_output(section,first_speaker,output_intervals)
+			output_intervals = process_mlf_output(section,first_speaker,output_intervals,0) # 0 offset
 
 	return output_intervals
 
