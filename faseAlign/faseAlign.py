@@ -505,8 +505,7 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename):
 
 def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path):
 	
-	print(basename+"_")
-	call_htk(tmppath,basename+"_",dict_path)
+	call_htk(tmppath,basename,dict_path)
 
 	with codecs.open(tmppath + basename + '_aligned.mlf', 'r','utf-8') as input: 
 		f = input.readlines()[2:]
