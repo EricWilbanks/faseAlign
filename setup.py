@@ -1,11 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='fase-align',
-    version='1.0.0.dev1',
+    name='faseAlign',
+    version='1.0.0.dev2',
     description='Command Line python module for Force Aligning Spanish using HTK',
-    long_description='long-description-here',
-    url='https://github.com/EricWilbanks/fase-align',
+    url='https://github.com/EricWilbanks/faseAlign',
     author='Eric Wilbanks',
     author_email='wilbanks.ericw@gmail.com',
     license='MIT',
@@ -24,4 +23,5 @@ setup(
         'sox',
         'audiolabel'
     ],
+    scripts=['faseAlign/faseAlign.py']
 )
