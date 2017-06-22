@@ -402,9 +402,9 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 
 def call_htk(tmppath,name,dict_path):
 
-	HCopy_call = ["/usr/local/bin/HCopy", "-T", "1", "-C", repos+"/config_HCopy", "-S", tmppath + name + "wav_mfc.scp"]
+	HCopy_call = ["/usr/local/bin/HCopy", "-T", "1", "-C", repos+"/config_HCopy", "-S", tmppath + name + "_wav_mfc.scp"]
 	subprocess.check_call(HCopy_call, stdout=subprocess.PIPE)
-	HVite_call = ["/usr/local/bin/HVite", "-A", "-D", "-T", "1", "-l", "'*'", "-a", "-m", "-C", repos+"/config", "-H", repos+"/globals", "-H", repos+"/hmmdefs", "-m", "-t", "250.0", "150.0", "1000.0", "-I", tmppath + name + "words.mlf", "-i", tmppath + name + "aligned.mlf", "-S", tmppath + name + "mfc.scp", dict_path, repos+"/monophones1"]
+	HVite_call = ["/usr/local/bin/HVite", "-A", "-D", "-T", "1", "-l", "'*'", "-a", "-m", "-C", repos+"/config", "-H", repos+"/globals", "-H", repos+"/hmmdefs", "-m", "-t", "250.0", "150.0", "1000.0", "-I", tmppath + name + "_words.mlf", "-i", tmppath + name + "_aligned.mlf", "-S", tmppath + name + "_mfc.scp", dict_path, repos+"/monophones1"]
 	subprocess.call(HVite_call)
 
 
@@ -469,7 +469,7 @@ def process_mlf_output(section,speak,output_intervals,offset):
 
 
 
-def align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename):
+def align_from_tg(chunk_index, total_chunks, tmppath, dict_path):
 
 	output_intervals = {}
 
@@ -479,11 +479,11 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path, basename):
 		output_intervals[speaker]["phones"] = []
 		output_intervals[speaker]["words"] = []
 	
-		curr = "speaker_" + speaker + "_"
+		curr = "speaker_" + speaker
 
 		call_htk(tmppath,curr,dict_path)
 
-		with codecs.open(tmppath + curr + 'aligned.mlf', 'r', 'utf-8') as input:
+		with codecs.open(tmppath + curr + '_aligned.mlf', 'r', 'utf-8') as input:
 			f = input.readlines()[1:]
 			for section in makeSections(f):
 				# Get chunk name from .rec header
@@ -526,7 +526,7 @@ def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,d
 
 
 
-def process_tg_intervals(tmppath,basename,output_intervals):
+def process_tg_intervals(tmppath,output_intervals):
 
 	out_tg = audiolabel.LabelManager(codec='utf-8')
 
@@ -585,8 +585,8 @@ def main(audio, transcript, tmppath, basename, transcript_type, channel_type, ch
 	if transcript_type == "txt":
 		align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path)
 	else:
-		output_intervals = align_from_tg(chunk_index, total_chunks,tmppath,dict_path,basename)
-	out_tg = process_tg_intervals(tmppath,basename,output_intervals)
+		output_intervals = align_from_tg(chunk_index, total_chunks,tmppath)
+	out_tg = process_tg_intervals(tmppath,output_intervals)
 	with codecs.open(outpath+basename+'_aligned.TextGrid','w','utf-8') as o:
 		o.write(out_tg.as_string('praat_short'))
 
