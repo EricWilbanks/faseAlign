@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='fase-align',
@@ -19,7 +19,7 @@ setup(
         'Programming Language :: Python :: 3'
     ],
     keywords='phonetics alignment spanish corpus',
-    packages='fase-align',
+    packages=find_packages(),
     install_requires=[
         'sox',
         'audiolabel'
