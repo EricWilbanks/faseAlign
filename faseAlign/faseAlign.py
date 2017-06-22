@@ -90,7 +90,6 @@ def prep_dir(tmppath,basename,dict_include):
 		shutil.rmtree(tmppath)	
 	os.mkdir(tmppath)
 	os.mkdir(tmppath+'/chunks/')
-	#subprocess.Popen(['chmod','a+w',tmppath + 'chunks/'], stdout=subprocess.PIPE)
 
 	if dict_include == True:
 
@@ -403,24 +402,9 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 
 def call_htk(tmppath,name,dict_path):
 
-
-	subprocess.Popen(['chmod','a+w',tmppath + name + 'mfc.scp'], stdout=subprocess.PIPE)
-	subprocess.Popen(['chmod','a+w',tmppath + name + 'wav_mfc.scp'], stdout=subprocess.PIPE)
-	subprocess.Popen(['chmod','a+w',tmppath + name + 'words.mlf'], stdout=subprocess.PIPE)
-
 	HCopy_call = ["/usr/local/bin/HCopy", "-T", "1", "-C", repos+"/config_HCopy", "-S", tmppath + name + "wav_mfc.scp"]
-	#subprocess.call(HCopy_call,stdin=DEVNULL,stdout=DEVNULL,stderr=DEVNULL)#.wait()
-	#print(' '.join(HCopy_call)+'\n')
 	subprocess.check_call(HCopy_call, stdout=subprocess.PIPE)
-	#subprocess.check_call(HCopy_call,stdin=PIPE,stdout=DEVNULL,stderr=STDOUT)
-
-	subprocess.Popen(["chmod","a+w",tmppath+name+".mfc"], stdout=subprocess.PIPE)
-
 	HVite_call = ["/usr/local/bin/HVite", "-A", "-D", "-T", "1", "-l", "'*'", "-a", "-m", "-C", repos+"/config", "-H", repos+"/globals", "-H", repos+"/hmmdefs", "-m", "-t", "250.0", "150.0", "1000.0", "-I", tmppath + name + "words.mlf", "-i", tmppath + name + "aligned.mlf", "-S", tmppath + name + "mfc.scp", dict_path, repos+"/monophones1"]
-	#HVite_call = ["/usr/local/bin/HVite", "-A", "-D", "-T", "1", "-l", "'*'", "-a", "-m", "-C", repos+"/config", "-H", repos+"/globals", "-H", repos+"/hmmdefs", "-m", "-t", "250.0", "150.0", "1000.0", "-I", tmppath + name + "words.mlf", "-i", tmppath + name + "aligned.mlf", "-S", tmppath + name + "mfc.scp", repos+"dict_tri", repos+"/tiedlist"]
-
-	#print(' '.join(HVite_call)+'\n')
-	#subprocess.check_call(HVite_call, stdout=subprocess.PIPE)
 	subprocess.call(HVite_call)
 
 
