@@ -505,7 +505,7 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path):
 
 
 def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path):
-	
+
 	call_htk(tmppath,basename,dict_path)
 
 	with codecs.open(tmppath +'/'+basename + '_aligned.mlf', 'r','utf-8') as input: 
@@ -584,7 +584,7 @@ def main(audio, transcript, tmppath, basename, transcript_type, channel_type, ch
 	###########################
 
 	if transcript_type == "txt":
-		align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path)
+		output_intervals = align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path)
 	else:
 		output_intervals = align_from_tg(chunk_index,total_chunks,tmppath,dict_path)
 	out_tg = process_tg_intervals(tmppath,output_intervals)
@@ -632,7 +632,7 @@ else:
 	dict_include = False
 
 # Establish basename and directories
-basename = '/' + os.path.basename(args.wav).replace('.wav','')
+basename = os.path.basename(args.wav).replace('.wav','')
 if args.outpath is not None:
 	outpath = args.outpath + '/'
 else:
