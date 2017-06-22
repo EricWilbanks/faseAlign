@@ -83,7 +83,7 @@ def sectionizeMLF(mlf):
 
 
 
-def prep_dir(tmppath,basename,dict_include):
+def prep_dir(tmppath,dict_include):
  	
 
 	if os.path.exists(tmppath):
@@ -112,7 +112,6 @@ def prep_dir(tmppath,basename,dict_include):
 				sys.exit()
 
 		os.system('cat ' + repos + 'dict_sort ' + args.missing + ' | sort | uniq > ' + tmppath + 'new_dict.txt')
-		#subprocess.Popen(['cat',repos+"dict_sort",tmppath + basename + '.missing', '|', 'sort', '|', 'uniq', '>', tmppath + 'new_dict.txt'], stdout=subprocess.PIPE)	
 		dict_path = tmppath + 'new_dict.txt'	
 	else:
 		dict_path = repos + "dict_sort"
@@ -135,12 +134,12 @@ def process_wav(audio,tmppath,basename,channel_type):
 		pass
 	
 	else: # sr > 11025
-		subprocess.check_call(['mv',audio,tmppath+basename+ "_original.wav"])
-		subprocess.check_call(['sox',tmppath+basename+ "_original.wav",'-r','11025', audio])
+		subprocess.check_call(['mv',audio,tmppath+'/'+basename+ "_original.wav"])
+		subprocess.check_call(['sox',tmppath+'/'+basename+ "_original.wav",'-r','11025', audio])
 
 	if channel_type == "stereo":
-		subprocess.check_call(['sox',audio,tmppath+basename+"_c1.wav",'remix','1'])
-		subprocess.check_call(['sox',audio,tmppath+basename+"_c2.wav",'remix','2'])
+		subprocess.check_call(['sox',audio,tmppath+'/'+basename+"_c1.wav",'remix','1'])
+		subprocess.check_call(['sox',audio,tmppath+'/'+basename+"_c2.wav",'remix','2'])
 
 
 
@@ -291,8 +290,8 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppat
 		words.write(iter2)
 
 	words.write('\n')
-	mfc.write(tmppath + basename + '.mfc')	
-	wav_mfc.write(audio + ' ' + tmppath + basename + '.mfc' )	
+	mfc.write(tmppath +'/'+basename + '.mfc')	
+	wav_mfc.write(audio + ' ' + tmppath +'/'+basename + '.mfc' )	
 
 	if len(missing) > 0:
 		with codecs.open(tmppath + 'missing_words', 'w', 'utf-8') as words_to_add:
@@ -335,9 +334,9 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 			current_wav = audio
 		else:
 			if speaker == chan_1:
-				current_wav = tmppath+basename+'_c1.wav'
+				current_wav = tmppath+'/'+basename+'_c1.wav'
 			elif speaker == chan_2:
-				current_wav = tmppath+basename+'_c2.wav'
+				current_wav = tmppath+'/'+basename+'_c2.wav'
 			else:
 				print("Couldn't find a matching speaker for " + speaker + ". Reverting to mono.")
 				current_wav = audio
@@ -354,40 +353,42 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 			chunk_end = interval.t2
 			chunk_txt = clean_words_str(interval.text)
 
-			# Exclude turns including {CS},{OP},XXX,HHH,and hhh
-			if re.search('\{CS\}', ' '.join(chunk_txt)) is None and re.search('\{OP\}', ' '.join(chunk_txt)) is None and re.search('XXX', ' '.join(chunk_txt)) is None and re.search('HHH', ' '.join(chunk_txt)) is None and re.search(' hhh', ' '.join(chunk_txt)) is None:
+			# Ignore empty turns
+			if len(chunk_txt) > 0:
+				# Exclude turns including {CS},{OP},XXX,HHH,and hhh
+				if re.search('\{CS\}', ' '.join(chunk_txt)) is None and re.search('\{OP\}', ' '.join(chunk_txt)) is None and re.search('XXX', ' '.join(chunk_txt)) is None and re.search('HHH', ' '.join(chunk_txt)) is None and re.search(' hhh', ' '.join(chunk_txt)) is None:
 
-				# Recover chunk start and end time for after aligning
-				chunk_index[speaker][chunk_name] = (chunk_start,chunk_end)
+					# Recover chunk start and end time for after aligning
+					chunk_index[speaker][chunk_name] = (chunk_start,chunk_end)
 
 
-				all_words[speaker].append('"*/' + chunk_name + '.lab"\nSIL\n')
+					all_words[speaker].append('"*/' + chunk_name + '.lab"\nSIL\n')
 
-				for iter, value in enumerate(chunk_txt):
-					if i == 0:
-						all_words[speaker].append(value + "\n")
-					else:
-						all_words[speaker].append("sp\n" + value + "\n")
+					for iter, value in enumerate(chunk_txt):
+						if i == 0:
+							all_words[speaker].append(value + "\n")
+						else:
+							all_words[speaker].append("sp\n" + value + "\n")
+						
+						if value not in dict_split:
+							missing.append(value)
+
+						i += 1
+
+					all_words[speaker].append('SIL\n.\n')
+
+					# Extract Chunk Audio
+					tfm = sox.Transformer()
+					tfm.trim(chunk_start,chunk_end)
+					tfm.build(current_wav,tmppath+'chunks/'+chunk_name+'.wav')
 					
-					if value not in dict_split:
-						missing.append(value)
+					# Write files
+					with open(tmppath + 'speaker_'+speaker+'_mfc.scp', 'a') as mfc:
+						with open(tmppath + 'speaker_'+speaker+'_wav_mfc.scp', 'a') as wav_mfc:
+							mfc.write(tmppath+'chunks/'+chunk_name+'.mfc\n')
+							wav_mfc.write(tmppath+'chunks/'+chunk_name+'.wav ' + tmppath+'chunks/'+chunk_name+'.mfc\n')
 
-					i += 1
-
-				all_words[speaker].append('.\n')
-
-				# Extract Chunk Audio
-				tfm = sox.Transformer()
-				tfm.trim(chunk_start,chunk_end)
-				tfm.build(current_wav,tmppath+'chunks/'+chunk_name+'.wav')
-				
-				# Write files
-				with open(tmppath + 'speaker_'+speaker+'_mfc.scp', 'a') as mfc:
-					with open(tmppath + 'speaker_'+speaker+'_wav_mfc.scp', 'a') as wav_mfc:
-						mfc.write(tmppath+'chunks/'+chunk_name+'.mfc\n')
-						wav_mfc.write(tmppath+'chunks/'+chunk_name+'.wav ' + tmppath+'chunks/'+chunk_name+'.mfc\n')
-
-				total_chunks += 1
+					total_chunks += 1
 
 		# Append a speaker's turns
 		with open(tmppath + 'speaker_'+speaker+'_words.mlf', 'a') as words:
@@ -507,7 +508,7 @@ def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,d
 	
 	call_htk(tmppath,basename,dict_path)
 
-	with codecs.open(tmppath + basename + '_aligned.mlf', 'r','utf-8') as input: 
+	with codecs.open(tmppath +'/'+basename + '_aligned.mlf', 'r','utf-8') as input: 
 		f = input.readlines()[2:]
 
 		for section in makeSections(f):
@@ -545,16 +546,16 @@ def process_tg_intervals(tmppath,output_intervals):
 
 def main(audio, transcript, tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include):
 
-	dict_path = prep_dir(tmppath,basename,dict_include)
+	dict_path = prep_dir(tmppath,dict_include)
 	process_wav(audio,tmppath,basename,channel_type)
 
 	###########################
 	if transcript_type == "txt":
 
-		with codecs.open(tmppath + basename + '_words.mlf', 'a', 'utf-8') as words:
+		with codecs.open(tmppath +'/'+basename + '_words.mlf', 'a', 'utf-8') as words:
 			with codecs.open(dict_path, 'r', 'utf-8') as dict_sort:
-				with open(tmppath + basename + '_mfc.scp', 'a') as mfc:
-					with open(tmppath + basename + '_wav_mfc.scp', 'a') as wav_mfc:
+				with open(tmppath +'/'+basename + '_mfc.scp', 'a') as mfc:
+					with open(tmppath +'/'+basename + '_wav_mfc.scp', 'a') as wav_mfc:
 						try:
 							with codecs.open(transcript, 'r', 'utf-8') as actual_transcript:
 								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename)
@@ -587,7 +588,7 @@ def main(audio, transcript, tmppath, basename, transcript_type, channel_type, ch
 	else:
 		output_intervals = align_from_tg(chunk_index,total_chunks,tmppath,dict_path)
 	out_tg = process_tg_intervals(tmppath,output_intervals)
-	with codecs.open(outpath+basename+'_aligned.TextGrid','w','utf-8') as o:
+	with codecs.open(outpath+'/'+basename+'_aligned.TextGrid','w','utf-8') as o:
 		o.write(out_tg.as_string('praat_short'))
 
 	shutil.rmtree(tmppath)
