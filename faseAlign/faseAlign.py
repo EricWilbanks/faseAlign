@@ -509,7 +509,7 @@ def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,d
 	current_speaker = first_speaker
 
 	all_lines = []
-
+	exit()
 	with codecs.open(tmppath + basename + '_aligned.mlf', 'r','utf-8') as input: 
 		f = input.readlines()[2:]
 
