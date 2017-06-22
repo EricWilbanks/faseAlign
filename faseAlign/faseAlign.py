@@ -585,7 +585,7 @@ def main(audio, transcript, tmppath, basename, transcript_type, channel_type, ch
 	if transcript_type == "txt":
 		align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path)
 	else:
-		output_intervals = align_from_tg(chunk_index, total_chunks,tmppath)
+		output_intervals = align_from_tg(chunk_index,total_chunks,tmppath,dict_path)
 	out_tg = process_tg_intervals(tmppath,output_intervals)
 	with codecs.open(outpath+basename+'_aligned.TextGrid','w','utf-8') as o:
 		o.write(out_tg.as_string('praat_short'))
