@@ -12,7 +12,8 @@ import shutil
 import audiolabel
 import sox
 
-
+print(os.path.dirname(os.path.realpath(__file__)))
+exit()
 
 def correction(x):
 	"""	
