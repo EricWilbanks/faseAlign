@@ -265,7 +265,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppat
 
 	speaker_list, speaker_indices, speaker_words, first_speaker = identify_speakers(actual)
 
-	all_words.append('#!MLF!#\n"*/' + basename +'.lab"\nSIL\n')
+	all_words.append('#!MLF!#\n"*/' + basename +'.lab"\n{SIL}\n')
 
 	for elem in dict_all:
 		if len(elem.split()) > 0:
@@ -282,7 +282,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppat
 				missing.append(value)
 			i += 1
 
-	all_words.append('SIL\n.')
+	all_words.append('{SIL}\n.')
 						
 
 	for iter2 in all_words:
@@ -361,7 +361,7 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 					chunk_index[speaker][chunk_name] = (chunk_start,chunk_end)
 
 
-					all_words[speaker].append('"*/' + chunk_name + '.lab"\nSIL\n')
+					all_words[speaker].append('"*/' + chunk_name + '.lab"\n{SIL}\n')
 
 					for iter, value in enumerate(chunk_txt):
 						if i == 0:
@@ -374,7 +374,7 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 
 						i += 1
 
-					all_words[speaker].append('SIL\n.\n')
+					all_words[speaker].append('{SIL}\n.\n')
 
 					# Extract Chunk Audio
 					tfm = sox.Transformer()
@@ -457,7 +457,7 @@ def process_mlf_output(section,speak,output_intervals,offset):
 		if word_begin != word_end:
 			word = bytes(sec[0][4],encoding='latin-1').decode('unicode-escape') # Escape and convert hex decimals output from HVite
 			word = word.encode('latin-1').decode('utf-8') # Convert these strings back to correct utf-8
-			if word != "sp" and word != "SIL":
+			if word != "sp" and word != "{SIL}":
 				# If we're processing a txt file input and using speaker_indices
 				try:
 					speak = speaker_indices[word_index] # Compare to word indices mapped to speakers. 
