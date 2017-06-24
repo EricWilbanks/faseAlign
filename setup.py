@@ -19,6 +19,7 @@ setup(
     ],
     keywords='phonetics alignment spanish corpus',
     packages=find_packages(),
+    package_data = {name : ['model/*']},
     install_requires=[
         'sox',
         'audiolabel'

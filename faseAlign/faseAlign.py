@@ -406,7 +406,6 @@ def call_htk(tmppath,name,dict_path):
 	devnull = open(os.devnull, 'w')
 	HCopy_call = ["/usr/local/bin/HCopy", "-T", "1", "-C", repos+"/config_HCopy", "-S", tmppath + name + "_wav_mfc.scp"]
 	subprocess.call(HCopy_call, stdout = devnull)
-	#subprocess.check_call(HCopy_call, stdout=subprocess.PIPE)
 	HVite_call = ["/usr/local/bin/HVite", "-A", "-D", "-T", "1", "-l", "'*'", "-a", "-m", "-C", repos+"/config", "-H", repos+"/globals", "-H", repos+"/hmmdefs", "-m", "-t", "250.0", "150.0", "1000.0", "-I", tmppath + name + "_words.mlf", "-i", tmppath + name + "_aligned.mlf", "-S", tmppath + name + "_mfc.scp", dict_path, repos+"/monophones1"]
 	subprocess.call(HVite_call, stdout = devnull)
 
