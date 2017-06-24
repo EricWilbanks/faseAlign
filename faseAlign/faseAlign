@@ -9,6 +9,7 @@ import codecs
 import subprocess
 import argparse
 import shutil
+import site
 import audiolabel
 import sox
 
