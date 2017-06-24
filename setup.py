@@ -24,5 +24,5 @@ setup(
         'sox',
         'audiolabel'
     ],
-    scripts=['faseAlign/faseAlign.py']
+    scripts=['faseAlign/faseAlign']
 )

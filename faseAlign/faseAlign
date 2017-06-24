@@ -12,9 +12,6 @@ import shutil
 import audiolabel
 import sox
 
-print(os.path.dirname(os.path.realpath(__file__)))
-exit()
-
 def correction(x):
 	"""	
 	Correct the rounding error for the 11025hz sampling rate. 
@@ -611,7 +608,8 @@ parser.add_argument('-o', '--outpath', help = 'directory to store output textgri
 parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
 args = parser.parse_args()
 
-repos = "/home/ubuntu/Desktop/Shared/sf_fase_dev/testing/m5_monomix/" # TO-DO: map this correctly from setup.py
+sp = site.getsitepackages()[0]
+repos = sp+'/faseAlign/model/'
 
 # Check stereo options
 if ((args.stereo is True and args.left is None) or (args.stereo is True and args.right is None)):
