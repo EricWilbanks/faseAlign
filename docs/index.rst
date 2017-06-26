@@ -26,8 +26,8 @@ Citation
 
 Contribute
 ----------
-- Issue Tracker: github.com/faseAlign/faseAlign/issues
-- Source Code: github.com/faseAlign/faseAlign
+- Issue Tracker: https://github.com/faseAlign/faseAlign/issues
+- Source Code: https://github.com/faseAlign/faseAlign
 
 
 Contact
