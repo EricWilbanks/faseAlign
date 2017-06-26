@@ -1,4 +1,9 @@
+.._aligning:
+
 Aligning
 --------
 
-In progress.
+- basic example call
+- missing words
+- change output directory
+- stereo usage

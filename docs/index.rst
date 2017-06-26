@@ -3,10 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _index: 
+
 faseAlign Documentation
 =====================================
 
-faseAlign is a Python-based suite for doing automatic forced alignment of text to audio for Spanish data using the `HTK Speech Recognition Toolkit <http://htk.eng.cam.ac.uk/>`_. The included acoustic models and dictionary are appropriate for many varieties of Latin American Spanish (see _development for more details).
+faseAlign is a Python-based suite for doing automatic forced alignment of text to audio for Spanish data using the `HTK Speech Recognition Toolkit <http://htk.eng.cam.ac.uk/>`_. The included acoustic models and dictionary are appropriate for many varieties of Latin American Spanish (see :ref:`development` for more details).
+
 
 Features
 --------
@@ -14,6 +17,11 @@ Features
 - support for .txt or .TextGrid input transcriptions
 - custom dictionaries
 - support for stereo audio
+
+
+Citation
+--------
+(Decide on citation)
 
 
 Contribute

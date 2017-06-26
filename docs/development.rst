@@ -1,4 +1,7 @@
-Development
+.. _development:
+
+Model Development
 -----------
 
-Information about model specifications and training.
+- monophone list
+- notes on model development

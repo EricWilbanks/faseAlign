@@ -1,4 +1,10 @@
+.. _preparation:
 Preparing your Data
 -------------------
 
-In progress.
+- types of inputs allowed
+- examples
+- special symbols
+- transcription best practices
+
+- dictionary entries
