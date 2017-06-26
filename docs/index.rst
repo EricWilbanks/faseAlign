@@ -10,6 +10,10 @@ Welcome to faseAlign's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   installation
+   preparation
+   aligning
+   troubleshooting
 
 
 Indices and tables
