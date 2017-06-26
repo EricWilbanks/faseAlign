@@ -30,7 +30,7 @@ def correction(x):
 
 
 
-def makeSections(f): # TO-DO: check that this still functions for batch scp alignments
+def makeSections(f): # TO-DO: check that this still functions for batch scp alignments; pay special attention to speaker determination/ and min/max etc.
 	 ''' This is a generator function. It will return successive sections
 		 of f until EOF.
 
