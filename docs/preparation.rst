@@ -10,8 +10,6 @@ Preparing your Data
 - transcription best practices
 - dictionary entries
 
-.. _add-missing:
-
 Missing Words
 -------------
 

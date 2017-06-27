@@ -30,7 +30,7 @@ The default location of the output TextGrid is your current working directory. T
 Missing Words
 -------------
 
-If there are words in your transcript that are not included in the dictionary, you should add them to a custom local dictionary (see :ref:`add-missing`). Then pass the path to the new file to the `-m` flag:
+If there are words in your transcript that are not included in the dictionary, you should add them to a custom local dictionary (see :ref:`aligning.rst#missing-words`). Then pass the path to the new file to the `-m` flag:
 
 .. code-block:: bash
 
