@@ -12,7 +12,7 @@ Preparing your Data
 
 .. _missing:
 
-Missing Words
+How to Add Missing Words
 -------------
 
 How to add missing words
