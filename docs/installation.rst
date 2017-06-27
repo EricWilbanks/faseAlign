@@ -76,7 +76,7 @@ Once git is installed, you can download and install the newest version of faseAl
 	pip install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
 
-..note:: This assumes that your default pip version is pip3+ and is associated with Python 3+ site-packages. To check your default pip version, use the following command:
+.. note:: This assumes that your default pip version is pip3+ and is associated with Python 3+ site-packages. To check your default pip version, use the following command:
 
 	.. code-block:: bash
 
