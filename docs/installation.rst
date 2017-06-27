@@ -8,6 +8,7 @@ Installation
 .. topic:: Requirements
 	
 	Before using faseAlign, you should check to make sure that you have the following requirements already installed.
+	
 	*	Python version 3.0+ 
 	*	HTK Toolkit
 	*	git
@@ -35,16 +36,19 @@ Then, download the `HTK source code <http://htk.eng.cam.ac.uk/download.shtml>`_.
 Compiling HTK
 ---------------------
 Once the zipped source code has been downloaded. Locate the downloaded file and execute the following command to unpack it:
+
 .. code-block::	bash
 
 	tar -xvzf HTK-3.4.1.tar.gz
 
 Now move into the newly created `htk` directory:
+
 .. code-block:: bash
 
 	cd htk
 
 Finally, execute the following lines of code to compile and install HTK:
+
 .. code-block:: bash
 
 	export CPPFLAGS=-UPHNALG
@@ -53,6 +57,7 @@ Finally, execute the following lines of code to compile and install HTK:
 	sudo make install
 
 If your installation was successful, the following command should print out the version information for the HTK toolkit:
+
 .. code-block:: bash
 
 	HVite -V
@@ -64,16 +69,19 @@ Package installation and configuration is taken care of by pip and git. Follow t
 Installing faseAlign
 --------------------
 Once git is installed, you can download and install the newest version of faseAlign using the following command:
+
 .. code-block:: bash
 
 	pip install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
 This assumes that your default pip version is pip3+ and is associated with Python 3+ site-packages. To check your default pip version, use the following command:
+
 .. code-block:: bash
 
 	pip -V
 
 If the version is not 3+, you should change `pip` to `pip3` in the install command:
+
 .. code-block:: bash
 
 	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
