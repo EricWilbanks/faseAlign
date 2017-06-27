@@ -1,4 +1,4 @@
-.._aligning:
+.. _aligning:
 
 Aligning
 ========
