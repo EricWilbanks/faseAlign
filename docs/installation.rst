@@ -8,9 +8,9 @@ Installation
 .. topic:: Requirements
 	
 	Before using faseAlign, you should check to make sure that you have the following requirements already installed.
-	* Python version 3.0+ 
-	* HTK Toolkit
-	* GIT
+	*	Python version 3.0+ 
+	*	HTK Toolkit
+	*	git
 
 
 Making sure you have Python3
