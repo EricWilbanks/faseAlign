@@ -8,7 +8,7 @@ Installation
 .. topic:: Requirements
 	
 	Before using faseAlign, you should check to make sure that you have the following requirements already installed.
-	
+
 	*	Python version 3.0+ 
 	*	HTK Toolkit
 	*	git
@@ -17,6 +17,7 @@ Installation
 Making sure you have Python 3
 ----------------------------
 faseAlign is developed to run using Python 3. To check to see if you have Python 3 installed, execute the following code at the command line:
+
 .. code-block:: bash
 
 	python3 --version
@@ -74,14 +75,17 @@ Once git is installed, you can download and install the newest version of faseAl
 
 	pip install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
-This assumes that your default pip version is pip3+ and is associated with Python 3+ site-packages. To check your default pip version, use the following command:
 
-.. code-block:: bash
+..note::
 
-	pip -V
+	This assumes that your default pip version is pip3+ and is associated with Python 3+ site-packages. To check your default pip version, use the following command:
 
-If the version is not 3+, you should change `pip` to `pip3` in the install command:
+	.. code-block:: bash
 
-.. code-block:: bash
+		pip -V
 
-	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
+	If the version is not 3+, you should change `pip` to `pip3` in the install command:
+
+	.. code-block:: bash
+
+		pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
