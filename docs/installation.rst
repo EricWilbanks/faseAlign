@@ -13,7 +13,7 @@ Installation
 	*	git
 
 
-Making sure you have Python3
+Making sure you have Python 3
 ----------------------------
 faseAlign is developed to run using Python 3. To check to see if you have Python 3 installed, execute the following code at the command line:
 .. code-block:: bash
