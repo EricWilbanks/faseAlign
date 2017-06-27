@@ -1,6 +1,6 @@
 .. _preparation:
 Preparing your Data
--------------------
+===================
 
 - types of inputs allowed
 - examples

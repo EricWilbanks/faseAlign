@@ -12,7 +12,7 @@ faseAlign is a Python-based suite for doing automatic forced alignment of text t
 
 
 Features
---------
+========
 - force-aligned .TextGrid output files
 - support for .txt or .TextGrid input transcriptions
 - custom dictionaries
@@ -20,19 +20,18 @@ Features
 
 
 Citation
---------
+========
 (Decide on citation)
 
 
 Contribute
-----------
+==========
 - Issue Tracker: https://github.com/faseAlign/faseAlign/issues
 - Source Code: https://github.com/faseAlign/faseAlign
 
 
 Contact
--------
-
+=======
 If you're experiencing issues or just have questions about the usage or installation of faseAlign, please feel free to contact me at wilbanks.ericw@gmail.com
 
 .. toctree::
