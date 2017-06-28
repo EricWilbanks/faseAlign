@@ -13,9 +13,6 @@ import site
 import audiolabel
 import sox
 
-
-print(sys.version)
-
 def correction(x):
 	"""	
 	Correct the rounding error for the 11025hz sampling rate. 
