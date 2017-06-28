@@ -653,8 +653,12 @@ parser.add_argument('-o', '--outpath', help = 'directory to store output textgri
 parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
 args = parser.parse_args()
 
-sp = site.getsitepackages()[0]
+try:
+	sp = site.getsitepackages()[0]
+except AttributeError: # site.getsitepackages() fails in virtualenv
+	sp = str(audiolabel.__file__) - '/audiolabel.py' # resorting to hack based on audiolabel.py location; easily broken if audiolabel changes
 repos = sp+'/faseAlign/model/'
+
 
 # Check stereo options
 if ((args.stereo is True and args.left is None) or (args.stereo is True and args.right is None)):
