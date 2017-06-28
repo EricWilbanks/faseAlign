@@ -656,7 +656,7 @@ args = parser.parse_args()
 try:
 	sp = site.getsitepackages()[0]
 except AttributeError: # site.getsitepackages() fails in virtualenv
-	sp = str(audiolabel.__file__) - '/audiolabel.py' # resorting to hack based on audiolabel.py location; easily broken if audiolabel changes
+	sp = str(audiolabel.__file__)[:-14] # fragile hack here; assuming this file attribute is sp/audiolabel.py
 repos = sp+'/faseAlign/model/'
 
 
