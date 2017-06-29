@@ -3,7 +3,7 @@
 Installation
 ============
 
-.. warning:: faseAlign has currently only been tested on Linux (Ubuntu 16.04). It is likely compatible with OS X and likely *incompatible* with Windows at the moment. 
+.. warning:: faseAlign has currently only been tested on Linux (Ubuntu 16.04). 
 
 .. topic:: Requirements
 	
