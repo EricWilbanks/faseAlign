@@ -638,67 +638,71 @@ def main(audio, transcript, tmppath, basename, transcript_type, channel_type, ch
 
 ############################################
 ############################################
-# Parse Arguments
-
-parser = argparse.ArgumentParser(description='test description')
-parser.add_argument('-w', '--wav', required = True, help = 'path to wav file')
-parser.add_argument('-s', '--stereo', action='store_true', help = 'stereo input, mono is default')
-parser.add_argument('-l', '--left', help = 'left channel speaker')
-parser.add_argument('-r', '--right', help = 'right channel speaker')
-parser.add_argument('-t', '--transcript', required = True, help = 'path to transcript')
-parser.add_argument('-o', '--outpath', help = 'directory to store output textgrid(s), default is current directory')
-parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
-args = parser.parse_args()
-
-try:
-	sp = site.getsitepackages()[0]
-except AttributeError: # site.getsitepackages() fails in virtualenv
-	sp = str(audiolabel.__file__)[:-14] # fragile hack here; assuming this file attribute is sp/audiolabel.py
-repos = sp+'/faseAlign/model/'
 
 
-# Check stereo options
-if ((args.stereo is True and args.left is None) or (args.stereo is True and args.right is None)):
-	parser.error('Stereo option requires --left and --right speaker arguments.')
+if __name__ == '__main__':
 
-# Check transcript type
-file_ext = os.path.splitext(args.transcript)[1]
+	# Parse arguments
+	parser = argparse.ArgumentParser(description='test description')
+	parser.add_argument('-w', '--wav', required = True, help = 'path to wav file')
+	parser.add_argument('-s', '--stereo', action='store_true', help = 'stereo input, mono is default')
+	parser.add_argument('-l', '--left', help = 'left channel speaker')
+	parser.add_argument('-r', '--right', help = 'right channel speaker')
+	parser.add_argument('-t', '--transcript', required = True, help = 'path to transcript')
+	parser.add_argument('-o', '--outpath', help = 'directory to store output textgrid(s), default is current directory')
+	parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
+	args = parser.parse_args()
 
-if file_ext == '.txt':
-	transcript_type = 'txt'
-elif file_ext in ['.TextGrid','.Textgrid','.textgrid','.textGrid']:
-	transcript_type = 'tg'
-else:
-	parser.error('Transcript file must be .txt or .TextGrid.')
-
-# Check missing
-if args.missing is not None:
-	dict_include = True
-else:
-	dict_include = False
-
-# Establish basename and directories
-basename = os.path.basename(args.wav).replace('.wav','')
-if args.outpath is not None:
-	outpath = args.outpath + '/'
-else:
-	outpath = os.getcwd()
-
-tmppath = outpath + '/tmp/'
+	# Establish site-packages location for repository files
+	try:
+		sp = site.getsitepackages()[0]
+	except AttributeError: # site.getsitepackages() fails in virtualenv
+		sp = str(audiolabel.__file__)[:-13] # fragile hack here; assuming this file attribute is sp/audiolabel.py
+	repos = sp+'/faseAlign/model/'
 
 
-# Channel options
-if args.stereo is True:
-	channel_type = 'stereo'
-	if ((args.left is not None) and (args.right is not None)):
-		chan_1 = '{' + args.left + '}' # TO-DO: improve flexibility and parsing of possible inputs (in addition to custom speaker tags)
-		chan_2 = '{' + args.right + '}'
+	# Check stereo options
+	if ((args.stereo is True and args.left is None) or (args.stereo is True and args.right is None)):
+		parser.error('Stereo option requires --left and --right speaker arguments.')
+
+	# Check transcript type
+	file_ext = os.path.splitext(args.transcript)[1]
+
+	if file_ext == '.txt':
+		transcript_type = 'txt'
+	elif file_ext in ['.TextGrid','.Textgrid','.textgrid','.textGrid']:
+		transcript_type = 'tg'
 	else:
+		parser.error('Transcript file must be .txt or .TextGrid.')
+
+	# Check missing
+	if args.missing is not None:
+		dict_include = True
+	else:
+		dict_include = False
+
+	# Establish basename and directories
+	basename = os.path.basename(args.wav).replace('.wav','')
+	if args.outpath is not None:
+		outpath = args.outpath + '/'
+	else:
+		outpath = os.getcwd()
+
+	tmppath = outpath + '/tmp/'
+
+
+	# Channel options
+	if args.stereo is True:
+		channel_type = 'stereo'
+		if ((args.left is not None) and (args.right is not None)):
+			chan_1 = '{' + args.left + '}' # TO-DO: improve flexibility and parsing of possible inputs (in addition to custom speaker tags)
+			chan_2 = '{' + args.right + '}'
+		else:
+			chan_1 = None
+			chan_2 = None
+	else:
+		channel_type = 'mono'
 		chan_1 = None
 		chan_2 = None
-else:
-	channel_type = 'mono'
-	chan_1 = None
-	chan_2 = None
 
-main(args.wav, args.transcript, tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include)
+	main(args.wav, args.transcript, tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include)
