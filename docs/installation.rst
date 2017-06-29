@@ -20,10 +20,16 @@ faseAlign is developed to run using Python 3. To check to see if you have Python
 
 .. code-block:: bash
 
-	python3 --version
+	python --version
 
-If you encounter an error, you likely need to install Python 3. You can find a suitable distribution at the `Official Python Website <https://www.python.org/downloads/>`_. faseAlign has been tested on major Python releases 3.4+.
+If your version is not Python 3, you can find a suitable distribution at the `Official Python Website <https://www.python.org/downloads/>`_. faseAlign has been tested on major Python releases 3.4+.
 
+.. note::
+	If you have multiple python versions installed but your default is <3, you can check using the following:
+
+	.. code-block:: bash
+
+		python3 --version
 
 Downloading HTK
 ----------------------
