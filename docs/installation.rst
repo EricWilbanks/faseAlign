@@ -7,7 +7,18 @@ Installation
 
 .. note:: 
 
-	Choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
+	The most user-friendly option the :ref:`install-bpm` which has faseAlign already included. If you'd prefer to compile from source, choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
+
+
+
+.. _install-bpm:
+
+Virtual Machine Installation
+----------------------------
+
+The easiest way to run faseAlign on your own computer is to use a virtual machine image with the required software already included. 
+
+(Include link)
 
 .. _install-linux:
 
