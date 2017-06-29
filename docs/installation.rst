@@ -106,11 +106,52 @@ Once git is installed, you can download and install the newest version of faseAl
 
 .. _install-mac:
 
-Mac OS Installation
+macOS Installation
 -------------------
 
+Xcode Compiler
+++++++++++++++
+
+First we have to make sure that Xcode (and included GCC compiler) are installed. Open the terminal application and call the following command:
+
+.. code-block:: bash
+
+	xcode-select -p
+
+If this command is not successful, install Xcode through the terminal:
+
+.. code-block:: bash
+
+	xcode-select --install
+
+And select "Install"
+
+Homebrew Installation
++++++++++++++++++++++
+
+Next, we need a package manager. Install Homebrew through the terminal:
+
+.. code-block:: bash
+
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Making sure you have Python 3
++++++++++++++++++++++++++++++
+
+Now we make sure we have a current version of Python3:
+
+.. code-block:: bash
+
+	brew install python3
 
 .. _install-windows:
+
+Downloading HTK
++++++++++++++++
+
+Compiling HTK
++++++++++++++++
+
 
 Windows Installation
 --------------------
