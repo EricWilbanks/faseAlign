@@ -9,6 +9,11 @@
 .. _`VirtualBox`: https://www.virtualbox.org
 
 .. _`BCE Guide to Enabling Virtualization`: http://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html
+
+.. _`HTK website`: http://htk.eng.cam.ac.uk/register.shtml
+
+.. `HTK source code`: http://htk.eng.cam.ac.uk/download.shtml
+
 Installation
 ============
 
@@ -56,13 +61,36 @@ You can now start the virtual machine by clicking the green "Show" arrow.
 
 	If you want to transfer files between the two you need to set up a *Shared Folder*.
 
-	.. topic:: Setting up a Shared folder
+	- Create a folder on your main computer wherever you like
+	- Open up the VirtualBox application and select the virtual machine you want to add the folder to and go to *Settings*
+	- Go to the *Shared Folders* tab and click the *Adds new Shared Folder* button.
+	- Select the Folder you want to share and make sure you select *Auto-Mount*
+	- The next time you start up the virtual machine you should find the shared folder at /media/sf_myfoldername/ or ~/Desktop/Shared/sf_myfoldername
 
-		- Create a folder on your main computer wherever you like
-		- Open up the VirtualBox application and select the virtual machine you want to add the folder to and go to *Settings*
-		- Go to the *Shared Folders* tab and click the *Adds new Shared Folder* button.
-		- Select the Folder you want to share and make sure you select *Auto-Mount*
-		- The next time you start up the virtual machine you should find the shared folder at /media/sf_myfoldername/ or ~/Desktop/Shared/sf_myfoldername
+
+Install HTK
++++++++++++
+
+The HTK Toolkit is required to perform the backend acoustic modeling and alignment. Because of license requirements, HTK cannot be distributed with other software, but it is free to download for individual users. 
+
+First, register on the `HTK website`_.
+
+Next, open the terminal application and install/download HTK with the following code:
+
+.. code-block:: bash
+
+	sudo bpm-update htk
+
+You will be prompted for the username and password from your HTK registration. 
+
+Updating faseAlign
+++++++++++++++++++
+
+Make sure you have the most recent version of faseAlign by calling the following in the terminal:
+
+.. code-block:: bash
+
+	pip install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
 .. _install-linux:
 
@@ -93,9 +121,9 @@ Downloading HTK
 
 The HTK Toolkit is required to perform the backend acoustic modeling and alignment. Because of license requirements, HTK cannot be distributed with other software, but it is free to download for individual users. 
 
-First, register on the `HTK website <http://htk.eng.cam.ac.uk/register.shtml>`_.
+First, register on the `HTK website`_
 
-Then, download the `HTK source code <http://htk.eng.cam.ac.uk/download.shtml>`_. faseAlign was developed using the stable release 3.4.1 of HTK.
+Then, download the `HTK source code`_. faseAlign was developed using the stable release 3.4.1 of HTK.
 
 
 Compiling HTK
