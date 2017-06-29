@@ -94,6 +94,24 @@ Make sure you have the most recent version of faseAlign by calling the following
 
 .. _install-linux:
 
+
+Correctly Configure UTF-8
++++++++++++++++++++++++++
+
+At this point you likely want to ensure that accented (UTF-8) characters are correctly interpreted. To do so, enter the following to the terminal: 
+
+.. code-block:: bash
+
+	echo export LC_ALL=en_US.UTF-8 >> ~/.bashrc
+	echo export LC_ALL=en_US.UTF-8 >> ~/.profile
+	echo export LANG=en_US.UTF-8 >> ~/.bashrc
+	echo export LANG=en_US.UTF-8 >> ~/.profile
+	echo export LANGUAGE=en_US.UTF-8 >> ~/.bashrc
+	echo export LANGUAGE=en_US.UTF-8 >> ~/.profile
+
+	source ~/.bashrc
+
+
 Linux Installation
 -------------------
 
