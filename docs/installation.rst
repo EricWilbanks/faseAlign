@@ -79,6 +79,7 @@ Installing git
 Package installation and configuration is taken care of by pip and git.
 
 .. code-block:: bash
+
 	sudo apt-get install git
 
 Installing faseAlign
