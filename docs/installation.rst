@@ -5,6 +5,27 @@ Installation
 
 .. warning:: faseAlign has currently only been tested on Linux (Ubuntu 16.04). 
 
+.. note:: 
+
+	Are you installing on `Linux`_install-linux, Mac OS, or Windows? 
+
+.. _install-linux:
+
+Installing on Linux
+-------------------
+
+.. _install-mac:
+
+Installing on Mac OS
+--------------------
+
+
+.._install-windows:
+
+Installing on Windows
+---------------------
+
+
 .. topic:: Requirements
 	
 	Before using faseAlign, you should check to make sure that you have the following requirements already installed.
