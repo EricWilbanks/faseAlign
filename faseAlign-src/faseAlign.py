@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 # Unix allows for execution of files without .py, but Windows does not. 
-# This workaround allows faseAlign to be called (without extension) from the command line in an OS-independent fashion 
+# This workaround allows faseAlign to be called (without extension) from the command line in an OS-independent fashion
+import sys
+sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 import faseAlign
 import argparse
 
