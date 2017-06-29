@@ -7,7 +7,7 @@ Installation
 
 .. note:: 
 
-	Are you installing on `Linux`_install-linux, Mac OS, or Windows? 
+	Are you installing on `Linux <install-linux>`_, Mac OS, or Windows? 
 
 .. _install-linux:
 
