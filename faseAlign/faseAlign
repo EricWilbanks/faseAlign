@@ -28,7 +28,7 @@ def correction(x):
 
 
 
-def process_arguments(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing):
+def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing):
 
 	# Establish site-packages location for repository files
 	try:
@@ -85,7 +85,7 @@ def process_arguments(args.wav, args.stereo, args.left, args.right, args.transcr
 
 	return tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include
 
-	
+
 
 def makeSections(f): # TO-DO: check that this still functions for batch scp alignments; pay special attention to speaker determination/ and min/max etc.
 	 ''' This is a generator function. It will return successive sections
@@ -655,9 +655,9 @@ def process_tg_intervals(tmppath,output_intervals): # To-Do: lots of opportunity
 
 
 
-def main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing):
+def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing):
 
-	tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing)
+	tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing)
 
 	dict_path = prep_dir(tmppath,dict_include)
 	process_wav(audio,tmppath,basename,channel_type)
