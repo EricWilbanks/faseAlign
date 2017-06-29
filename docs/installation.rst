@@ -7,11 +7,11 @@ Installation
 
 .. note:: 
 
-	Are you installing on `Linux <installation#install-linux>`_, `Mac OS <installation#install-mac>`_, or `Windows <installation#install-windows>`_? 
+	Choose either :ref:`_install-linux`, `Mac OS <installation#install-mac>`_, or `Windows <installation#install-windows>`_? 
 
 .. _install-linux:
 
-Installing on Linux
+Linux Installation
 -------------------
 
 .. topic:: Requirements
@@ -111,14 +111,14 @@ Once git is installed, you can download and install the newest version of faseAl
 
 .. _install-mac:
 
-Installing on Mac OS
---------------------
+Mac OS Installation
+-------------------
 
 
 .. _install-windows:
 
-Installing on Windows
----------------------
+Windows Installation
+--------------------
 
 
 
