@@ -7,24 +7,12 @@ Installation
 
 .. note:: 
 
-	Are you installing on `Linux <installation/install-linux>`_, `Mac OS <installation/install-mac>`_, or 1Windows <installation/install-windows>`_? 
+	Are you installing on `Linux <installation#install-linux>`_, `Mac OS <installation#install-mac>`_, or `Windows <installation#install-windows>`_? 
 
 .. _install-linux:
 
 Installing on Linux
 -------------------
-
-.. _install-mac:
-
-Installing on Mac OS
---------------------
-
-
-.. _install-windows:
-
-Installing on Windows
----------------------
-
 
 .. topic:: Requirements
 	
@@ -36,7 +24,8 @@ Installing on Windows
 
 
 Making sure you have Python 3
-----------------------------
++++++++++++++++++++++++++++++
+
 faseAlign is developed to run using Python 3. To check to see if you have Python 3 installed, execute the following code at the command line:
 
 .. code-block:: bash
@@ -53,7 +42,8 @@ If your version is not Python 3, you can find a suitable distribution at the `Of
 		python3 --version
 
 Downloading HTK
-----------------------
++++++++++++++++
+
 The HTK Toolkit is required to perform the backend acoustic modeling and alignment. Because of license requirements, HTK cannot be distributed with other software, but it is free to download for individual users. 
 
 First, register on the `HTK website <http://htk.eng.cam.ac.uk/register.shtml>`_.
@@ -62,7 +52,8 @@ Then, download the `HTK source code <http://htk.eng.cam.ac.uk/download.shtml>`_.
 
 
 Compiling HTK
----------------------
++++++++++++++
+
 Once the zipped source code has been downloaded. Locate the downloaded file and execute the following command to unpack it:
 
 .. code-block::	bash
@@ -91,11 +82,13 @@ If your installation was successful, the following command should print out the 
 	HVite -V
 
 Installing git
---------------
+++++++++++++++
+
 Package installation and configuration is taken care of by pip and git. Follow the instructions on `git's website <https://git-scm.com/downloads>`_ to make sure you have it on your system.
 
 Installing faseAlign
---------------------
+++++++++++++++++++++
+
 Once git is installed, you can download and install the newest version of faseAlign using the following command:
 
 .. code-block:: bash
@@ -114,3 +107,18 @@ Once git is installed, you can download and install the newest version of faseAl
 	.. code-block:: bash
 
 		pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
+
+
+.. _install-mac:
+
+Installing on Mac OS
+--------------------
+
+
+.. _install-windows:
+
+Installing on Windows
+---------------------
+
+
+
