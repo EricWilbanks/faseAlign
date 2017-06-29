@@ -13,6 +13,8 @@ import site
 import audiolabel
 import sox
 
+
+
 def correction(x):
 	"""	
 	Correct the rounding error for the 11025hz sampling rate. 
@@ -35,7 +37,7 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 		sp = site.getsitepackages()[0]
 	except AttributeError: # site.getsitepackages() fails in virtualenv
 		sp = str(audiolabel.__file__)[:-13] # fragile hack here; assuming this file attribute is sp/audiolabel.py
-	repos = os.path.join(sp, 'faseAlign', 'model')
+	repos = os.path.join(sp, 'faseAlign-src', 'model')
 
 
 	# Check stereo options
