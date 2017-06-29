@@ -16,7 +16,9 @@ Installation
 
 .. note:: 
 
-	The most user-friendly option the :ref:`install-bpm` which has faseAlign already included. This option however takes up a large (~14GB) amount of disk space. If you'd prefer to compile from source, choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
+	The most user-friendly option is the :ref:`install-bpm` which has faseAlign already included. This option however takes up a large (~14GB) amount of disk space. 
+
+	If you'd prefer to compile from source, choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
 
 
 
@@ -43,10 +45,10 @@ Run VirtualBox and select `File, Import Appliance...` and select the .ova file y
 You can now start the virtual machine by clicking the green "Show" arrow.
 
 .. warning:: 
+	
+	If you're on a Windows computer and run into errors at this step, virtualization might be disabled on your computer. 
 
-If you're on a Windows computer and run into errors at this step, virtualization might be disabled on your computer. 
-
-Follow the `BCE Guide to Enabling Virtualization`_ in order to enable virtualization. This involves editing BIOS settings, so if you don't feel comfortable making such changes consult with someone who does. 
+	Follow the `BCE Guide to Enabling Virtualization`_ in order to enable virtualization. This involves editing BIOS settings, so if you don't feel comfortable making such changes consult with someone who does. 
 
 .. note::
 
@@ -198,7 +200,6 @@ Now we make sure we have a current version of Python3:
 
 	brew install python3
 
-.. _install-windows:
 
 Downloading HTK
 +++++++++++++++
@@ -206,6 +207,7 @@ Downloading HTK
 Compiling HTK
 +++++++++++++++
 
+.. _install-windows:
 
 Windows Installation
 --------------------
