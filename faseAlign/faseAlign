@@ -83,7 +83,7 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 		chan_2 = None
 
 
-	return tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include
+	return tmppath, basename, repos, transcript_type, channel_type, chan_1, chan_2, dict_include
 
 
 
@@ -657,7 +657,7 @@ def process_tg_intervals(tmppath,output_intervals): # To-Do: lots of opportunity
 
 def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing):
 
-	tmppath, basename, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing)
+	tmppath, basename, repos, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing)
 
 	dict_path = prep_dir(tmppath,dict_include)
 	process_wav(audio,tmppath,basename,channel_type)
