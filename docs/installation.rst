@@ -12,7 +12,7 @@
 
 .. _`HTK website`: http://htk.eng.cam.ac.uk/register.shtml
 
-.. `HTK source code`: http://htk.eng.cam.ac.uk/download.shtml
+.. `HTK source code`: http://htk.eng.cam.ac.uk/ftp/software/HTK-3.4.1.tar.gz
 
 Installation
 ============
@@ -190,21 +190,24 @@ Once git is installed, you can download and install the newest version of faseAl
 
 .. code-block:: bash
 
-	pip install git+git://github.com/EricWilbanks/faseAlign --upgrade
+	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
 
-.. note:: This assumes that your default pip version is pip3+ and is associated with Python 3+ site-packages. To check your default pip version, use the following command:
+Correctly Configure UTF-8
++++++++++++++++++++++++++
 
-	.. code-block:: bash
+At this point you likely want to ensure that accented (UTF-8) characters are correctly interpreted. To do so, enter the following to the terminal: 
 
-		pip -V
+.. code-block:: bash
 
-	If the version is not 3+, you should change `pip` to `pip3` in the install command:
+	echo export LC_ALL=en_US.UTF-8 >> ~/.bashrc
+	echo export LC_ALL=en_US.UTF-8 >> ~/.profile
+	echo export LANG=en_US.UTF-8 >> ~/.bashrc
+	echo export LANG=en_US.UTF-8 >> ~/.profile
+	echo export LANGUAGE=en_US.UTF-8 >> ~/.bashrc
+	echo export LANGUAGE=en_US.UTF-8 >> ~/.profile
 
-	.. code-block:: bash
-
-		pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
-
+	source ~/.bashrc
 
 .. _install-mac:
 
@@ -250,13 +253,65 @@ Now we make sure we have a current version of Python3:
 Downloading HTK
 +++++++++++++++
 
+The HTK Toolkit is required to perform the backend acoustic modeling and alignment. Because of license requirements, HTK cannot be distributed with other software, but it is free to download for individual users. 
+
+First, register on the `HTK website`_
+
+Then, download the `HTK source code`_. faseAlign was developed using the stable release 3.4.1 of HTK.
+
+
 Compiling HTK
 +++++++++++++++
+
+Once the zipped source code has been downloaded. Navigate to the downloaded file and execute the following command to unpack it:
+
+.. code-block::	bash
+
+	tar -xvzf HTK-3.4.1.tar.gz
+
+Now move into the newly created `htk` directory:
+
+.. code-block:: bash
+
+	cd htk
+
+Finally, execute the following lines of code to compile and install HTK:
+
+.. code-block:: bash
+
+	export CPPFLAGS=-UPHNALG
+	./configure --disable-hlmtools --disable-hslab --without-x
+	make all
+	sudo make install
+
+If your installation was successful, the following command should print out the version information for the HTK toolkit:
+
+.. code-block:: bash
+
+	HVite -V
+
+Installing git
+++++++++++++++
+
+Package installation and configuration is taken care of by pip and git.
+
+.. code-block:: bash
+
+	brew install git
+
+Installing faseAlign
+++++++++++++++++++++
+
+Once git is installed, you can download and install the newest version of faseAlign using the following command:
+
+.. code-block:: bash
+
+	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
 .. _install-windows:
 
 Windows Installation
 --------------------
 
-
+(to come)
 
