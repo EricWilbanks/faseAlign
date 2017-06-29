@@ -25,7 +25,9 @@ Installation
 
 	If you'd prefer to compile from source, choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
 
-
+|
+|
+|
 
 .. _install-bpm:
 
@@ -211,6 +213,10 @@ At this point you likely want to ensure that accented (UTF-8) characters are cor
 
 .. _install-mac:
 
+|
+|
+|
+
 macOS Installation
 -------------------
 
@@ -309,6 +315,10 @@ Once git is installed, you can download and install the newest version of faseAl
 	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
 .. _install-windows:
+
+|
+|
+|
 
 Windows Installation
 --------------------
