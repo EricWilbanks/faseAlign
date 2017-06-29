@@ -7,21 +7,12 @@ Installation
 
 .. note:: 
 
-	Choose either :ref:`_install-linux`, `Mac OS <installation#install-mac>`_, or `Windows <installation#install-windows>`_? 
+	Choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
 
 .. _install-linux:
 
 Linux Installation
 -------------------
-
-.. topic:: Requirements
-	
-	Before using faseAlign, you should check to make sure that you have the following requirements already installed.
-
-	*	Python version 3.4+ 
-	*	HTK Toolkit
-	*	git
-
 
 Making sure you have Python 3
 +++++++++++++++++++++++++++++
