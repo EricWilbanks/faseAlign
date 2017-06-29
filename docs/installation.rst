@@ -12,12 +12,10 @@
 
 .. _`HTK website`: http://htk.eng.cam.ac.uk/register.shtml
 
-.. `HTK source code`: http://htk.eng.cam.ac.uk/ftp/software/HTK-3.4.1.tar.gz
+.. _`HTK source code`: http://htk.eng.cam.ac.uk/ftp/software/HTK-3.4.1.tar.gz
 
 Installation
 ============
-
-.. warning:: faseAlign has currently only been tested on Linux (Ubuntu 16.04). 
 
 .. note:: 
 
