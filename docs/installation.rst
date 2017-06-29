@@ -111,6 +111,9 @@ At this point you likely want to ensure that accented (UTF-8) characters are cor
 
 	source ~/.bashrc
 
+|
+|
+|
 
 Linux Installation
 -------------------
