@@ -21,16 +21,17 @@ faseAlign is developed to run using Python 3. To check to see if you have Python
 
 .. code-block:: bash
 
-	python --version
+	python3 --version
 
-If your version is not Python 3, you can find a suitable distribution at the `Official Python Website <https://www.python.org/downloads/>`_. faseAlign has been tested on major Python releases 3.4+.
+If this command fails, you need to install a newer version of python:
 
-.. note::
-	If you have multiple python versions installed but your default is <3, you can check using the following:
+.. code-block:: bash
 
-	.. code-block:: bash
+	sudo apt-get install python3.6
 
-		python3 --version
+
+.. note:: faseAlign has been tested on major Python releases 3.4+.
+
 
 Downloading HTK
 +++++++++++++++
@@ -45,7 +46,7 @@ Then, download the `HTK source code <http://htk.eng.cam.ac.uk/download.shtml>`_.
 Compiling HTK
 +++++++++++++
 
-Once the zipped source code has been downloaded. Locate the downloaded file and execute the following command to unpack it:
+Once the zipped source code has been downloaded. Navigate to the downloaded file and execute the following command to unpack it:
 
 .. code-block::	bash
 
@@ -75,7 +76,10 @@ If your installation was successful, the following command should print out the 
 Installing git
 ++++++++++++++
 
-Package installation and configuration is taken care of by pip and git. Follow the instructions on `git's website <https://git-scm.com/downloads>`_ to make sure you have it on your system.
+Package installation and configuration is taken care of by pip and git.
+
+.. code-block:: bash
+	sudo apt-get install git
 
 Installing faseAlign
 ++++++++++++++++++++
