@@ -48,7 +48,19 @@ If you're on a Windows computer and run into errors at this step, virtualization
 
 Follow the `BCE Guide to Enabling Virtualization`_ in order to enable virtualization. This involves editing BIOS settings, so if you don't feel comfortable making such changes consult with someone who does. 
 
+.. note::
 
+	The files on your virtual machine and the files on your host machine are completely separated and do not interact. 
+
+	If you want to transfer files between the two you need to set up a *Shared Folder*.
+
+	.. topic:: Setting up a Shared folder
+
+		- Create a folder on your main computer wherever you like
+		- Open up the VirtualBox application and select the virtual machine you want to add the folder to and go to *Settings*
+		- Go to the *Shared Folders* tab and click the *Adds new Shared Folder* button.
+		- Select the Folder you want to share and make sure you select *Auto-Mount*
+		- The next time you start up the virtual machine you should find the shared folder at /media/sf_myfoldername/ or ~/Desktop/Shared/sf_myfoldername
 
 .. _install-linux:
 
