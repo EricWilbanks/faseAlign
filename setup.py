@@ -19,10 +19,10 @@ setup(
     ],
     keywords='phonetics alignment spanish corpus',
     packages=find_packages(),
-    package_data = {'faseAlign-src' : ['model/*']},
+    package_data = {'faseAlign' : ['model/*']},
     install_requires=[
         'sox',
         'audiolabel'
     ],
-    scripts=['faseAlign-src/faseAlign','faseAlign-src/faseAlign.py']
+    scripts=['faseAlign/faseAlign']
 )
