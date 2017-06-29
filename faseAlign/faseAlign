@@ -97,8 +97,8 @@ def prep_dir(tmppath,dict_include):
 		matches = []
 
 		with codecs.open(args.missing, 'r', 'utf-8') as custom_dict:
-			lines = custom_dict.readlines()
-			for line in lines:
+			custom_lines = custom_dict.readlines()
+			for line in custom_lines:
 				for character in unwanted:
 					if re.search(character,line.encode('utf-8')) is not None:
 						matches.append(character)
@@ -110,8 +110,20 @@ def prep_dir(tmppath,dict_include):
 					print('"' + char + '", ')
 				sys.exit()
 
-		os.system('cat ' + repos + 'dict_sort ' + args.missing + ' | sort | uniq > ' + tmppath + 'new_dict.txt') # TO-DO: make this OS independent
-		dict_path = tmppath + 'new_dict.txt'	
+		dict_path = os.path.join(tmppath,'new_dict.txt')
+		with codecs.open(os.path.join(repos,dict_sort),'r','utf-8') as full_dict:
+			full_lines = full_dict.readlines()
+		
+		custom_lines = set(custom_lines)
+		full_lines = set(full_lines)
+
+		full = list(full_lines | custom_lines)
+		full.sort()
+
+		with codecs.open(dict_path,'w','utf-8') as new_dict:
+			for line in full:
+				new_dict.write(line)
+
 	else:
 		dict_path = os.path.join(repos, "dict_sort")
 
@@ -127,7 +139,6 @@ def process_wav(audio,tmppath,basename,channel_type):
 
 	if sr < 11025:
 		print("WARNING - Sampling rate is lower than necessary 11025hz. Alignment will suffer!")
-		#sys.exit()
 
 	elif sr == 11025:
 		pass
