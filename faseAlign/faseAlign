@@ -400,12 +400,13 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 	
 
 
-def call_htk(tmppath,name,dict_path): # TO-DO: make this OS independent
+def call_htk(tmppath,name,dict_path): 
 
 	devnull = open(os.devnull, 'w')
-	HCopy_call = ["/usr/local/bin/HCopy", "-T", "1", "-C", repos+"/config_HCopy", "-S", tmppath + name + "_wav_mfc.scp"]
+	usr_bin = '/usr/local/bin' # TO-DO: make this OS independent
+	HCopy_call = [os.path.join(usr_bin,"HCopy"), "-T", "1", "-C", os.bin.join(repos,"config_HCopy"), "-S", os.path.join(tmppath, name + "_wav_mfc.scp")]
 	subprocess.call(HCopy_call, stdout = devnull)
-	HVite_call = ["/usr/local/bin/HVite", "-A", "-D", "-T", "1", "-l", "'*'", "-a", "-m", "-C", repos+"/config", "-H", repos+"/globals", "-H", repos+"/hmmdefs", "-m", "-t", "250.0", "150.0", "1000.0", "-I", tmppath + name + "_words.mlf", "-i", tmppath + name + "_aligned.mlf", "-S", tmppath + name + "_mfc.scp", dict_path, repos+"/monophones1"]
+	HVite_call = [os.path.join(usr_bin,"HVite"), "-A", "-D", "-T", "1", "-l", "'*'", "-a", "-m", "-C", os.path.join(repos,"config"), "-H", os.path.join(repos,"globals"), "-H", os.path.join(repos,"hmmdefs"), "-m", "-t", "250.0", "150.0", "1000.0", "-I", os.path.join(tmppath,name + "_words.mlf"), "-i", os.path.join(tmppath, name + "_aligned.mlf"), "-S", os.path.join(tmppath, name + "_mfc.scp"), dict_path, os.path.join(repos,"monophones1")]
 	subprocess.call(HVite_call, stdout = devnull)
 
 
