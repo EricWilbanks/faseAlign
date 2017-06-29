@@ -1,5 +1,14 @@
 .. _installation:
 
+.. _`Berkeley Common Environment (BCE)`: http://bce.berkeley.edu/
+
+.. _`Berkeley Phonetics Machine (BPM)`: http://linguistics.berkeley.edu/plab/guestwiki/index.php?title=Berkeley_Phonetics_Machine
+
+.. _`faseAlign OVA image`: http://google.com 
+
+.. _`VirtualBox`: https://www.virtualbox.org
+
+.. _`BCE Guide to Enabling Virtualization`: http://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html
 Installation
 ============
 
@@ -7,7 +16,7 @@ Installation
 
 .. note:: 
 
-	The most user-friendly option the :ref:`install-bpm` which has faseAlign already included. If you'd prefer to compile from source, choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
+	The most user-friendly option the :ref:`install-bpm` which has faseAlign already included. This option however takes up a large (~14GB) amount of disk space. If you'd prefer to compile from source, choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
 
 
 
@@ -16,9 +25,30 @@ Installation
 Virtual Machine Installation
 ----------------------------
 
-The easiest way to run faseAlign on your own computer is to use a virtual machine image with the required software already included. 
+Download BPM Image
+++++++++++++++++++
 
-(Include link)
+The easiest way to run faseAlign on your own computer is to use a virtual machine image with the required software already included. The image we'll be using is based on the `Berkeley Phonetics Machine (BPM)`_, in turn derived from the `Berkeley Common Environment (BCE)`_. 
+
+Download the `faseAlign OVA image`_.
+
+
+Set Up Virtual Machine
+++++++++++++++++++++++
+
+First, you'll need to install `VirtualBox` in able to be able to run virtual machines on your computer. 
+
+Run VirtualBox and select `File, Import Appliance...` and select the .ova file you downloaded earlier. Then adjust the amount of RAM the virtual machine is allotted (defaults are typically fine).
+
+You can now start the virtual machine by clicking the green "Show" arrow.
+
+.. warning:: 
+
+If you're on a Windows computer and run into errors at this step, virtualization might be disabled on your computer. 
+
+Follow the `BCE Guide to Enabling Virtualization`_ in order to enable virtualization. This involves editing BIOS settings, so if you don't feel comfortable making such changes consult with someone who does. 
+
+
 
 .. _install-linux:
 
