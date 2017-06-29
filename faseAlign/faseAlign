@@ -141,7 +141,7 @@ def sectionizeMLF(mlf):
 
 
 
-def prep_dir(tmppath,dict_include):
+def prep_dir(tmppath,repos,dict_include):
  	
 
 	if os.path.exists(tmppath):
@@ -470,7 +470,7 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 	
 
 
-def call_htk(tmppath,name,dict_path): 
+def call_htk(tmppath,repos,name,dict_path): 
 	
 	# Assuming HTK executables are mapped properly during installation
 	devnull = open(os.devnull, 'w')
@@ -544,7 +544,7 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 
 
 
-def align_from_tg(chunk_index, total_chunks, tmppath, dict_path):
+def align_from_tg(chunk_index, total_chunks, tmppath, repos, dict_path):
 
 	output_intervals = {}
 	speaker_indices = None # empty argument to process_mlf_output()
@@ -557,7 +557,7 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path):
 	
 		curr = "speaker_" + speaker
 
-		call_htk(tmppath,curr,dict_path)
+		call_htk(tmppath,repos,curr,dict_path)
 
 		with codecs.open(os.path.join(tmppath, curr + '_aligned.mlf'), 'r', 'utf-8') as input:
 			f = input.readlines()[1:]
@@ -579,9 +579,9 @@ def align_from_tg(chunk_index, total_chunks, tmppath, dict_path):
 
 
 
-def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path):
+def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,repos,basename,dict_path):
 
-	call_htk(tmppath,basename,dict_path)
+	call_htk(tmppath,repos,basename,dict_path)
 
 	with codecs.open(os.path.join(tmppath, basename + '_aligned.mlf'), 'r','utf-8') as input: 
 		f = input.readlines()[2:]
@@ -659,7 +659,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 
 	tmppath, basename, repos, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing)
 
-	dict_path = prep_dir(tmppath,dict_include)
+	dict_path = prep_dir(tmppath,repos, dict_include)
 	process_wav(audio,tmppath,basename,channel_type)
 
 	###########################
@@ -697,9 +697,9 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 	###########################
 
 	if transcript_type == "txt":
-		output_intervals = align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,basename,dict_path)
+		output_intervals = align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,repos,basename,dict_path)
 	else:
-		output_intervals = align_from_tg(chunk_index,total_chunks,tmppath,dict_path)
+		output_intervals = align_from_tg(chunk_index,total_chunks,tmppath,repos,dict_path)
 		
 	out_tg = process_tg_intervals(tmppath,output_intervals)
 	with codecs.open(os.path.join(outpath, basename+'_aligned.TextGrid'),'w','utf-8') as o:
