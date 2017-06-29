@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='faseAlign',
-    version='1.0.0.dev5',
+    version='1.0.0.dev6',
     description='Command Line python module for Force Aligning Spanish using HTK',
     url='https://github.com/EricWilbanks/faseAlign',
     author='Eric Wilbanks',
@@ -19,7 +19,7 @@ setup(
     ],
     keywords='phonetics alignment spanish corpus',
     packages=find_packages(),
-    package_data = {'faseAlign' : ['model/*']},
+    package_data = {'faseAlign-src' : ['model/*']},
     install_requires=[
         'sox',
         'audiolabel'
