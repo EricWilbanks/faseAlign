@@ -4,7 +4,7 @@
 
 .. _`Berkeley Phonetics Machine (BPM)`: http://linguistics.berkeley.edu/plab/guestwiki/index.php?title=Berkeley_Phonetics_Machine
 
-.. _`faseAlign OVA image`: http://google.com 
+.. _`faseAlign OVA image`: https://berkeley.box.com/s/v8kgr4xhb5v0tozfbeocbl34wmng6kcb
 
 .. _`VirtualBox`: https://www.virtualbox.org
 
