@@ -29,7 +29,6 @@ It is **strongly suggested** to use transcriptions in Praat TextGrid format as i
 +++++++++++++++++++
 
 .. include:: example.txt
-	
 	:literal:
 
 
