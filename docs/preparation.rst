@@ -70,6 +70,7 @@ Add each of the missing words to a txt file with their corresponding phones, as 
 .. include:: dict_ex.txt
 	:literal:
 
+
 The format of the dictionary is the word (in captials) following by the corresponding phones, each separated by a space. 
 
 Phones correspond to ipa with the following exceptions:
