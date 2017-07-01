@@ -65,4 +65,21 @@ How to Add Missing Words
 
 You'll often run into words in your transcription that are not included in the dictionary; these may include place names, speech errors, novel words, etc. As decribed in :ref:`missing-alert`
 
+Add each of the missing words to a txt file with their corresponding phones, as shown below::
+
+.. include:: dict_ex.txt
+	:literal:
+
+The format of the dictionary is the word (in captials) following by the corresponding phones, each separated by a space. 
+
+Phones correspond to ipa with the following exceptions:
+
+- Palatal fricative: y
+- Palatal affricatve: CH
+- Palatal nasal: NY
+- Alveolar tap: r
+- Alveolar trill: R
+- Approximants and stops are both lower-case: (b,d,g)
+
+
 .. note:: Extra words in your custom dictionary won't affect alignment! I suggest keeping one dict.local and adding new words as you encounter them. 
