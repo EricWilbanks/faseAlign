@@ -195,6 +195,21 @@ Once git is installed, you can download and install the newest version of faseAl
 
 	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
+Installing sox
+++++++++++++++
+
+The sox utility is used to downsample and extract sound files. Try the command below to see if sox is already installed:
+
+.. code-block:: bash 
+	
+	sox --version
+
+If you receive an error message, install sox with the following command:
+
+.. code-block:: bash
+
+	sudo apt-get install sox
+
 
 Correctly Configure UTF-8
 +++++++++++++++++++++++++
@@ -314,6 +329,22 @@ Once git is installed, you can download and install the newest version of faseAl
 .. code-block:: bash
 
 	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
+
+Installing sox
+++++++++++++++
+
+The sox utility is used to downsample and extract sound files. Try the command below to see if sox is already installed:
+
+.. code-block:: bash 
+	
+	sox --version
+
+If you receive an error message, install sox with the following command:
+
+.. code-block:: bash
+
+	brew install sox
+
 
 .. _install-windows:
 
