@@ -92,9 +92,6 @@ Make sure you have the most recent version of faseAlign by calling the following
 
 	pip install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
-.. _install-linux:
-
-
 Correctly Configure UTF-8
 +++++++++++++++++++++++++
 
@@ -114,6 +111,8 @@ At this point you likely want to ensure that accented (UTF-8) characters are cor
 |
 |
 |
+
+.. _install-linux:
 
 Linux Installation
 -------------------
@@ -227,11 +226,12 @@ At this point you likely want to ensure that accented (UTF-8) characters are cor
 
 	source ~/.bashrc
 
-.. _install-mac:
 
 |
 |
 |
+
+.. _install-mac:
 
 macOS Installation
 -------------------
@@ -346,11 +346,12 @@ If you receive an error message, install sox with the following command:
 	brew install sox
 
 
-.. _install-windows:
 
 |
 |
 |
+
+.. _install-windows:
 
 Windows Installation
 --------------------
