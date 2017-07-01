@@ -63,7 +63,7 @@ Additionally, the following can be used to note various non-speech items:
 How to Add Missing Words
 ------------------------
 
-You'll often run into words in your transcription that are not included in the dictionary; these may include place names, speech errors, novel words, etc. As decribed in :ref:`missing-alert`
+You'll often run into words in your transcription that are not included in the dictionary; these may include place names, speech errors, novel words, etc. as decribed in :ref:`missing-alert`.
 
 Add each of the missing words to a txt file with their corresponding phones, as shown below:
 
