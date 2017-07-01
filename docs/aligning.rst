@@ -26,9 +26,10 @@ The default location of the output TextGrid is your current working directory. T
 
 	faseAlign -w input.wav -t transcript.TextGrid -o /home/user/Desktop/project/
 
+.. _missing-alert:
 
-Missing Words
--------------
+Missing Words During Alignment
+------------------------------
 
 If there are words in your transcript that are not included in the dictionary, you should add them to a custom local dictionary (see :ref:`missing`). Then pass the path to the new file to the `-m` flag:
 

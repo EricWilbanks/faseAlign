@@ -34,24 +34,35 @@ It is **strongly suggested** to use transcriptions in Praat TextGrid format as i
 
 faseAlign also supports transcriptions in .txt format as in the above example. This approach has the benefit of not needing any determination of turn boundaries, but suffers from slightly poorer alignments. This is due to the fact that the entire wav file is aligned to the entire transcription.  In this method, speakers cannot overlap in the output alignment (since the file is processed in one linear chunk). 
 
-Speakers are still separated into their separate tiers following alignment, through the use of speakers labels (e.g., {S1} and {S2}) which mark utterances belonging to that speaker. 
+Speakers are still separated into different tiers following alignment, through the use of speaker labels (e.g., {S1} and {S2}) which mark utterances belonging to that speaker. 
 
 .. note:: Currently only speaker labels {S1}-{S99} are available for .txt transcriptions
 
 Transcription Best Practices
 ----------------------------
 
-Regardless of transcription method chosen, the process of transcribing is nearly identical.
+Regardless of transcription method chosen, the process of transcribing is similar; you'll want to pay attention to these key points:
 
-- types of inputs allowed
-- examples
-- special symbols
-- transcription best practices
-- dictionary entries
+#. **Be as Accurate as Possible!** - This includes transcribing false starts, repetitions, omissions, etc as accurately as possible. The aligner can't find a word if it's not in the transcription!
+#. **Transcribe in Breath Groups** - While this is most helpful for the TextGrid transcriptions, I also find it helpful for the txt ones as well.
+
+#. **Spell out all accents and tildes** - otherwise words might be not be found in the dictionary
+#. **Spell out all numbers and dates** - ("El veinte de marzo" instead of "el 20 de Mar.")
+
+
+Additionally, the following can be used to note various non-speech items:
+
+- {BR} - breath
+- {CG} - cough
+- {SIL} - silence longer than ~ 2 seconds
+- {LG} - laughter
+- {NS} - random noise
 
 .. _missing:
 
 How to Add Missing Words
 ------------------------
 
-How to add missing words
+You'll often run into words in your transcription that are not included in the dictionary; these may include place names, speech errors, novel words, etc. As decribed in :ref:`missing-alert`
+
+.. note:: Extra words in your custom dictionary won't affect alignment! I suggest keeping one dict.local and adding new words as you encounter them. 
