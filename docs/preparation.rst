@@ -11,11 +11,14 @@ The input to the force aligner is a wav file and the orthographic transcription 
 .TextGrid transcription
 ++++++++++++++++++++++
 
-It is strongly suggested to use transcriptions in Praat TextGrid format. TextGrid transcripts are of the style of the example below:
-
 .. figure:: ex_tg.png
-	:alt: description
+	:alt: TextGrid transcription example
 	:figclass: align-center
+
+	Caption?
+
+	
+It is **strongly suggested** to use transcriptions in Praat TextGrid format as in the above example.
 
 This approach has many benefits over the .txt transcription approach:
 
