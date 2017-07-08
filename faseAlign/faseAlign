@@ -257,7 +257,6 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 		chan_1 = None
 		chan_2 = None
 
-
 	return tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include
 
 
@@ -798,6 +797,15 @@ def process_tg_intervals(tmppath,output_intervals): # To-Do: lots of opportunity
 			except NameError:
 				global_max = local_max
 
+	# To-Do: convert words to spanish_word objects and add tier with tonicity;
+	if args_syllables = True:
+		print('Syllable flag enabled. This feature is not yet fully implemented.')
+
+		for speaker in output_intervals:
+			for entry in output_intervals[speaker]["words"]:
+				current = spanish_word(entry)
+				print(current)
+
 	# Add buffers
 	for speaker in output_intervals:
 		for tier in output_intervals[speaker]:
@@ -815,8 +823,6 @@ def process_tg_intervals(tmppath,output_intervals): # To-Do: lots of opportunity
 					buff.append((prev_end,global_max,''))
 				# Add new intervals to output_intervals
 				output_intervals[speaker][tier].extend(buff)
-
-	# To-Do: convert words to spanish_word objects and add tier with tonicity;
 	
 	# Write output to textgrid object
 	out_tg = audiolabel.LabelManager(codec='utf-8')
@@ -834,7 +840,7 @@ def process_tg_intervals(tmppath,output_intervals): # To-Do: lots of opportunity
 
 
 
-def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing):
+def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_syllables):
 
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing)
 
@@ -895,7 +901,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 if __name__ == '__main__':
 
 	# Parse arguments
-	parser = argparse.ArgumentParser(description='test description')
+	parser = argparse.ArgumentParser(description='Command Line arguments for faseAlign')
 	parser.add_argument('-w', '--wav', required = True, help = 'path to wav file')
 	parser.add_argument('-s', '--stereo', action='store_true', help = 'stereo input, mono is default')
 	parser.add_argument('-l', '--left', help = 'left channel speaker')
@@ -903,7 +909,7 @@ if __name__ == '__main__':
 	parser.add_argument('-t', '--transcript', required = True, help = 'path to transcript')
 	parser.add_argument('-o', '--outpath', help = 'directory to store output textgrid(s), default is current directory')
 	parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
+	parser.add_argument('-y', '--syllables', action='store_true', help = 'add syllable information tier to output textgrids')
 	args = parser.parse_args()
 
-	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing)
-
+	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing, args.syllables)
