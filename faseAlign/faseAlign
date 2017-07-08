@@ -64,7 +64,7 @@ class spanish_word(object):
 		cv = ''.join(['c' if p in spanish_word.consonants else 'v' for p in self.phones])
 
 		# first parse of groups with maximal onsets
-		l = re.findall('(?:c*v+c+$)|(?:c*v+)|(?:v+c+)', cv)
+		l = re.findall('(?:c*v+c+$)|(?:c*v+)|(?:v+c+)|(?:^c+$)', cv)
 		
 		syllables_c = {}
 		syll_n = 0
