@@ -71,7 +71,7 @@ class spanish_word(object):
 		phones = self.phones
 		
 		if len(phones) != len(''.join(l)):
-			print('Error! Investigate! - ' + str(self.orth))
+			print('Error! Investigate! - ' + str(self.orth) + ' - ' + str(self.phones) + ' - ' + str(cv))
 
 		###################
 		# assign consonants
@@ -803,7 +803,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 
 		for speaker in output_intervals:
 			for entry in output_intervals[speaker]["words"]:
-				current = spanish_word(entry)
+				current = spanish_word(entry[2])
 				print(current)
 
 	# Add buffers
