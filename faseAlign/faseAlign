@@ -811,7 +811,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 			for entry in output_intervals[speaker]["words"]:
 				if entry[2] not in ['sp','{SIL}','{LG}','{BR}','{CG}','{NS}']:
 					current = spanish_word(entry[2])
-					print(current)
+					# To-Do: Continue
 
 	# Add buffers
 	for speaker in output_intervals:
