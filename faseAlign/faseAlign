@@ -170,6 +170,9 @@ class spanish_word(object):
 			if stress_match is not None:
 				stressed = int(syll)
 
+		if self.num_syllables == 1:
+			stressed = 1
+
 		if stressed == 0: # normal rules, no orthographic accent
 			if self.orth[-1] in spanish_word.vowels + ['n','s']:
 				stressed = self.num_syllables - 1 # penultimate stress since no orthographic accent
@@ -803,8 +806,9 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 
 		for speaker in output_intervals:
 			for entry in output_intervals[speaker]["words"]:
-				current = spanish_word(entry[2])
-				print(current)
+				if entry[2] not in ['{SIL}','sp']:
+					current = spanish_word(entry[2])
+					print(current)
 
 	# Add buffers
 	for speaker in output_intervals:
