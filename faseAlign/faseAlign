@@ -184,6 +184,9 @@ class spanish_word(object):
 			for pair in spanish_word.corr_tups2:
 				match, repl = pair
 				syllables[syll][:] = [re.sub(match,repl,x) for x in syllables[syll]] # whole list slice
+		for pair in spanish_word.corr_tups2:
+			match, repl = pair
+			self.phones[:] = [re.sub(match,repl,x) for x in self.phones]
 
 		self.stressed = stressed
 
@@ -806,7 +809,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 
 		for speaker in output_intervals:
 			for entry in output_intervals[speaker]["words"]:
-				if entry[2] not in ['{SIL}','sp']:
+				if entry[2] not in ['sp','{SIL}','{LG}','{BR}','{CG}','{NS}']:
 					current = spanish_word(entry[2])
 					print(current)
 
