@@ -171,7 +171,7 @@ class spanish_word(object):
 				stressed = int(syll)
 
 		if stressed == 0: # normal rules, no orthographic accent
-			if self.orth[-1] in vowels + ['n','s']:
+			if self.orth[-1] in spanish_word.vowels + ['n','s']:
 				stressed = self.num_syllables - 1 # penultimate stress since no orthographic accent
 			else: 
 				stressed = self.num_syllables # final stress since no orthographic accent 
