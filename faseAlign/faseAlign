@@ -798,7 +798,7 @@ def process_tg_intervals(tmppath,output_intervals): # To-Do: lots of opportunity
 				global_max = local_max
 
 	# To-Do: convert words to spanish_word objects and add tier with tonicity;
-	if args_syllables = True:
+	if args_syllables == True:
 		print('Syllable flag enabled. This feature is not yet fully implemented.')
 
 		for speaker in output_intervals:
