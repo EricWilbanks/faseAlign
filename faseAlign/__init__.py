@@ -1,3 +1,3 @@
 """
-fase-align.py
+faseAlign
 """
