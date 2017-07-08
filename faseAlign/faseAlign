@@ -71,7 +71,7 @@ class spanish_word(object):
 		phones = self.phones
 		
 		if len(phones) != len(''.join(l)):
-			print('Error! Investigate!')
+			print('Error! Investigate! - ' + str(self.orth))
 
 		###################
 		# assign consonants
@@ -778,7 +778,7 @@ def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,repos,base
 
 
 
-def process_tg_intervals(tmppath,output_intervals): # To-Do: lots of opportunity to streamline here. 
+def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots of opportunity to streamline here. 
 
 	# Compute global min and max time
 	for speaker in output_intervals:
@@ -886,7 +886,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 	else:
 		output_intervals = align_from_tg(chunk_index,total_chunks,tmppath,repos,dict_path)
 		
-	out_tg = process_tg_intervals(tmppath,output_intervals)
+	out_tg = process_tg_intervals(tmppath,output_intervals,args_syllables)
 	with codecs.open(os.path.join(outpath, basename+'_aligned.TextGrid'),'w','utf-8') as o:
 		o.write(out_tg.as_string('praat_short'))
 
