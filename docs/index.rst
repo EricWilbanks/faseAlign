@@ -1,8 +1,3 @@
-.. faseAlign documentation master file, created by
-   sphinx-quickstart on Mon Jun 26 10:45:12 2017.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 .. _index: 
 
 faseAlign Documentation
@@ -21,7 +16,7 @@ Features
 
 Citation
 ========
-(Decide on citation)
+Wilbanks, E. (2017). faseAlign (Version |version|) [Computer software]. Retrieved |today| from https://github.com/EricWilbanks/faseAlign.
 
 
 Contribute
