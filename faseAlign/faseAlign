@@ -803,7 +803,6 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 			except NameError:
 				global_max = local_max
 
-	# To-Do: convert words to spanish_word objects and add tier with tonicity;
 	if args_syllables == True:
 
 		for speaker in output_intervals:
@@ -849,7 +848,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 	out_tg = audiolabel.LabelManager(codec='utf-8')
 
 	for speaker in output_intervals:
-		for tier_type in output_intervals[speaker]:
+		for tier_type in sorted(output_intervals[speaker].keys()):
 			tier_name = speaker + ' : ' + tier_type
 			t = audiolabel.IntervalTier(name=tier_name)
 			for i in output_intervals[speaker][tier_type]:
