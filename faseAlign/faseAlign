@@ -805,7 +805,6 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 
 	# To-Do: convert words to spanish_word objects and add tier with tonicity;
 	if args_syllables == True:
-		print('Syllable flag enabled. This feature is not yet fully implemented.')
 
 		for speaker in output_intervals:
 			output_intervals[speaker]["syllables"] = []
@@ -814,9 +813,20 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 					current = spanish_word(entry[2])
 					word_s = entry[0]
 					word_e = entry[1]
-					phones  = [p[2] for p in output_intervals[speaker]["phones"] if ((p[0] >= word_s) and (p[1] <= word_e))] # all phones which fall within word times
+					phones  = [p for p in output_intervals[speaker]["phones"] if ((p[0] >= word_s) and (p[1] <= word_e))] # all phones which fall within word times
+					if len(phones) != len(current.phones):
+						print('ERROR! - unequal phone numbers: ' + str(phones) + ' - ' + str(current.phones))
 					for syll in current.syllables:
-						print(current.syllables[syll])	
+						curr_syll = current.syllables[syll]
+						syll_s = phones[0][0] # start time of first phone in syllable
+						syll_e = phones[len(curr_syll)][1] # end time of last phone in syllable
+						phones[:] = phones[len(curr_syll):] # remove syllable's phones from list
+						if syll == current.stressed:
+							text = "stressed"
+						else:
+							text = "unstressed"
+						output_intervals[speaker]["syllables"].extend((syll_s,syll_e,text))
+						
 
 	# Add buffers
 	for speaker in output_intervals:
