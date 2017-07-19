@@ -827,7 +827,6 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 							text = "unstressed"
 						output_intervals[speaker]["syllables"].append((syll_s,syll_e,text))
 						
-)
 	# Add buffers
 	for speaker in output_intervals:
 		for tier in output_intervals[speaker]:
