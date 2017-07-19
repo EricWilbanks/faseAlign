@@ -12,6 +12,7 @@ Features
 - support for .txt or .TextGrid input transcriptions
 - custom dictionaries
 - support for stereo audio
+- automatic syllabification options
 
 
 Citation
@@ -40,3 +41,4 @@ If you're experiencing issues or just have questions about the usage or installa
    aligning
    troubleshooting
    development
+   updates
