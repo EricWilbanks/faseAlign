@@ -808,15 +808,15 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 		print('Syllable flag enabled. This feature is not yet fully implemented.')
 
 		for speaker in output_intervals:
+			output_intervals[speaker]["syllables"] = {}
 			for entry in output_intervals[speaker]["words"]:
 				if entry[2] not in ['sp','{SIL}','{LG}','{BR}','{CG}','{NS}']:
 					current = spanish_word(entry[2])
 					word_s = entry[0]
 					word_e = entry[1]
-					test = [p[2] for p in output_intervals[speaker]["phones"] if ((p[0] >= word_s) and (p[1] <= word_e))] # all phones which fall within word times
-					print(test)
-					print(current.phones)
-					print('*****')
+					phones  = [p[2] for p in output_intervals[speaker]["phones"] if ((p[0] >= word_s) and (p[1] <= word_e))] # all phones which fall within word times
+					for syll in current.syllables:
+						print(syll)	
 
 	# Add buffers
 	for speaker in output_intervals:
