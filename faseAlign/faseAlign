@@ -847,7 +847,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 	# Write output to textgrid object
 	out_tg = audiolabel.LabelManager(codec='utf-8')
 
-	for speaker in output_intervals:
+	for speaker in sorted(output_intervals.keys()):
 		for tier_type in sorted(output_intervals[speaker].keys()):
 			tier_name = speaker + ' : ' + tier_type
 			t = audiolabel.IntervalTier(name=tier_name)
