@@ -501,7 +501,7 @@ def identify_speakers(l):
 
 
 
-def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename,args_repress):
+def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename,args_prevent):
 	
 	
 	content = actual_transcript.readlines()
@@ -530,7 +530,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppat
 				all_words.append("sp\n" + current.orth.upper() +"\n")
 
 			if value not in dict_split:
-				if args_repress == True:
+				if args_prevent == True:
 					missing.append(current.orth.upper())
 				else:
 					with codecs.open(dict_path,'a','utf-8') as d:
@@ -559,7 +559,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppat
 
 
 
-def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan_1,chan_2,args_repress):
+def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan_1,chan_2,args_prevent):
 
 	# Prep files to filter missing items
 	missing = []
@@ -626,7 +626,7 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 							all_words[speaker].append("sp\n" + current.orth.upper() + "\n")
 						
 						if value not in dict_split:
-							if args_repress == True:
+							if args_prevent == True:
 								missing.append(current.orth.upper())
 							else:
 								with codecs.open(dict_path,'a','utf-8') as d:
@@ -867,7 +867,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots
 
 
 
-def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_syllables, args_repress):
+def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_syllables, args_prevent):
 
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing)
 
@@ -883,22 +883,22 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 					with open(os.path.join(tmppath, basename + '_wav_mfc.scp'), 'a') as wav_mfc:
 						try:
 							with codecs.open(args_transcript, 'r', 'utf-8') as actual_transcript:
-								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename,args_repress)
+								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename,args_prevent)
 
 						except UnicodeError:
 							try:
 								with codecs.open(args_transcript, 'r', 'utf-16') as actual_transcript:
-									speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename,args_repress)
+									speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename,args_prevent)
 
 							except UnicodeError:
 								with codecs.open(args_transcript, 'r', 'iso-8859-1') as actual_transcript:
-									speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename,args_repress)
+									speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppath,basename,args_prevent)
 			
 	###########################
 			
 	else:
 		with codecs.open(dict_path, 'r', 'utf-8') as dict_sort:
-			missing, chunk_index, total_chunks= make_mlf_from_tg(dict_sort,args_wav,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_repress)
+			missing, chunk_index, total_chunks= make_mlf_from_tg(dict_sort,args_wav,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_prevent)
 			# Exit if missing words!
 			if len(missing) > 0:
 				with codecs.open(os.path.join(tmppath, 'missing_words'), 'w', 'utf-8') as words_to_add:
@@ -929,15 +929,15 @@ if __name__ == '__main__':
 
 	# Parse arguments
 	parser = argparse.ArgumentParser(description='Command Line arguments for faseAlign')
-	parser.add_argument('-w', '--wav', help = 'path to wav file')
-	parser.add_argument('-s', '--stereo', action='store_true', help = 'stereo input, mono is default')
+	parser.add_argument('-w', '--wav', required = True,  help = 'path to wav file')
+	parser.add_argument('-s', '--stereo', action = 'store_true', help = 'stereo input, mono is default')
 	parser.add_argument('-l', '--left', help = 'left channel speaker')
 	parser.add_argument('-r', '--right', help = 'right channel speaker')
 	parser.add_argument('-t', '--transcript', required = True, help = 'path to transcript')
 	parser.add_argument('-o', '--outpath', help = 'directory to store output textgrid(s), default is current directory')
 	parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
-	parser.add_argument('-y', '--syllables', action='store_true', help = 'add syllable information tier to output textgrids')
-	parser.add_argument('-r', '--repress', action='store_true', help = 'repress automatic phonemicization for unknown words')
+	parser.add_argument('-y', '--syllables', action = 'store_true', help = 'add syllable information tier to output textgrids')
+	parser.add_argument('-p', '--prevent', action = 'store_true', help = 'prevent automatic phonemicization for unknown words')
 	args = parser.parse_args()
 
-	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing, args.syllables, args.repress)
+	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing, args.syllables, args.prevent)
