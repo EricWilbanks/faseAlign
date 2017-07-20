@@ -6,7 +6,7 @@ Model Development
 Monophones
 ----------
 
-.. figure:: monophones.pdf
+.. figure:: monophones.png
 	:alt: Table of monophone symbols
 	:figclass: align-center
 
