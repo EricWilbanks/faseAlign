@@ -43,7 +43,7 @@ Download the `faseAlign OVA image`_.
 Set Up Virtual Machine
 ++++++++++++++++++++++
 
-First, you'll need to install `VirtualBox` in able to be able to run virtual machines on your computer. 
+First, you'll need to install `VirtualBox`_ in able to be able to run virtual machines on your computer. 
 
 Run VirtualBox and select `File, Import Appliance...` and select the .ova file you downloaded earlier. Then adjust the amount of RAM the virtual machine is allotted (defaults are typically fine).
 
