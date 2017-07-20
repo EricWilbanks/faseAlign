@@ -533,7 +533,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppat
 				if args_prevent == True:
 					missing.append(current.orth.upper())
 				else:
-					with codecs.open(dict_path,'a','utf-8') as d:
+					with codecs.open(dict_sort,'a','utf-8') as d:
 						d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
 			i += 1
 
@@ -552,7 +552,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppat
 			for word in sorted(set(missing)):
 				words_to_add.write(word + '\n')
 		
-		sys.exit('There were missing words in your transcript! Saved to- ' + tmppath + 'missing_words')
+		sys.exit('There were missing words in your transcript! Saved to- ' + str(os.path.join(tmppath,'missing_words')))
 
 
 	return speaker_words, speaker_indices, speaker_list, first_speaker
@@ -629,7 +629,7 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 							if args_prevent == True:
 								missing.append(current.orth.upper())
 							else:
-								with codecs.open(dict_path,'a','utf-8') as d:
+								with codecs.open(dict_sort,'a','utf-8') as d:
 									d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
 						i += 1
 
