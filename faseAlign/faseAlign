@@ -624,7 +624,6 @@ def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_
 							all_words[speaker].append("sp\n" + current.orth.upper() + "\n")
 						
 						if value not in dict_split:
-							print(value)
 							if args_prevent == True:
 								missing.append(current.orth.upper())
 							else:
