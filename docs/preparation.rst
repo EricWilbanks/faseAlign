@@ -9,7 +9,7 @@ Transcription Files
 The input to the force aligner is a wav file and the orthographic transcription associated with it. Transcriptions can be in either .TextGrid or .txt formats.
 
 .TextGrid transcription
-++++++++++++++++++++++
++++++++++++++++++++++++
 
 .. figure:: ex_tg.png
 	:alt: TextGrid transcription example
