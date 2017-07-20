@@ -533,8 +533,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_sort,tmppat
 				if args_prevent == True:
 					missing.append(current.orth.upper())
 				else:
-					with codecs.open(dict_sort,'a','utf-8') as d:
-						d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
+					dict_sort.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary; this is opened by main()
 			i += 1
 
 	all_words.append('{SIL}\n.')
@@ -629,8 +628,7 @@ def make_mlf_from_tg(dict_sort,audio,tmppath,basename,textgrid,channel_type,chan
 							if args_prevent == True:
 								missing.append(current.orth.upper())
 							else:
-								with codecs.open(dict_sort,'a','utf-8') as d:
-									d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
+								dict_sort.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary; this is opened by main()
 						i += 1
 
 					all_words[speaker].append('{SIL}\n.\n')
@@ -878,7 +876,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 	if transcript_type == "txt":
 
 		with codecs.open(os.path.join(tmppath, basename + '_words.mlf'), 'a', 'utf-8') as words:
-			with codecs.open(dict_path, 'r', 'utf-8') as dict_sort:
+			with codecs.open(dict_path, 'a', 'utf-8') as dict_sort:
 				with open(os.path.join(tmppath, basename + '_mfc.scp'), 'a') as mfc:
 					with open(os.path.join(tmppath, basename + '_wav_mfc.scp'), 'a') as wav_mfc:
 						try:
@@ -897,7 +895,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 	###########################
 			
 	else:
-		with codecs.open(dict_path, 'r', 'utf-8') as dict_sort:
+		with codecs.open(dict_path, 'a', 'utf-8') as dict_sort:
 			missing, chunk_index, total_chunks= make_mlf_from_tg(dict_sort,args_wav,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_prevent)
 			# Exit if missing words!
 			if len(missing) > 0:
