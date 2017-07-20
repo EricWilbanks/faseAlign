@@ -1,8 +1,8 @@
-.. _updates:
+.. _changelog:
 
 
-Updates Log
-===========
+Changelog
+=========
 
 #. **Version 0.1.1** : July 19, 2017
 

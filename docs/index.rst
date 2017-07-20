@@ -41,5 +41,5 @@ If you're experiencing issues or just have questions about the usage or installa
    aligning
    troubleshooting
    development
-   updates
+   changelog
 
