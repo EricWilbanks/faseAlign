@@ -12,7 +12,8 @@ Features
 - support for .txt or .TextGrid input transcriptions
 - custom dictionaries
 - support for stereo audio
-
+- automatic phonemicization of unknown words
+- automatic syllabification and tonicity
 
 Citation
 ========

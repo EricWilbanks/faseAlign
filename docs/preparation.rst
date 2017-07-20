@@ -65,7 +65,7 @@ How to Add Missing Words
 
 You'll often run into words in your transcription that are not included in the dictionary; these may include place names, speech errors, novel words, etc. as decribed in :ref:`missing-alert`.
 
-Add each of the missing words to a txt file with their corresponding phones, as shown below:
+If you want to override the automatic phonemicization (often appropriate for words not following native Spanish orthography to phonemes), add each of the missing words to a txt file with their corresponding phones, as shown below:
 
 .. include:: dict_ex.txt
 	:literal:

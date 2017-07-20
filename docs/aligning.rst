@@ -31,11 +31,21 @@ The default location of the output TextGrid is your current working directory. T
 Missing Words During Alignment
 ------------------------------
 
-If there are words in your transcript that are not included in the dictionary, you should add them to a custom local dictionary (see :ref:`missing`). Then pass the path to the new file to the `-m` flag:
+By default, faseAlign generates automatic phonemicization of missing words following Spanish orthography to phoneme rules. These automatic phonemicizations are usually correct for native Spanish vocabulary, but are often incorrect for loanwords or some place names. 
+
+If there are words in your transcript that you'd like to give a custom phonemicization, you should add them to a custom local dictionary (see :ref:`missing`). Then pass the path to the new file to the `-m` flag:
 
 .. code-block:: bash
 
 	faseAlign -w input.wav -t transcript.TextGrid -m dict.local
+
+If you'd like to prevent automatic phonemicization in the first place, you can use the `-p` flag:
+
+.. code-block:: bash
+
+	faseAlign -w input.wav -t transcript.TextGrid -p
+
+Now, if missing words are encountered they will be collected into an output file for you to add to your custom local dictionary.
 
 Stereo Options
 --------------
