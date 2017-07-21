@@ -789,7 +789,7 @@ def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,repos,base
 
 
 
-def process_tg_intervals(tmppath,output_intervals,args_syllables): # To-Do: lots of opportunity to streamline here. 
+def process_tg_intervals(tmppath,output_intervals,args_syllables): 
 
 	# Compute global min and max time
 	for speaker in output_intervals:
