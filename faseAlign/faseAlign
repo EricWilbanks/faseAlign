@@ -454,7 +454,7 @@ def identify_speakers(l):
 	index_edit = 0
 
 	for index,line in enumerate(l):
-		speaker_match = re.search('\{[SI][0-9]*?\}',line)
+		speaker_match = re.search('\{[SI][0-9]*?\}',line) # TO-DO: updates for speaker tags
 
 		# Populate speaker list
 		if speaker_match != None:
