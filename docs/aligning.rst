@@ -12,6 +12,9 @@ Command Line
 	
 	All faseAlign calls are carried out via the command line or terminal. It may be useful for you to review basic terminal commands used by Linux and OSX when interacting with files. I'd suggest finding a short introduction such as this `Brief Tutorial`_. 
 
+|
+|
+|
 
 Basic Example
 -------------
@@ -26,6 +29,9 @@ The transcript file passed to the `-t` flag can be of type `.TextGrid` or `.txt`
 
 .. note:: There are no positional arguments so you can order the flags however you want. 
 
+|
+|
+|
 
 Additional Options
 ------------------

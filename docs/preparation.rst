@@ -38,6 +38,10 @@ Speakers are still separated into different tiers following alignment, through t
 
 .. note:: Currently only speaker labels {S1}-{S99} are available for .txt transcriptions
 
+|
+|
+|
+
 Transcription Best Practices
 ----------------------------
 
@@ -59,6 +63,10 @@ Additionally, the following can be used to note various non-speech items:
 - {NS} - random noise
 
 .. _missing:
+
+|
+|
+|
 
 How to Add Missing Words
 ------------------------
