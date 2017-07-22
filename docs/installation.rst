@@ -119,6 +119,9 @@ Build from Source
 	
 	If you'd prefer to build from the source code instead of using the Virtual Machine, choose one of the following options: :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`.
 
+|
+|
+|
 
 .. _install-linux:
 

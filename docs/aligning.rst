@@ -1,7 +1,17 @@
 .. _aligning:
 
+.. _`Brief Tutorial`: https://computers.tutsplus.com/tutorials/navigating-the-terminal-a-gentle-introduction--mac-3855
+
 Aligning
 ========
+
+Command Line
+------------
+
+.. note::
+	
+	All faseAlign calls are carried out via the command line or terminal. It may be useful for you to review basic terminal commands used by Linux and OSX when interacting with files. I'd suggest finding a short introduction such as this `Brief Tutorial`_. 
+
 
 Basic Example
 -------------
@@ -17,8 +27,14 @@ The transcript file passed to the `-t` flag can be of type `.TextGrid` or `.txt`
 .. note:: There are no positional arguments so you can order the flags however you want. 
 
 
+Additional Options
+------------------
+
+On top of the basic aligning call, there is additional functionality available. Examples for each of these additional features are shown below. 
+
+
 Change Output Location
-----------------------
+++++++++++++++++++++++
 
 The default location of the output TextGrid is your current working directory. This can be overwritten by passing an new directory (absolute or relative path) to the `-o` flag:
 
@@ -29,7 +45,7 @@ The default location of the output TextGrid is your current working directory. T
 .. _missing-alert:
 
 Missing Words During Alignment
-------------------------------
+++++++++++++++++++++++++++++++
 
 By default, faseAlign generates automatic phonemicization of missing words following Spanish orthography to phoneme rules. These automatic phonemicizations are usually correct for native Spanish vocabulary, but are often incorrect for loanwords or some place names. 
 
@@ -48,7 +64,7 @@ If you'd like to prevent automatic phonemicization in the first place, you can u
 Now, if missing words are encountered they will be collected into an output file for you to add to your custom local dictionary.
 
 Stereo Options
---------------
+++++++++++++++
 
 If you have stereo audio with speakers on separate channels, alignment can be improved by separating out speakers into their respective channels. 
 
