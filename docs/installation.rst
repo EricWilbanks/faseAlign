@@ -112,13 +112,19 @@ At this point you likely want to ensure that accented (UTF-8) characters are cor
 |
 |
 
+Build from Source
+-----------------
+
+If you'd prefer to build from the source code instead of using the Virtual Machine, choose one of the following options.
+
+
 .. _install-linux:
 
 Linux Installation
--------------------
+++++++++++++++++++
 
 Making sure you have Python 3
-+++++++++++++++++++++++++++++
+*****************************
 
 faseAlign is developed to run using Python 3. To check to see if you have Python 3 installed, execute the following code at the command line:
 
@@ -137,7 +143,7 @@ If this command fails, you need to install a newer version of python:
 
 
 Downloading HTK
-+++++++++++++++
+***************
 
 The HTK Toolkit is required to perform the backend acoustic modeling and alignment. Because of license requirements, HTK cannot be distributed with other software, but it is free to download for individual users. 
 
@@ -147,7 +153,7 @@ Then, download the `HTK source code`_. faseAlign was developed using the stable 
 
 
 Compiling HTK
-+++++++++++++
+*************
 
 Once the zipped source code has been downloaded. Navigate to the downloaded file and execute the following command to unpack it:
 
@@ -177,7 +183,7 @@ If your installation was successful, the following command should print out the 
 	HVite -V
 
 Installing git
-++++++++++++++
+**************
 
 Package installation and configuration is taken care of by pip and git.
 
@@ -186,7 +192,7 @@ Package installation and configuration is taken care of by pip and git.
 	sudo apt-get install git
 
 Installing faseAlign
-++++++++++++++++++++
+********************
 
 Once git is installed, you can download and install the newest version of faseAlign using the following command:
 
@@ -195,7 +201,7 @@ Once git is installed, you can download and install the newest version of faseAl
 	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
 Installing sox
-++++++++++++++
+**************
 
 The sox utility is used to downsample and extract sound files. Try the command below to see if sox is already installed:
 
@@ -211,7 +217,7 @@ If you receive an error message, install sox with the following command:
 
 
 Correctly Configure UTF-8
-+++++++++++++++++++++++++
+*************************
 
 At this point you likely want to ensure that accented (UTF-8) characters are correctly interpreted. To do so, enter the following to the terminal: 
 
@@ -234,10 +240,10 @@ At this point you likely want to ensure that accented (UTF-8) characters are cor
 .. _install-mac:
 
 macOS Installation
--------------------
+++++++++++++++++++
 
 Xcode Compiler
-++++++++++++++
+**************
 
 First we have to make sure that Xcode (and included GCC compiler) are installed. Open the terminal application and call the following command:
 
@@ -254,7 +260,7 @@ If this command is not successful, install Xcode through the terminal:
 And select "Install"
 
 Homebrew Installation
-+++++++++++++++++++++
+*********************
 
 Next, we need a package manager. Install Homebrew through the terminal:
 
@@ -263,7 +269,7 @@ Next, we need a package manager. Install Homebrew through the terminal:
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 Making sure you have Python 3
-+++++++++++++++++++++++++++++
+*****************************
 
 Now we make sure we have a current version of Python3:
 
@@ -273,7 +279,7 @@ Now we make sure we have a current version of Python3:
 
 
 Downloading HTK
-+++++++++++++++
+***************
 
 The HTK Toolkit is required to perform the backend acoustic modeling and alignment. Because of license requirements, HTK cannot be distributed with other software, but it is free to download for individual users. 
 
@@ -283,7 +289,7 @@ Then, download the `HTK source code`_. faseAlign was developed using the stable 
 
 
 Compiling HTK
-+++++++++++++++
+*************
 
 Once the zipped source code has been downloaded. Navigate to the downloaded file and execute the following command to unpack it:
 
@@ -313,7 +319,7 @@ If your installation was successful, the following command should print out the 
 	HVite -V
 
 Installing git
-++++++++++++++
+**************
 
 Package installation and configuration is taken care of by pip and git.
 
@@ -322,7 +328,7 @@ Package installation and configuration is taken care of by pip and git.
 	brew install git
 
 Installing faseAlign
-++++++++++++++++++++
+********************
 
 Once git is installed, you can download and install the newest version of faseAlign using the following command:
 
@@ -331,7 +337,7 @@ Once git is installed, you can download and install the newest version of faseAl
 	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
 
 Installing sox
-++++++++++++++
+**************
 
 The sox utility is used to downsample and extract sound files. Try the command below to see if sox is already installed:
 
@@ -354,7 +360,7 @@ If you receive an error message, install sox with the following command:
 .. _install-windows:
 
 Windows Installation
---------------------
+++++++++++++++++++++
 
 (under development)
 
