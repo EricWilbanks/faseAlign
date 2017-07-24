@@ -253,7 +253,7 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 	if args.stereo is True:
 		channel_type = 'stereo'
 		if ((args.left is not None) and (args.right is not None)):
-			chan_1 = '{' + args.left + '}' # TO-DO: improve flexibility and parsing of possible inputs (in addition to custom speaker tags)
+			chan_1 = '{' + args.left + '}'
 			chan_2 = '{' + args.right + '}'
 		else:
 			chan_1 = None
@@ -444,7 +444,7 @@ def clean_words_list(l,content):
 
 
 
-def identify_speakers(l):
+def identify_speakers(l,tags):
 
 	speaker_list = []
 	speaker_words = {}
@@ -452,6 +452,9 @@ def identify_speakers(l):
 
 	first_speaker = ""
 	index_edit = 0
+
+	for t in tags:
+		print(t)
 
 	for index,line in enumerate(l):
 		speaker_match = re.search('\{[SI][0-9]*?\}',line) # TO-DO: updates for speaker tags
@@ -501,7 +504,7 @@ def identify_speakers(l):
 
 
 
-def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path):
+def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path,tags):
 	
 	
 	content = actual_transcript.readlines()
@@ -512,7 +515,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 	missing = []
 	i = 0
 
-	speaker_list, speaker_indices, speaker_words, first_speaker = identify_speakers(actual)
+	speaker_list, speaker_indices, speaker_words, first_speaker = identify_speakers(actual,tags)
 
 	all_words.append('#!MLF!#\n"*/' + basename +'.lab"\n{SIL}\n')
 
@@ -865,7 +868,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 
 
 
-def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_syllables, args_prevent):
+def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_syllables, args_prevent, args_tags):
 
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing)
 
@@ -883,7 +886,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 				with open(os.path.join(tmppath, basename + '_wav_mfc.scp'), 'a') as wav_mfc:
 					try:
 						with codecs.open(args_transcript, 'r', 'utf-8') as actual_transcript:
-							speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path)
+							speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path,args_tags)
 
 					except UnicodeError:
 						try:
@@ -937,6 +940,7 @@ if __name__ == '__main__':
 	parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
 	parser.add_argument('-y', '--syllables', action = 'store_true', help = 'add syllable information tier to output textgrids')
 	parser.add_argument('-p', '--prevent', action = 'store_true', help = 'prevent automatic phonemicization for unknown words')
+	parser.add_argument('-t', '--tags', nargs = '+', help = 'include all speaker tags used in the transcription (without curly braces)')
 	args = parser.parse_args()
 
-	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing, args.syllables, args.prevent)
+	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing, args.syllables, args.prevent, args.tags)
