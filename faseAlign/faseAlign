@@ -472,6 +472,7 @@ def identify_speakers(l,tags):
 			
 				# If a speaker hasn't yet been assigned, assign one and record which speaker was first
 				if current_speaker == "":
+					print(speaker)
 					current_speaker = speaker
 					first_speaker = speaker
 		
