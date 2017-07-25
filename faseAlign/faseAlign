@@ -209,7 +209,7 @@ def correction(x):
 
 
 
-def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing):
+def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags):
 
 	# Establish site-packages location for repository files
 	try:
@@ -263,7 +263,12 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 		chan_1 = None
 		chan_2 = None
 
-	return tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include
+	# Remove possible braces from tag array
+	for c in ['{','}']:
+		args_tags[:] = [t.replace(c,'') for t in args_tags]
+	
+
+	return tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags
 
 
 
@@ -870,7 +875,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 
 def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_syllables, args_prevent, args_tags):
 
-	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing)
+	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags)
 
 	dict_path = prep_dir(tmppath,repos, dict_include)
 	process_wav(args_wav,tmppath,basename,channel_type)
@@ -940,7 +945,7 @@ if __name__ == '__main__':
 	parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
 	parser.add_argument('-y', '--syllables', action = 'store_true', help = 'add syllable information tier to output textgrids')
 	parser.add_argument('-p', '--prevent', action = 'store_true', help = 'prevent automatic phonemicization for unknown words')
-	parser.add_argument('-t', '--tags', nargs = '+', help = 'include all speaker tags used in the transcription (without curly braces)')
+	parser.add_argument('-g', '--tags', nargs = '+', help = 'include all speaker tags used in the transcription (without curly braces)')
 	args = parser.parse_args()
 
 	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing, args.syllables, args.prevent, args.tags)
