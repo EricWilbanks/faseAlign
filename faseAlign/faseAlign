@@ -526,7 +526,11 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 	i = 0
 
 	speaker_list, speaker_indices, speaker_words, first_speaker = identify_speakers(actual,args_tags)
-
+	print(speaker_list)
+	print(speaker_indices)
+	print(speaker_words)
+	print(first_speaker)
+	
 	all_words.append('#!MLF!#\n"*/' + basename +'.lab"\n{SIL}\n')
 
 	for elem in dict_all:
