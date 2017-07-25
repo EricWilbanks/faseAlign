@@ -497,6 +497,14 @@ def identify_speakers(l,tags):
 			index_edit += 1
 
 		else:
+			print(speaker_list)
+			print('********')
+			print(speaker_indices)
+			print('********')
+			print(speaker_words)
+			print('********')
+			print(first_speaker)
+			print('********')
 		# TO-DO: figure out exactly the contexts of speaker_list,speaker_indices,speaker_words,first_speaker in cases of no labels
 
 	#print("Warning: no speaker labels were included as arguments. If you have more than one speaker, make sure you use the -g/--tags argument.")
