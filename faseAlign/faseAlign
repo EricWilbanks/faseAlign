@@ -264,8 +264,9 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 		chan_2 = None
 
 	# Remove possible braces from tag array
-	for c in ['{','}']:
-		args_tags[:] = [t.replace(c,'') for t in args_tags]
+	if args_tags is not None:
+		for c in ['{','}']:
+			args_tags[:] = [t.replace(c,'') for t in args_tags]
 	
 
 	return tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags
@@ -458,8 +459,9 @@ def identify_speakers(l,tags):
 	first_speaker = ""
 	index_edit = 0
 
-	for t in tags:
-		print(t)
+	if tags is not None:
+		for t in tags:
+			print(t)
 
 	for index,line in enumerate(l):
 		speaker_match = re.search('\{[SI][0-9]*?\}',line) # TO-DO: updates for speaker tags
@@ -509,7 +511,7 @@ def identify_speakers(l,tags):
 
 
 
-def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path,tags):
+def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path,args_tags):
 	
 	
 	content = actual_transcript.readlines()
@@ -520,7 +522,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 	missing = []
 	i = 0
 
-	speaker_list, speaker_indices, speaker_words, first_speaker = identify_speakers(actual,tags)
+	speaker_list, speaker_indices, speaker_words, first_speaker = identify_speakers(actual,args_tags)
 
 	all_words.append('#!MLF!#\n"*/' + basename +'.lab"\n{SIL}\n')
 
