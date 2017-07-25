@@ -267,6 +267,9 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 	if args_tags is not None:
 		for c in ['{','}']:
 			args_tags[:] = [t.replace(c,'') for t in args_tags]
+		if transcript_type == "tg":
+			print("Warning: Ignoring -g/--tags argument since your transcript is a TextGrid.")
+			print("Did you mean to use a txt transcript?")
 	
 
 	return tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags
@@ -461,18 +464,19 @@ def identify_speakers(l,tags):
 	index_edit = 0
 
 	for index,word in enumerate(l):
+		speaker_match = None
 		if tags is not None:
 			for tag in tags:
 				pattern = "\{" + tag + "\}"
-				speaker_match = re.search(pattern,word)
-
+				if speaker_match is None:
+					speaker_match = re.search(pattern,word)
+				
 			# Populate speaker list
 			if speaker_match != None:
 				speaker = word[speaker_match.start()+1:speaker_match.end()-1]
 			
 				# If a speaker hasn't yet been assigned, assign one and record which speaker was first
 				if current_speaker == "":
-					print(speaker)
 					current_speaker = speaker
 					first_speaker = speaker
 		
@@ -498,17 +502,23 @@ def identify_speakers(l,tags):
 			index_edit += 1
 
 		else:
-			print(speaker_list)
-			print('********')
-			print(speaker_indices)
-			print('********')
-			print(speaker_words)
-			print('********')
-			print(first_speaker)
-			print('********')
-		# TO-DO: figure out exactly the contexts of speaker_list,speaker_indices,speaker_words,first_speaker in cases of no labels
+			speaker = "speaker"
+			first_speaker = "speaker"
+			speaker_list = ["speaker"]
 
-	#print("Warning: no speaker labels were included as arguments. If you have more than one speaker, make sure you use the -g/--tags argument.")
+			if index_edit == 0:
+				print("Warning: no speaker labels were included as arguments. If you have more than one speaker, make sure you use the -g/--tags argument.")
+				print("Processing entire file as individual speaker")	
+
+			try:
+				speaker_words[speaker].append(word)
+			except KeyError:
+				speaker_words[speaker] = []
+				speaker_words[speaker].append(word)
+
+			speaker_indices[index_edit] = speaker
+			index_edit += 1
+
 
 	return speaker_list,speaker_indices,speaker_words,first_speaker
 
@@ -526,10 +536,6 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 	i = 0
 
 	speaker_list, speaker_indices, speaker_words, first_speaker = identify_speakers(actual,args_tags)
-	print(speaker_list)
-	print(speaker_indices)
-	print(speaker_words)
-	print(first_speaker)
 	
 	all_words.append('#!MLF!#\n"*/' + basename +'.lab"\n{SIL}\n')
 
