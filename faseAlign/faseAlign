@@ -456,26 +456,22 @@ def identify_speakers(l,tags):
 	speaker_words = {}
 	speaker_indices = {}
 
+	current_speaker = ""
 	first_speaker = ""
 	index_edit = 0
 
-	if tags is not None:
-		for t in tags:
-			print(t)
-
 	for index,line in enumerate(l):
-		for tag in tags:
-			pattern = "\{" + tag + "\}"
-			speaker_match = re.search(pattern,line)
+		if tags is not None:
+			for tag in tags:
+				pattern = "\{" + tag + "\}"
+				speaker_match = re.search(pattern,line)
 
 		# Populate speaker list
 		if speaker_match != None:
 			speaker = line[speaker_match.start()+1:speaker_match.end()-1]
 			
 			# If a speaker hasn't yet been assigned, assign one and record which speaker was first
-			try:
-				current_speaker
-			except NameError:
+			if current_speaker == "":
 				current_speaker = speaker
 				first_speaker = speaker
 		
