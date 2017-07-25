@@ -460,50 +460,46 @@ def identify_speakers(l,tags):
 	first_speaker = ""
 	index_edit = 0
 
-	for index,line in enumerate(l):
+	for index,word in enumerate(l):
 		if tags is not None:
 			for tag in tags:
 				pattern = "\{" + tag + "\}"
-				speaker_match = re.search(pattern,line)
+				speaker_match = re.search(pattern,word)
 
-		# Populate speaker list
-		if speaker_match != None:
-			speaker = line[speaker_match.start()+1:speaker_match.end()-1]
+			# Populate speaker list
+			if speaker_match != None:
+				speaker = word[speaker_match.start()+1:speaker_match.end()-1]
 			
-			# If a speaker hasn't yet been assigned, assign one and record which speaker was first
-			if current_speaker == "":
-				current_speaker = speaker
-				first_speaker = speaker
+				# If a speaker hasn't yet been assigned, assign one and record which speaker was first
+				if current_speaker == "":
+					current_speaker = speaker
+					first_speaker = speaker
 		
-			# Note speaker changes
-			if current_speaker != speaker:
-				current_speaker = speaker
+				# Note speaker changes
+				if current_speaker != speaker:
+					current_speaker = speaker
 		
-			# Add speakers to list of speakers
-			speaker_list.append(current_speaker)
+				# Add speakers to list of speakers
+				speaker_list.append(current_speaker)
 		
-			# Ensure that the speaker labels aren't appended
-			continue 
+				# Ensure that the speaker labels aren't appended
+				continue 
 
-		# Populate speaker keys
-		if current_speaker not in speaker_words.keys():
-			speaker_words[current_speaker] = []
+			# Populate speaker keys
+			if current_speaker not in speaker_words.keys():
+				speaker_words[current_speaker] = []
 		
-		# Add line to speaker dictionary
-		speaker_words[current_speaker].append(line)
+			# Add line to speaker dictionary
+			speaker_words[current_speaker].append(word)
 		
-		# Construct dictionary which links word indices to speakers
-		speaker_indices[index_edit] = current_speaker
-		index_edit += 1
+			# Construct dictionary which links word indices to speakers
+			speaker_indices[index_edit] = current_speaker
+			index_edit += 1
 
-	# Clean up output	
-	speaker_list = sorted(set(speaker_list))
-	if len(speaker_list) > 0:
+		else:
+		# TO-DO: figure out exactly the contexts of speaker_list,speaker_indices,speaker_words,first_speaker in cases of no labels
 
-		pass
-	else:
-		print("Warning: No speaker labels found. If you have more than one speaker, make sure your speaker labels are in the correct format.")
-		print("Processing all text as single speaker.")
+	#print("Warning: no speaker labels were included as arguments. If you have more than one speaker, make sure you use the -g/--tags argument.")
 
 	return speaker_list,speaker_indices,speaker_words,first_speaker
 
