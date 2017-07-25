@@ -4,6 +4,10 @@
 Changelog
 =========
 
+#. **Version 0.1.2** : July 24, 2017
+
+		#. Addition of custom speaker tag functionality (-g flag)
+
 #. **Version 0.1.1** : July 19, 2017
 
 		#. Addition of syllabification functionality (-y flag)
