@@ -69,6 +69,18 @@ If you'd like to prevent automatic phonemicization in the first place, you can u
 
 Now, if missing words are encountered they will be collected into an output file for you to add to your custom local dictionary.
 
+Speaker Tags for txt Transcriptions
++++++++++++++++++++++++++++++++++++
+
+Recall that .txt transcriptions have speaker tags in between braces (e.g., {Julia}, {S10}). To use these speaker tags, you have to use the `-g` flag:
+
+.. code-block:: bash
+
+	faseAlign -w input.wav -t transcript.txt -g Julia Marco S4
+
+This command will correctly match the speaker tags `{Julia}`, `{Marco}`, and `{S4}`. 
+
+
 Stereo Options
 ++++++++++++++
 

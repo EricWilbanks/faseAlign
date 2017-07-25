@@ -34,9 +34,9 @@ It is **strongly suggested** to use transcriptions in Praat TextGrid format as i
 
 faseAlign also supports transcriptions in .txt format as in the above example. This approach has the benefit of not needing any determination of turn boundaries, but suffers from slightly poorer alignments. This is due to the fact that the entire wav file is aligned to the entire transcription.  In this method, speakers cannot overlap in the output alignment (since the file is processed in one linear chunk). 
 
-Speakers are still separated into different tiers following alignment, through the use of speaker labels (e.g., {S1} and {S2}) which mark utterances belonging to that speaker. 
+Speakers are still separated into different tiers following alignment, through the use of speaker labels (e.g., {Julia}, {Speaker1}, {Marcos}) which mark utterances belonging to that speaker. 
 
-.. note:: Currently only speaker labels {S1}-{S99} are available for .txt transcriptions
+.. note:: Make sure to use the same speaker tags throughout the transcription. `{Julia}` and `{JULIA}` would be treated as two separate speakers. 
 
 |
 |
