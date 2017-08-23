@@ -48,6 +48,16 @@ The default location of the output TextGrid is your current working directory. T
 
 	faseAlign -w input.wav -t transcript.TextGrid -o /home/user/Desktop/project/
 
+
+Specify Output Name
++++++++++++++++++++
+
+The default name for output files can be changed with the `-n` flag: 
+
+.. code-block:: bash
+
+	faseAlign -w input.wav -t transcript.TextGrid -n new_file_name
+
 .. _missing-alert:
 
 Missing Words During Alignment

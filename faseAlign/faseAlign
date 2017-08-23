@@ -220,11 +220,11 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 
 
 	# Check stereo options
-	if ((args.stereo is True and args.left is None) or (args.stereo is True and args.right is None)):
+	if ((args_stereo is True and args_left is None) or (args_stereo is True and args_right is None)):
 		parser.error('Stereo option requires --left and --right speaker arguments.')
 
 	# Check transcript type
-	file_ext = os.path.splitext(args.transcript)[1]
+	file_ext = os.path.splitext(args_transcript)[1]
 
 	if file_ext in ['.txt','.TXT','.Txt','.txT']:
 		transcript_type = 'txt'
@@ -234,15 +234,15 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 		parser.error('Transcript file must be .txt or .TextGrid.')
 
 	# Check missing
-	if args.missing is not None:
+	if args_missing is not None:
 		dict_include = True
 	else:
 		dict_include = False
 
 	# Establish basename and directories
-	basename = os.path.basename(args.wav).replace('.wav','')
-	if args.outpath is not None:
-		outpath = args.outpath
+	basename = os.path.basename(args_wav).replace('.wav','')
+	if args_outpath is not None:
+		outpath = args_outpath
 	else:
 		outpath = os.getcwd()
 
@@ -250,11 +250,11 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 
 
 	# Channel options
-	if args.stereo is True:
+	if args_stereo is True:
 		channel_type = 'stereo'
-		if ((args.left is not None) and (args.right is not None)):
-			chan_1 = '{' + args.left + '}'
-			chan_2 = '{' + args.right + '}'
+		if ((args_left is not None) and (args_right is not None)):
+			chan_1 = '{' + args_left + '}'
+			chan_2 = '{' + args_right + '}'
 		else:
 			chan_1 = None
 			chan_2 = None
@@ -891,7 +891,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 
 
 
-def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_syllables, args_prevent, args_tags):
+def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_name, args_missing, args_syllables, args_prevent, args_tags):
 
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags)
 
@@ -939,7 +939,13 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 		output_intervals = align_from_tg(chunk_index,total_chunks,tmppath,repos,dict_path)
 		
 	out_tg = process_tg_intervals(tmppath,output_intervals,args_syllables)
-	with codecs.open(os.path.join(outpath, basename+'_aligned.TextGrid'),'w','utf-8') as o:
+	
+	if args_name is not None: # override default output name
+		outname = args_name.strip('.TextGrid') + '.TextGrid'
+	else:
+		outname = basename + '_aligned.TextGrid'
+
+	with codecs.open(os.path.join(outpath, outname),'w','utf-8') as o:
 		o.write(out_tg.as_string('praat_short'))
 
 	shutil.rmtree(tmppath)
@@ -960,10 +966,11 @@ if __name__ == '__main__':
 	parser.add_argument('-r', '--right', help = 'right channel speaker')
 	parser.add_argument('-t', '--transcript', required = True, help = 'path to transcript')
 	parser.add_argument('-o', '--outpath', help = 'directory to store output textgrid(s), default is current directory')
+	parser.add_argument('-n', '--name', help = 'specify an output name, default is the basename + "_aligned.TextGrid"')
 	parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
 	parser.add_argument('-y', '--syllables', action = 'store_true', help = 'add syllable information tier to output textgrids')
 	parser.add_argument('-p', '--prevent', action = 'store_true', help = 'prevent automatic phonemicization for unknown words')
 	parser.add_argument('-g', '--tags', nargs = '+', help = 'include all speaker tags used in the transcription (without curly braces)')
 	args = parser.parse_args()
 
-	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.missing, args.syllables, args.prevent, args.tags)
+	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.prevent, args.tags)

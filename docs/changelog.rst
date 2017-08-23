@@ -3,6 +3,9 @@
 
 Changelog
 =========
+#. **Version 0.1.3** : August 22, 2017
+
+		#. Addition of custom output name functionality (-n flag)
 
 #. **Version 0.1.2** : July 24, 2017
 
