@@ -354,7 +354,7 @@ def prep_dir(tmppath,repos,dict_include):
 					print(character)
 					print(type(line))
 					print(line)
-					print(line.decode('utf-8'))
+					print(line.encode('utf-8'))
 					if re.search(character,line.encode('utf-8')) is not None:
 						matches.append(character)
 				
