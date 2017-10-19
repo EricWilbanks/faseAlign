@@ -351,12 +351,12 @@ def prep_dir(tmppath,repos,dict_include):
 			custom_lines = custom_dict.readlines()
 			for line in custom_lines:
 				for character in unwanted:
-					print(character)
-					print(type(character))
-					print(line)
-					print(line.encode('utf-8'))
-					if re.search(character,line.encode('utf-8')) is not None:
-						matches.append(character)
+					try:
+						if re.search(character,line.encode('utf-8')) is not None:
+							matches.append(character)
+					except TypeError:
+						if re.search(character,line) is not None:
+							matches.append(character)
 				
 			if len(matches) > 0:
 				matches = list(set(matches))
