@@ -366,7 +366,7 @@ def prep_dir(tmppath,repos,dict_include):
 				sys.exit()
 
 		dict_path = os.path.join(tmppath,'new_dict.txt')
-		with codecs.open(os.path.join(repos,dict_sort),'r','utf-8') as full_dict:
+		with codecs.open(os.path.join(repos,"dict_sort"),'r','utf-8') as full_dict:
 			full_lines = full_dict.readlines()
 		
 		custom_lines = set(custom_lines)
