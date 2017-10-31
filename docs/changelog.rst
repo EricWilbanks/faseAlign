@@ -3,6 +3,10 @@
 
 Changelog
 =========
+#. **Version 0.1.4** : October 18, 2017
+
+		#. Dictionary encoding bug fixes
+
 #. **Version 0.1.3** : August 22, 2017
 
 		#. Addition of custom output name functionality (-n flag)
