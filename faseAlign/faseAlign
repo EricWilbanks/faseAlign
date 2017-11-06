@@ -373,10 +373,11 @@ def prep_dir(tmppath,repos,dict_include):
 
 		full = list(full_lines | custom_lines)
 		full.sort()
+		full = [line.strip() for line in full]
 
 		with codecs.open(dict_path,'w','utf-8') as new_dict:
 			for line in full:
-				new_dict.write(line)
+				new_dict.write(line + '\n')
 
 	else:
 		dict_path = os.path.join(repos, "dict_sort")
