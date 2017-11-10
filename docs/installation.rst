@@ -332,6 +332,15 @@ Package installation and configuration is taken care of by pip and git.
 
 	brew install git
 
+Installing audiolabel
+*********************
+
+Audiolabel is the package we'll be using to interact with and create TextGrid files. To install audiolabel, use the following command:
+
+.. code-block:: bash
+
+	pip3 install git+git://github.com/rsprouse/audiolabel
+
 Installing faseAlign
 ********************
 
@@ -340,6 +349,8 @@ Once git is installed, you can download and install the newest version of faseAl
 .. code-block:: bash
 
 	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
+
+
 
 Installing sox
 **************
