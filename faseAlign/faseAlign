@@ -399,6 +399,9 @@ def process_wav(audio,tmppath,basename,channel_type):
 		pass
 	
 	else: # sr > 11025
+		print(audio)
+		print(os.path.join(tmppath, basename+"_original.wav"))
+		sys.exit()
 		subprocess.check_call(['mv',audio,os.path.join(tmppath, basename + "_original.wav")])
 		subprocess.check_call(['sox',os.path.join(tmppath, basename + "_original.wav"),'-r','11025', audio])
 
