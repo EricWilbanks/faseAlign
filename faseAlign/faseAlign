@@ -563,6 +563,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 			if value not in dict_split:
 				if args_phonemicize == True:
 					with codecs.open(dict_path,'a','utf-8') as d:
+						print('Automatic Phonemicization: ' + current.orth.upper() + ': ' + ' '.join(current.phones))
 						d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
 				else:
 					missing.append(current.orth.upper())
@@ -658,6 +659,7 @@ def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_
 						if value not in dict_split:
 							if args_phonemicize == True:
 								with codecs.open(dict_path,'a','utf-8') as d:
+									print('Automatic Phonemicization: ' + current.orth.upper() + ': ' + ' '.join(current.phones))
 									d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
 							else:
 								missing.append(current.orth.upper())
