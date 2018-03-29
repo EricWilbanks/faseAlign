@@ -392,6 +392,9 @@ def process_wav(audio,tmppath,basename,channel_type):
 	sr = wav_file.getframerate()
 	wav_file.close()
 
+	audio_align = os.path.join(tmppath, audio)
+	subprocess.check_call(['cp',audio,audio_align])
+
 	if sr < 11025:
 		print("WARNING - Sampling rate is lower than necessary 11025hz. Alignment will suffer!")
 
@@ -399,17 +402,14 @@ def process_wav(audio,tmppath,basename,channel_type):
 		pass
 	
 	else: # sr > 11025
-		print(audio)
-		print(os.path.join(tmppath, basename+"_original.wav"))
-		sys.exit()
-		subprocess.check_call(['mv',audio,os.path.join(tmppath, basename + "_original.wav")])
-		subprocess.check_call(['sox',os.path.join(tmppath, basename + "_original.wav"),'-r','11025', audio])
+		subprocess.check_call(['sox',audio_align,'-r','11025', os.path.join(tmppath,basename+"_ds.wav")])
+		subprocess.check_call(['mv',os.path.join(tmppath,basename+"_ds.wav"),audio_align])
 
 	if channel_type == "stereo":
 		subprocess.check_call(['sox',audio,os.path.join(tmppath,basename+"_c1.wav"),'remix','1'])
 		subprocess.check_call(['sox',audio,os.path.join(tmppath,basename+"_c2.wav"),'remix','2'])
 
-
+	return audio_align
 
 def clean_words_str(content):
 
@@ -903,7 +903,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags)
 
 	dict_path = prep_dir(tmppath,repos, dict_include)
-	process_wav(args_wav,tmppath,basename,channel_type)
+	audio_align = process_wav(args_wav,tmppath,basename,channel_type)
 
 	with codecs.open(dict_path,'r','utf-8') as dict_sort:
 		dict_all = dict_sort.readlines()
@@ -916,21 +916,21 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 				with open(os.path.join(tmppath, basename + '_wav_mfc.scp'), 'a') as wav_mfc:
 					try:
 						with codecs.open(args_transcript, 'r', 'utf-8') as actual_transcript:
-							speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path,args_tags)
+							speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path,args_tags)
 
 					except UnicodeError:
 						try:
 							with codecs.open(args_transcript, 'r', 'utf-16') as actual_transcript:
-								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path)
+								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path)
 
 						except UnicodeError:
 							with codecs.open(args_transcript, 'r', 'iso-8859-1') as actual_transcript:
-								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(args_wav,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path)
+								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path)
 			
 	###########################
 			
 	else:
-		missing, chunk_index, total_chunks= make_mlf_from_tg(dict_all,args_wav,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_prevent,dict_path)
+		missing, chunk_index, total_chunks= make_mlf_from_tg(dict_all,audio_align,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_prevent,dict_path)
 		# Exit if missing words!
 		if len(missing) > 0:
 			with codecs.open(os.path.join(tmppath, 'missing_words'), 'w', 'utf-8') as words_to_add:
