@@ -3,6 +3,11 @@
 
 Changelog
 =========
+#. **Version 0.1.5** : March 28, 2018
+
+		#. Sampling rate bug fixes
+		#. Change in default behavior: phonemicization is no longer carried out by default, but must be chosen using the `p` flag
+
 #. **Version 0.1.4** : October 18, 2017
 
 		#. Dictionary encoding bug fixes
