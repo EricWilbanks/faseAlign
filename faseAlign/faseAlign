@@ -533,7 +533,7 @@ def identify_speakers(l,tags):
 
 
 
-def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path,args_tags):
+def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_phonemicize,dict_path,args_tags):
 	
 	
 	content = actual_transcript.readlines()
@@ -561,11 +561,11 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 				all_words.append("sp\n" + current.orth.upper() +"\n")
 
 			if value not in dict_split:
-				if args_prevent == True:
-					missing.append(current.orth.upper())
-				else:
+				if args_phonemicize == True:
 					with codecs.open(dict_path,'a','utf-8') as d:
 						d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
+				else:
+					missing.append(current.orth.upper())
 			i += 1
 
 	all_words.append('{SIL}\n.')
@@ -579,18 +579,18 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 	wav_mfc.write(audio + ' ' + os.path.join(tmppath, basename + '.mfc'))
 
 	if len(missing) > 0:
-		with codecs.open(os.path.join(tmppath, 'missing_words'), 'w', 'utf-8') as words_to_add:
+		with codecs.open('faseAlign.missing', 'w', 'utf-8') as words_to_add:
 			for word in sorted(set(missing)):
 				words_to_add.write(word + '\n')
 		
-		sys.exit('There were missing words in your transcript! Saved to- ' + str(os.path.join(tmppath,'missing_words')))
+		sys.exit('There were missing words in your transcript! Saved to- faseAlign.missing')
 
 
 	return speaker_words, speaker_indices, speaker_list, first_speaker
 
 
 
-def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_1,chan_2,args_prevent,dict_path):
+def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_1,chan_2,args_phonemicize,dict_path):
 
 	# Prep files to filter missing items
 	missing = []
@@ -656,11 +656,12 @@ def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_
 							all_words[speaker].append("sp\n" + current.orth.upper() + "\n")
 						
 						if value not in dict_split:
-							if args_prevent == True:
-								missing.append(current.orth.upper())
-							else:
+							if args_phonemicize == True:
 								with codecs.open(dict_path,'a','utf-8') as d:
 									d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
+							else:
+								missing.append(current.orth.upper())
+
 						i += 1
 
 					all_words[speaker].append('{SIL}\n.\n')
@@ -897,7 +898,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 
 
 
-def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_name, args_missing, args_syllables, args_prevent, args_tags):
+def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_name, args_missing, args_syllables, args_phonemicize, args_tags):
 
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags)
 
@@ -915,27 +916,27 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 				with open(os.path.join(tmppath, basename + '_wav_mfc.scp'), 'a') as wav_mfc:
 					try:
 						with codecs.open(args_transcript, 'r', 'utf-8') as actual_transcript:
-							speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path,args_tags)
+							speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_phonemicize,dict_path,args_tags)
 
 					except UnicodeError:
 						try:
 							with codecs.open(args_transcript, 'r', 'utf-16') as actual_transcript:
-								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path)
+								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_phonemicize,dict_path)
 
 						except UnicodeError:
 							with codecs.open(args_transcript, 'r', 'iso-8859-1') as actual_transcript:
-								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_prevent,dict_path)
+								speaker_words,speaker_indices,speaker_list,first_speaker = make_mlf_from_txt(audio_align,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_phonemicize,dict_path)
 			
 	###########################
 			
 	else:
-		missing, chunk_index, total_chunks= make_mlf_from_tg(dict_all,audio_align,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_prevent,dict_path)
+		missing, chunk_index, total_chunks= make_mlf_from_tg(dict_all,audio_align,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_phonemicize,dict_path)
 		# Exit if missing words!
 		if len(missing) > 0:
-			with codecs.open(os.path.join(tmppath, 'missing_words'), 'w', 'utf-8') as words_to_add:
+			with codecs.open('faseAlign.missing', 'w', 'utf-8') as words_to_add:
 				for word in sorted(set(missing)):
 					words_to_add.write(word+'\n')
-			sys.exit('There were missing words in your transcript! Saved to- ' + os.path.join(tmppath,'missing_words'))
+			sys.exit('There were missing words in your transcript! Saved to- faseAlign.missing')
 				
 	###########################
 
@@ -975,8 +976,8 @@ if __name__ == '__main__':
 	parser.add_argument('-n', '--name', help = 'specify an output name, default is the basename + "_aligned.TextGrid"')
 	parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
 	parser.add_argument('-y', '--syllables', action = 'store_true', help = 'add syllable information tier to output textgrids')
-	parser.add_argument('-p', '--prevent', action = 'store_true', help = 'prevent automatic phonemicization for unknown words')
+	parser.add_argument('-p', '--phonemicize', action = 'store_true', help = 'automatic phonemicization for unknown words')
 	parser.add_argument('-g', '--tags', nargs = '+', help = 'include all speaker tags used in the transcription (without curly braces)')
 	args = parser.parse_args()
 
-	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.prevent, args.tags)
+	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.phonemicize, args.tags)
