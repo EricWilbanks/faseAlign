@@ -276,7 +276,7 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 	# Remove possible braces from tag array
 	if args_tags is not None:
 		for c in ['{','}']:
-			args_tags[:] = [t.replace(c,'') for t in args_tags]
+			args_tags[:] = [t.replace(c,'').upper() for t in args_tags]
 		if transcript_type == "tg":
 			print("Warning: Ignoring -g/--tags argument since your transcript is a TextGrid.")
 			print("Did you mean to use a txt transcript?")
@@ -540,13 +540,11 @@ def identify_speakers(l,tags):
 			speaker_indices[index_edit] = speaker
 			index_edit += 1
 
-
 	return speaker_list,speaker_indices,speaker_words,first_speaker
 
 
 
 def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath,basename,args_phonemicize,dict_path,args_tags):
-	
 	
 	content = actual_transcript.readlines()
 	actual = []
@@ -566,20 +564,21 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 
 	for iter, value in enumerate(actual):
 		if re.search('\{[SI][0-9]*?\}',value) is None:
-			current = spanish_word(value)
-			if i == 0:
-				all_words.append(current.orth.upper()+"\n")
-			else:
-				all_words.append("sp\n" + current.orth.upper() +"\n")
-
-			if value not in dict_split:
-				if args_phonemicize == True:
-					with codecs.open(dict_path,'a','utf-8') as d:
-						print('Automatic Phonemicization: ' + current.orth.upper() + ': ' + ' '.join(current.phones))
-						d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
+			if value not in ['{'+t+'}' for t in args_tags]: # don't include custom tags in words to align
+				current = spanish_word(value)
+				if i == 0:
+					all_words.append(current.orth.upper()+"\n")
 				else:
-					missing.append(current.orth.upper())
-			i += 1
+					all_words.append("sp\n" + current.orth.upper() +"\n")
+
+				if value not in dict_split:
+					if args_phonemicize == True:
+						with codecs.open(dict_path,'a','utf-8') as d:
+							print('Automatic Phonemicization: ' + current.orth.upper() + ': ' + ' '.join(current.phones))
+							d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
+					else:
+						missing.append(current.orth.upper())
+				i += 1
 
 	all_words.append('{SIL}\n.')
 						
