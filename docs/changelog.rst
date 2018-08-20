@@ -3,9 +3,10 @@
 
 Changelog
 =========
-#. **Version 0.1.6** : August 19, 2018
+#. **Version 1.1.6** : August 19, 2018
 
 		#. Addition of version printout (-v flag)
+		#. Change of version numbering scheme to be consisten with semantic versioning
 
 #. **Version 0.1.5** : March 28, 2018
 
