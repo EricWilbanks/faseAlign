@@ -48,10 +48,14 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-year = now.year
 project = 'faseAlign'
 copyright = '2018, Eric Wilbanks'
 author = 'Eric Wilbanks'
+
+# rst_epilog for custom substitutions
+rst_epilog = """
+.. |year| replace:: {year}
+""".format(year = now.year)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
