@@ -17,7 +17,7 @@ Features
 
 Citation
 ========
-Wilbanks, E. (2018). faseAlign (Version |version|) [Computer software]. Retrieved |today| from https://github.com/EricWilbanks/faseAlign.
+Wilbanks, E. (|year|). faseAlign (Version |version|) [Computer software]. Retrieved |today| from https://github.com/EricWilbanks/faseAlign.
 
 
 Contribute
