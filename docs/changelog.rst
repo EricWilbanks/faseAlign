@@ -3,6 +3,10 @@
 
 Changelog
 =========
+#. **Version 0.1.6** : August 19, 2018
+
+		# Addition of version printout (-v flag)
+
 #. **Version 0.1.5** : March 28, 2018
 
 		#. Sampling rate bug fixes

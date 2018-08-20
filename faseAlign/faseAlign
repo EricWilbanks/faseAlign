@@ -12,6 +12,7 @@ import shutil
 import site
 import audiolabel
 import sox
+import pkg_resources
 
 
 class spanish_word(object):
@@ -208,7 +209,17 @@ def correction(x):
 
 
 
-def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags):
+def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version):
+
+	# Print version information
+	if args_version is True:
+		version = pkg_resources.require('faseAlign')[0].version
+		print('faseAlign Version = ' + str(version))
+		sys.exit()
+
+	# Check to see if wav and transcript arguments are provided
+	if (args_wav is None) or (args_transcript is None):
+		parser.error('Must include wav and transcript arguments.')	
 
 	# Establish site-packages location for repository files
 	try:
@@ -391,7 +402,8 @@ def process_wav(audio,tmppath,basename,channel_type):
 	sr = wav_file.getframerate()
 	wav_file.close()
 
-	audio_align = os.path.join(tmppath, audio)
+	audio_align = os.path.join(tmppath, os.path.basename(audio))
+
 	subprocess.check_call(['cp',audio,audio_align])
 
 	if sr < 11025:
@@ -900,9 +912,9 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 
 
 
-def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_name, args_missing, args_syllables, args_phonemicize, args_tags):
+def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_name, args_missing, args_syllables, args_phonemicize, args_tags, args_version):
 
-	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags)
+	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version)
 
 	dict_path = prep_dir(tmppath,repos, dict_include)
 	audio_align = process_wav(args_wav,tmppath,basename,channel_type)
@@ -969,17 +981,18 @@ if __name__ == '__main__':
 
 	# Parse arguments
 	parser = argparse.ArgumentParser(description='Command Line arguments for faseAlign')
-	parser.add_argument('-w', '--wav', required = True,  help = 'path to wav file')
+	parser.add_argument('-w', '--wav', help = 'path to wav file')
 	parser.add_argument('-s', '--stereo', action = 'store_true', help = 'stereo input, mono is default')
 	parser.add_argument('-l', '--left', help = 'left channel speaker')
 	parser.add_argument('-r', '--right', help = 'right channel speaker')
-	parser.add_argument('-t', '--transcript', required = True, help = 'path to transcript')
+	parser.add_argument('-t', '--transcript', help = 'path to transcript')
 	parser.add_argument('-o', '--outpath', help = 'directory to store output textgrid(s), default is current directory')
 	parser.add_argument('-n', '--name', help = 'specify an output name, default is the basename + "_aligned.TextGrid"')
 	parser.add_argument('-m', '--missing', help = 'custom dictionary containing missing words')
 	parser.add_argument('-y', '--syllables', action = 'store_true', help = 'add syllable information tier to output textgrids')
 	parser.add_argument('-p', '--phonemicize', action = 'store_true', help = 'automatic phonemicization for unknown words')
 	parser.add_argument('-g', '--tags', nargs = '+', help = 'include all speaker tags used in the transcription (without curly braces)')
+	parser.add_argument('-v', '--version', action = 'store_true', help = 'print version information')
 	args = parser.parse_args()
 
-	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.phonemicize, args.tags)
+	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.phonemicize, args.tags, args.version)
