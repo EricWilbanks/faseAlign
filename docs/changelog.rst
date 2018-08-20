@@ -3,10 +3,14 @@
 
 Changelog
 =========
+#. **Version 1.1.7** : August 20, 2018
+
+		#. Bug fixes to .txt input transcripts and processing of speaker labels
+
 #. **Version 1.1.6** : August 19, 2018
 
 		#. Addition of version printout (-v flag)
-		#. Change of version numbering scheme to be consistent with semantic versioning
+		#. Change of version numbering scheme to be consistent with semantic versioning (note the jump from 0.1.5 to 1.1.6)
 
 #. **Version 0.1.5** : March 28, 2018
 
