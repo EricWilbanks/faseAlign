@@ -49,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'faseAlign'
-copyright = '2018, Eric Wilbanks'
+copyright = ''.join(now.year,', Eric Wilbanks')
 author = 'Eric Wilbanks'
 
 # rst_epilog for custom substitutions
