@@ -100,3 +100,13 @@ First, determine which speaker is in channel 1 (left) and channel 2 (right). Now
 .. code-block:: bash
 
 	faseAlign -w input.wav -t transcript.TextGrid -s -l S1 -r S2
+
+Automatic Syllabification
++++++++++++++++++++++++++
+
+To generate automatic syllable boundaries, as well as stressed/unstressed status, use the `-y` flag in your call:
+
+.. code-block:: bash
+
+	faseAlign -w input.wav -t transcript.TextGrid -y
+
