@@ -3,6 +3,10 @@
 
 Changelog
 =========
+#. **Version 1.1.8** : September 26, 2018
+
+		#. Added -i/--tier tag to allow for aligning of individual tiers of .TextGrid transcripts
+
 #. **Version 1.1.7** : August 20, 2018
 
 		#. Bug fixes to .txt input transcripts and processing of speaker labels

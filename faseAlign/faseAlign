@@ -209,7 +209,7 @@ def correction(x):
 
 
 
-def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version):
+def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version, args_tier):
 
 	# Print version information
 	if args_version is True:
@@ -242,6 +242,11 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 		transcript_type = 'tg'
 	else:
 		parser.error('Transcript file must be .txt or .TextGrid.')
+
+	# Check specific tier options
+	if args_tier is not None:
+		if transcript_type != "tg":
+			parser.error('When using the --tier / -i option, the transcript must be a .TextGrid file')
 
 	# Check missing
 	if args_missing is not None:
@@ -602,7 +607,7 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 
 
 
-def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_1,chan_2,args_phonemicize,dict_path):
+def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_1,chan_2,args_phonemicize,dict_path,args_tier):
 
 	# Prep files to filter missing items
 	missing = []
@@ -619,6 +624,16 @@ def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_
 	# Read in TextGrid
 	lm = audiolabel.LabelManager(from_file = textgrid, from_type = 'praat', codec ='utf-8')
 
+	if args_tier is not None: # Align a single tier if args_tier option is specified.
+		if args_tier in lm.names:
+			for name in lm.names:
+				if name != args_tier:
+					lm.discard(name)
+		else:
+			tier_str = '\t'.join(lm.names)
+			print('\nYour custom tier (-i/--tier) argument was not found in the TextGrid tiers.\nPlease double-check the spelling of your desired tier name.\n')
+			print('Your current possible TextGrid tiers are: ' + tier_str)
+			sys.exit()
 
 	for speaker in lm.names:
 		chunk_index[speaker] = {}
@@ -911,9 +926,9 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 
 
 
-def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_name, args_missing, args_syllables, args_phonemicize, args_tags, args_version):
+def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_name, args_missing, args_syllables, args_phonemicize, args_tags, args_version, args_tier):
 
-	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version)
+	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version, args_tier)
 
 	dict_path = prep_dir(tmppath,repos, dict_include)
 	audio_align = process_wav(args_wav,tmppath,basename,channel_type)
@@ -943,7 +958,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 	###########################
 			
 	else:
-		missing, chunk_index, total_chunks= make_mlf_from_tg(dict_all,audio_align,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_phonemicize,dict_path)
+		missing, chunk_index, total_chunks= make_mlf_from_tg(dict_all,audio_align,tmppath,basename,args_transcript,channel_type,chan_1,chan_2,args_phonemicize,dict_path,args_tier)
 		# Exit if missing words!
 		if len(missing) > 0:
 			with codecs.open(basename+'.missing', 'w', 'utf-8') as words_to_add:
@@ -992,6 +1007,7 @@ if __name__ == '__main__':
 	parser.add_argument('-p', '--phonemicize', action = 'store_true', help = 'automatic phonemicization for unknown words')
 	parser.add_argument('-g', '--tags', nargs = '+', help = 'include all speaker tags used in the transcription (without curly braces)')
 	parser.add_argument('-v', '--version', action = 'store_true', help = 'print version information')
+	parser.add_argument('-i', '--tier', help = 'specify a particular TextGrid tier to align; other tiers will be ignored. Default is to align all tiers.')
 	args = parser.parse_args()
 
-	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.phonemicize, args.tags, args.version)
+	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.phonemicize, args.tags, args.version, args.tier)

@@ -78,7 +78,7 @@ If there are words in your transcript that you'd like to give a custom phonemici
 
 	faseAlign -w input.wav -t transcript.TextGrid -m dict.local
 
-Speaker Tags for txt Transcriptions
+Speaker Tags for .txt Transcriptions
 +++++++++++++++++++++++++++++++++++
 
 Recall that .txt transcriptions have speaker tags in between braces (e.g., {Julia}, {S10}). To use these speaker tags, you have to use the `-g` flag:
@@ -89,6 +89,17 @@ Recall that .txt transcriptions have speaker tags in between braces (e.g., {Juli
 
 This command will correctly match the speaker tags `{Julia}`, `{Marco}`, and `{S4}`. 
 
+
+Single Tier Alignment for .TextGrid transcriptions
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+By default, all tiers of .TextGrid transcripts will be aligned. If you'd prefer to only align one tier of a .TextGrid, you can use the `--tier`/`-i` flag:
+
+.. code-block:: bash
+
+	faseAlign -w input.wav -t transcript.TextGrid -i tier-name
+
+This command will only align a tier with the name 'tier-name'.
 
 Stereo Options
 ++++++++++++++
