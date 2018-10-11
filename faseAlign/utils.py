@@ -27,7 +27,7 @@ class spanish_word(object):
 			self.syllables[key][:] = [re.sub('1','NY',entry) for entry in self.syllables[key]]
 			self.syllables[key][:] = [re.sub('2','CH',entry) for entry in self.syllables[key]]
 
-	def __str__(self):
+	def __repr__(self):
 		return '\nWord: ' + self.orth + '\nPhones: ' + str(self.phones) + '\nSyllables: ' + str(self.syllables) + '\nStressed Syllable: ' + str(self.stressed) + '\nNumber of Syllables: ' + str(self.num_syllables)
 
 	def to_phones(self):
