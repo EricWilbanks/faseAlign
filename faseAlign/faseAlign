@@ -110,9 +110,8 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 			print("Warning: Ignoring -g/--tags argument since your transcript is a TextGrid.")
 			print("Did you mean to use a txt transcript?")
 		for tag in args_tags:
-			if tag in ['LG','BR','NS','LS','CG','SIL','lg','br','ns','ls','cg','sil']:
+			if tag in ['LG','BR','NS','LS','CG','SIL']:
 				parser.error(str(tag) + ' is reserved for internal use. Please choose a different speaker tag.')
-	
 
 	return tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags
 
@@ -384,12 +383,16 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 	i = 0
 
 	speaker_list, speaker_indices, speaker_words, first_speaker = identify_speakers(actual,args_tags)
+
+	if args_tags is None:
+		args_tags = [''] # empty list to test against
 	
 	all_words.append('#!MLF!#\n"*/' + basename +'.lab"\n{SIL}\n')
 
 	for elem in dict_all:
 		if len(elem.split()) > 0:
 			dict_split.append(elem.split()[0])
+	print(args_tags)
 
 	for iter, value in enumerate(actual):
 		if re.search('\{[SI][0-9]*?\}',value) is None:
