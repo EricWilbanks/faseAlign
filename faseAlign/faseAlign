@@ -392,12 +392,13 @@ def make_mlf_from_txt(audio,words,mfc,wav_mfc,actual_transcript,dict_all,tmppath
 	for elem in dict_all:
 		if len(elem.split()) > 0:
 			dict_split.append(elem.split()[0])
-	print(args_tags)
 
 	for iter, value in enumerate(actual):
 		if re.search('\{[SI][0-9]*?\}',value) is None:
 			print(['{'+t+'}' for t in args_tags])
+			print([type(t) for t in args_tags])
 			if value not in ['{'+t+'}' for t in args_tags]: # don't include custom tags in words to align
+				print(type(value))
 				print(value)
 				current = spanish_word(value)
 				if i == 0:
