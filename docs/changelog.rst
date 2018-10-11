@@ -3,6 +3,11 @@
 
 Changelog
 =========
+#. **Version 1.1.9** : October 10, 2018
+
+		#. Updates to package directory structure and creation of utils.py. 
+		#. Import custom classes and functions in a Python interpreter by importing from faseAlign.utils as in the following example: `from faseAlign.utils import spanish_word`
+
 #. **Version 1.1.8** : September 26, 2018
 
 		#. Added -i/--tier tag to allow for aligning of individual tiers of .TextGrid transcripts
