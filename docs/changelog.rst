@@ -3,6 +3,10 @@
 
 Changelog
 =========
+#. **Version 1.1.10**: October 14, 2019
+
+		#. Changes to directory structure for more consistent distribution
+
 #. **Version 1.1.9** : October 10, 2018
 
 		#. Updates to package directory structure and creation of utils.py. 

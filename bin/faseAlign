@@ -14,7 +14,7 @@ import shutil
 import site
 import audiolabel
 import sox
-import pkg_resources
+import pkg_resources as pr
 
 
 
@@ -45,13 +45,11 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 	if (args_wav is None) or (args_transcript is None):
 		parser.error('Must include wav and transcript arguments.')	
 
-	# Establish site-packages location for repository files
-	try:
-		sp = site.getsitepackages()[0]
-	except AttributeError: # site.getsitepackages() fails in virtualenv
-		sp = str(audiolabel.__file__)[:-13] # fragile hack here; assuming this file attribute is sp/audiolabel.py
-	repos = os.path.join(sp, 'faseAlign', 'model')
+	# Establish location for repository files
+	repos = pr.resource_filename('faseAlign','model/')
 
+	print(repos)
+	BOWSER
 
 	# Check stereo options
 	if ((args_stereo is True and args_left is None) or (args_stereo is True and args_right is None)):
