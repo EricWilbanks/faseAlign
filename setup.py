@@ -24,7 +24,7 @@ setup(
         'sox',
         'audiolabel'
     ],
-    scripts=['bin/faseAlign']
+    scripts=['bin/faseAlign'],
 	include_package_data=True,
 	zip_safe=False
 )
