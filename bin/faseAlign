@@ -505,6 +505,7 @@ def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_
 						
 						if value not in dict_split:
 							if args_phonemicize == True:
+								# TO-DO: if no custom dict has been added, `dict_sort` points towwards bin/model/dict_sort and throws an error since appending is not permitted. Add in test to see if dict_path is the tmppath version; if not, make it so before appending. see the comparable process on lines 201 in prep_dir()
 								with codecs.open(dict_path,'a','utf-8') as d:
 									print('Automatic Phonemicization: ' + current.orth.upper() + '- ' + ' '.join(current.phones))
 									d.write(current.orth.upper() + ' ' + ' '.join(current.phones) + '\n') # add automatic phonemicization results to dictionary
