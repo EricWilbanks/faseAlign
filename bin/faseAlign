@@ -45,11 +45,8 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 	if (args_wav is None) or (args_transcript is None):
 		parser.error('Must include wav and transcript arguments.')	
 
-	# Establish location for repository files
+	# Establish repository location for data files
 	repos = pr.resource_filename('faseAlign','model/')
-
-	print(repos)
-	BOWSER
 
 	# Check stereo options
 	if ((args_stereo is True and args_left is None) or (args_stereo is True and args_right is None)):
