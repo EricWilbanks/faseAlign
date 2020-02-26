@@ -28,7 +28,7 @@ Contribute
 
 Contact
 =======
-If you're experiencing issues or just have questions about the usage or installation of faseAlign, please feel free to contact me at wilbanks.ericw@gmail.com
+If you're experiencing issues or have questions about the usage or installation of faseAlign, please feel free to contact me at wilbanks.ericw@gmail.com
 
 .. toctree::
    :hidden:
