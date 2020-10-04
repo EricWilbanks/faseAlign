@@ -166,7 +166,7 @@ def sectionizeMLF(mlf):
 
 
 
-def prep_dir(tmppath,repos,dict_include):
+def prep_dir(tmppath,repos,dict_include,args_phonemicize):
  	
 
 	if os.path.exists(tmppath):
@@ -766,7 +766,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version, args_tier)
 
-	dict_path = prep_dir(tmppath,repos, dict_include)
+	dict_path = prep_dir(tmppath,repos, dict_include,args_phonemicize)
 	audio_align = process_wav(args_wav,tmppath,basename,channel_type)
 
 	with codecs.open(dict_path,'r','utf-8') as dict_sort:
