@@ -144,7 +144,7 @@ If this command fails, you need to install a newer version of python:
 	sudo apt-get install python3.8
 
 
-.. note:: the current version faseAlign has been tested on Python release 3.8
+.. note:: the current version of faseAlign has been tested on Python release 3.8
 
 
 Downloading HTK
