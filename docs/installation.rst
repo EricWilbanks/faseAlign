@@ -90,7 +90,7 @@ Make sure you have the most recent version of faseAlign by calling the following
 
 .. code-block:: bash
 
-	pip install git+git://github.com/EricWilbanks/faseAlign --upgrade
+	pip3 install git+https://github.com/EricWilbanks/faseAlign.git --upgrade
 
 Correctly Configure UTF-8
 +++++++++++++++++++++++++
@@ -141,10 +141,10 @@ If this command fails, you need to install a newer version of python:
 
 .. code-block:: bash
 
-	sudo apt-get install python3.6
+	sudo apt-get install python3.8
 
 
-.. note:: faseAlign has been tested on major Python releases 3.4+.
+.. note:: the current version faseAlign has been tested on Python release 3.8
 
 
 Downloading HTK
@@ -203,7 +203,7 @@ Audiolabel is the package we'll be using to interact with and create TextGrid fi
 
 .. code-block:: bash
 
-    pip3 install git+git://github.com/rsprouse/audiolabel
+    pip3 install git+https://github.com/rsprouse/audiolabel.git
 
 Installing faseAlign
 ********************
@@ -212,7 +212,7 @@ Once git is installed, you can download and install the newest version of faseAl
 
 .. code-block:: bash
 
-	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
+	pip3 install git+https://github.com/EricWilbanks/faseAlign.git --upgrade
 
 Installing sox
 **************
@@ -348,7 +348,7 @@ Audiolabel is the package we'll be using to interact with and create TextGrid fi
 
 .. code-block:: bash
 
-	pip3 install git+git://github.com/rsprouse/audiolabel
+	pip3 install git+https://github.com/rsprouse/audiolabel.git
 
 Installing faseAlign
 ********************
@@ -357,7 +357,8 @@ Once git is installed, you can download and install the newest version of faseAl
 
 .. code-block:: bash
 
-	pip3 install git+git://github.com/EricWilbanks/faseAlign --upgrade
+	pip3 install git+https://github.com/EricWilbanks/faseAlign.git --upgrade
+
 
 
 
