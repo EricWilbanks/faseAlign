@@ -845,4 +845,6 @@ if __name__ == '__main__':
 	parser.add_argument('-i', '--tier', help = 'specify a particular TextGrid tier to align; other tiers will be ignored. Default is to align all tiers.')
 	args = parser.parse_args()
 
+	print('test')
+	
 	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.phonemicize, args.tags, args.version, args.tier)
