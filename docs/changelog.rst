@@ -3,6 +3,12 @@
 
 Changelog
 =========
+#. **Version 1.1.10**: October 20, 2020
+
+		#. Changes to directory structure for more consistent distribution
+		#. Bug-fixes with dictionary access and phonemicization flag
+		#. Change to https git protocol (over git+git) for installation
+
 #. **Version 1.1.9** : October 10, 2018
 
 		#. Updates to package directory structure and creation of utils.py. 

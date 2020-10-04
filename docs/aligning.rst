@@ -121,3 +121,4 @@ To generate automatic syllable boundaries, as well as stressed/unstressed status
 
 	faseAlign -w input.wav -t transcript.TextGrid -y
 
+Note that this does not correctly account for exceptional hiatus class words. For example, dueto will be syllabified as 2, rather than 3 syllables.

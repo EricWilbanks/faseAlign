@@ -14,7 +14,7 @@ import shutil
 import site
 import audiolabel
 import sox
-import pkg_resources
+import pkg_resources as pr
 
 
 
@@ -37,7 +37,7 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 
 	# Print version information
 	if args_version is True:
-		version = pkg_resources.require('faseAlign')[0].version
+		version = pr.require('faseAlign')[0].version
 		print('faseAlign Version = ' + str(version))
 		sys.exit()
 
@@ -45,13 +45,8 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 	if (args_wav is None) or (args_transcript is None):
 		parser.error('Must include wav and transcript arguments.')	
 
-	# Establish site-packages location for repository files
-	try:
-		sp = site.getsitepackages()[0]
-	except AttributeError: # site.getsitepackages() fails in virtualenv
-		sp = str(audiolabel.__file__)[:-13] # fragile hack here; assuming this file attribute is sp/audiolabel.py
-	repos = os.path.join(sp, 'faseAlign', 'model')
-
+	# Establish repository location for data files
+	repos = pr.resource_filename('faseAlign','model/')
 
 	# Check stereo options
 	if ((args_stereo is True and args_left is None) or (args_stereo is True and args_right is None)):
@@ -171,7 +166,7 @@ def sectionizeMLF(mlf):
 
 
 
-def prep_dir(tmppath,repos,dict_include):
+def prep_dir(tmppath,repos,dict_include,args_phonemicize):
  	
 
 	if os.path.exists(tmppath):
@@ -218,6 +213,20 @@ def prep_dir(tmppath,repos,dict_include):
 			for line in full:
 				new_dict.write(line + '\n')
 
+	# allow for appending with phonemicization when no custom dict used by copying repos dict_sort to tmppath
+	elif args_phonemicize == True:
+		dict_path = os.path.join(tmppath,'new_dict.txt')
+		
+		with codecs.open(os.path.join(repos,"dict_sort"),'r','utf-8') as full_dict:
+			full_lines = full_dict.readlines()
+
+		full = list(full_lines)
+		full.sort()
+		full = [line.strip() for line in full]
+
+		with codecs.open(dict_path,'w','utf-8') as new_dict:
+			for line in full:
+				new_dict.write(line + '\n')			
 	else:
 		dict_path = os.path.join(repos, "dict_sort")
 
@@ -756,7 +765,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version, args_tier)
 
-	dict_path = prep_dir(tmppath,repos, dict_include)
+	dict_path = prep_dir(tmppath,repos, dict_include,args_phonemicize)
 	audio_align = process_wav(args_wav,tmppath,basename,channel_type)
 
 	with codecs.open(dict_path,'r','utf-8') as dict_sort:
@@ -835,5 +844,5 @@ if __name__ == '__main__':
 	parser.add_argument('-v', '--version', action = 'store_true', help = 'print version information')
 	parser.add_argument('-i', '--tier', help = 'specify a particular TextGrid tier to align; other tiers will be ignored. Default is to align all tiers.')
 	args = parser.parse_args()
-
+	
 	main(args.wav, args.stereo, args.left, args.right, args.transcript, args.outpath, args.name, args.missing, args.syllables, args.phonemicize, args.tags, args.version, args.tier)
