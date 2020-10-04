@@ -387,5 +387,5 @@ If you receive an error message, install sox with the following command:
 Windows Installation
 ++++++++++++++++++++
 
-(under development)
+Not currently supported.
 
