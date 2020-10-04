@@ -196,6 +196,15 @@ Package installation and configuration is taken care of by pip and git.
 
 	sudo apt-get install git
 
+Installing audiolabel
+*********************
+
+Audiolabel is the package we'll be using to interact with and create TextGrid files. To install audiolabel, use the following command:
+
+.. code-block:: bash
+
+    pip3 install git+git://github.com/rsprouse/audiolabel
+
 Installing faseAlign
 ********************
 
