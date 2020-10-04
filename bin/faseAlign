@@ -37,7 +37,7 @@ def process_arguments(args_wav, args_stereo, args_left, args_right, args_transcr
 
 	# Print version information
 	if args_version is True:
-		version = pkg_resources.require('faseAlign')[0].version
+		version = pr.require('faseAlign')[0].version
 		print('faseAlign Version = ' + str(version))
 		sys.exit()
 
