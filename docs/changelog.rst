@@ -3,7 +3,7 @@
 
 Changelog
 =========
-#. **Version 1.1.10**: October 14, 2019
+#. **Version 1.1.10**: October 20, 2020
 
 		#. Changes to directory structure for more consistent distribution
 		#. Bug-fixes with dictionary access and phonemicization flag
