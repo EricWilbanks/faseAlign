@@ -575,6 +575,8 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 		word_begin = correction(sec[0][0])
 		
 		# Ignore erroneous '.'
+		print(sec) # bug-testing; remove later!
+		print('\n') # bug-testing; remove later!
 		if len(sec[-1]) > 3:
 			word_end = correction(sec[-1][1])
 		else:
@@ -622,7 +624,6 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 					#	true_phone = phone					
 
 					output_intervals[curr]["phones"].append(tuple([begin+offset,end+offset,phone]))
-					print(tuple([begin+offset,end+offset,phone])) # bug-testing; remove later
 
 	return output_intervals
 
