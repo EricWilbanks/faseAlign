@@ -622,6 +622,7 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 					#	true_phone = phone					
 
 					output_intervals[curr]["phones"].append(tuple([begin+offset,end+offset,phone]))
+					print(tuple([begin+offset,end+offset,phone])) # bug-testing; remove later
 
 	return output_intervals
 
@@ -811,7 +812,8 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 		
 	out_tg = process_tg_intervals(tmppath,output_intervals,args_syllables)
 	
-	if args_name is not None: # override default output name
+	# override default output name
+	if args_name is not None: 
 		outname = args_name.replace('.TextGrid','') + '.TextGrid'
 	else:
 		outname = basename + '_aligned.TextGrid'
