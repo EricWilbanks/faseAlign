@@ -749,13 +749,13 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 	out_tg = audiolabel.LabelManager(codec='utf-8')
 
 	for speaker in sorted(output_intervals.keys()):
-		for tier_type in sorted(output_intervals[speaker].keys()):
-			print(tier_type + str(len(output_intervals[speaker].keys())))
+		for c, tier_type in enumerate(sorted(output_intervals[speaker].keys())):
 			tier_name = speaker + ' : ' + tier_type
 			t = audiolabel.IntervalTier(name=tier_name)
 			for i in output_intervals[speaker][tier_type]:
 				t.add(audiolabel.Label(text=i[2],t1=i[0],t2=i[1]))
-			out_tg.add(t)
+			# audioLabel tier index is 1-index, so we add
+			out_tg.add(t,idx=c+1)
 
 
 	return out_tg
