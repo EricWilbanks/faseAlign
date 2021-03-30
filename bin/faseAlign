@@ -750,6 +750,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 
 	for speaker in sorted(output_intervals.keys()):
 		for tier_type in sorted(output_intervals[speaker].keys()):
+			print(tier_type,length(output_intervals[speaker].keys()))
 			tier_name = speaker + ' : ' + tier_type
 			t = audiolabel.IntervalTier(name=tier_name)
 			for i in output_intervals[speaker][tier_type]:
