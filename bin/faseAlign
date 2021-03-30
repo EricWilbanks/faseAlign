@@ -754,7 +754,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 			t = audiolabel.IntervalTier(name=tier_name)
 			for i in output_intervals[speaker][tier_type]:
 				t.add(audiolabel.Label(text=i[2],t1=i[0],t2=i[1]))
-			# audioLabel tier index is 1-index, so we add
+			# audioLabel tier index is 1-index, so we add 1
 			out_tg.add(t,idx=c+1)
 
 

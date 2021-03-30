@@ -6,6 +6,7 @@ Changelog
 #. **Version 1.1.11**: March 30, 2021
 
 		#. Fixed bug where -n flag was removing characters from beginning and end of argument
+		#. Fixed bug where output TextGrids tiers may have been added in a random order; intended behavior is phones and then words.
 
 #. **Version 1.1.10**: October 20, 2020
 
