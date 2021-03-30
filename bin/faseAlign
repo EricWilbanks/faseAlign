@@ -811,7 +811,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 	out_tg = process_tg_intervals(tmppath,output_intervals,args_syllables)
 	
 	if args_name is not None: # override default output name
-		outname = args_name.strip('.TextGrid') + '.TextGrid'
+		outname = args_name.replace('.TextGrid','') + '.TextGrid'
 	else:
 		outname = basename + '_aligned.TextGrid'
 
