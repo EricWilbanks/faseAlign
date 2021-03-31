@@ -595,7 +595,6 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 				except TypeError: # speaker_indices is None (meaning we're processing a TextGrid)
 					pass
 			output_intervals[curr]["words"].append((word_begin+offset,word_end+offset,word))
-			print((word_begin+offset,word_end+offset,word))
 
 		# Get phone information
 		for phone_block in sec:
@@ -604,6 +603,11 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 			if len(current) > 3:
 				# Test for no-duration sp
 				intset = current[0:2]
+				# testing for floating 9s and rounding issue
+				if intset[1][-1] == '9':
+					print(intset) # bug-testing
+					intset[1] = float(intset[1]) + 1
+					print(intset)
 				integers = list(map(int, intset))
 				test_begin = float(integers[0])/10000000
 				test_end = float(integers[1])/10000000
