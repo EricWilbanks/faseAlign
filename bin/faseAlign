@@ -755,14 +755,17 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 	# Write output to textgrid object
 	out_tg = audiolabel.LabelManager(codec='utf-8')
 
+	c = 1
 	for speaker in sorted(output_intervals.keys()):
-		for c, tier_type in enumerate(sorted(output_intervals[speaker].keys())):
+		# reverse sorted : words --> (syllables -->) phones
+		for tier_type in sorted(output_intervals[speaker].keys(), reverse=True):
 			tier_name = speaker + ' : ' + tier_type
 			t = audiolabel.IntervalTier(name=tier_name)
 			for i in output_intervals[speaker][tier_type]:
 				t.add(audiolabel.Label(text=i[2],t1=i[0],t2=i[1]))
-			# audioLabel tier index is 1-index, so we add 1
-			out_tg.add(t,idx=c+1)
+			# audioLabel tier index governs order of tier appending; it's 1-index, not 0 index
+			out_tg.add(t,idx=c)
+			c += 1
 
 
 	return out_tg
