@@ -605,9 +605,7 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 				intset = current[0:2]
 				# testing for floating 9s and rounding issue
 				if intset[1][-1] == '9':
-					print(intset) # bug-testing
 					intset[1] = float(intset[1]) + 1
-					print(intset)
 				integers = list(map(int, intset))
 				test_begin = float(integers[0])/10000000
 				test_end = float(integers[1])/10000000
