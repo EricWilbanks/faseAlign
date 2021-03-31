@@ -23,6 +23,7 @@ def correction(x):
 	Correct the rounding error for the 11025hz sampling rate. 
 	See Yuan and Liberman (2008) or P2FA.readme for details.
 	"""
+	print(type(x)) # bug testing
 	x = float(x)
 	x = x - (x % 10) # Round down to deal with strangeness
 	x = x/10000000
