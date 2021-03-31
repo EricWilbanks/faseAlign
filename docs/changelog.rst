@@ -7,7 +7,7 @@ Changelog
 
 		#. Fixed bug where -n flag was removing characters from beginning and end of argument
 		#. Fixed bug where output TextGrids tiers may have been added in a random order; intended behavior is words and then phones.
-		# fixed bug where rounding errors in HTK output could cause output textgrids to have tiny empty intervals
+		#. Fixed bug where rounding errors in HTK output could cause output textgrids to have tiny empty intervals
 
 #. **Version 1.1.10**: October 20, 2020
 
