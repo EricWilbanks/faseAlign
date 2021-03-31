@@ -575,13 +575,12 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 		word_begin = correction(sec[0][0])
 		
 		# Ignore erroneous '.'
-		print(sec) # bug-testing; remove later!
-		print('\n') # bug-testing; remove later!
-
 		if len(sec[-1]) > 3:
-			word_end = correction(sec[-1][1])
-			if sec[-1][-2][-1] == '9': # bug-testing
-				print(sec[-1][2]) # bug-testing
+			# testing for floating 9s and rounding issue
+			if sec[-1][-2][-1] == '9':
+				word_end = correction(float(sec[-1][1]) + 1 )
+			else:
+				word_end = correction(sec[-1][1])
 		else:
 			word_end = correction(sec[-2][1])
 
