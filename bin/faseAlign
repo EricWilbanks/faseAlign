@@ -593,6 +593,7 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 				except TypeError: # speaker_indices is None (meaning we're processing a TextGrid)
 					pass
 			output_intervals[curr]["words"].append((word_begin+offset,word_end+offset,word))
+			print((word_begin+offset,word_end+offset,word))
 
 		# Get phone information
 		for phone_block in sec:
