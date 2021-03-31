@@ -577,10 +577,11 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 		# Ignore erroneous '.'
 		print(sec) # bug-testing; remove later!
 		print('\n') # bug-testing; remove later!
-		if sec[-1][-2][-1] == '9':
-			print(sec[-1][2])
+
 		if len(sec[-1]) > 3:
 			word_end = correction(sec[-1][1])
+			if sec[-1][-2][-1] == '9': # bug-testing
+				print(sec[-1][2]) # bug-testing
 		else:
 			word_end = correction(sec[-2][1])
 
