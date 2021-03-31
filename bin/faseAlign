@@ -570,7 +570,8 @@ def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): #
 	word_index = 0
 	
 	for sec in sectionizeMLF(section):
-		
+		print(sec)
+		print('\n')
 		# Get word information
 		word_begin = correction(sec[0][0])
 		
