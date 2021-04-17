@@ -1,0 +1,14 @@
+name: fase
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - pip
+  - git
+  - sox
+  - pandas
+  - pip:
+    - git+https://github.com/rsprouse/audiolabel
+    - git+https://github.com/EricWilbanks/faseAlign.git
+
