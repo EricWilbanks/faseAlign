@@ -455,6 +455,8 @@ def make_mlf_from_tg(dict_all,audio,tmppath,basename,textgrid,channel_type,chan_
 			dict_split.append(elem.split()[0])
 	total_chunks = 0
 
+	# TO-DO: add explicit testing against empty input textgrid arguments
+	# TO-DO: convert to modern audiolabel format; utilize read_label() df approach over for loops when possible
 
 	# Read in TextGrid
 	lm = audiolabel.LabelManager(from_file = textgrid, from_type = 'praat', codec ='utf-8')
