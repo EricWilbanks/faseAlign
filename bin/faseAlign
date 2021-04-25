@@ -566,7 +566,7 @@ def call_htk(tmppath,repos,name,dict_path):
 
 
 
-def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): # To-Do: reincorporate triphone stripping
+def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): # TO-DO: reincorporate triphone stripping
 
 	curr = speak
 	word_index = 0
