@@ -568,6 +568,8 @@ def call_htk(tmppath,repos,name,dict_path):
 
 def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): # TO-DO: reincorporate triphone stripping
 
+	print('dev work - make sure to remove alert')
+	
 	curr = speak
 	word_index = 0
 	
