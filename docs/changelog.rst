@@ -3,6 +3,10 @@
 
 Changelog
 =========
+#. **Version 1.1.12**: April 25, 2021
+
+		#. New installation instructions for conda environment method
+
 #. **Version 1.1.11**: March 30, 2021
 
 		#. Fixed bug where -n flag was removing characters from beginning and end of argument
