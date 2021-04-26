@@ -14,12 +14,18 @@
 
 .. _`HTK source code`: http://htk.eng.cam.ac.uk/ftp/software/HTK-3.4.1.tar.gz
 
+.. _`conda documentation`: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+
+.. _`miniconda linux installation page`: https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
+
+.. _`miniconda macOS installation page`: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html
+
 Installation
 ============
 
 .. note:: 
 
-	The most user-friendly option is the :ref:`install-bpm` which has faseAlign already included. This option however takes up a large (~14GB) amount of disk space. 
+	The most user-friendly option is the :ref:`install-bpm` which has much of the required software already included. This option however takes up a large (~14GB) amount of disk space. 
 
 	If you'd prefer to compile from source, choose either :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`. 
 
@@ -83,19 +89,29 @@ Next, open the terminal application and install/download HTK with the following 
 
 You will be prompted for the username and password from your HTK registration. 
 
-Updating faseAlign
-++++++++++++++++++
+Build the Conda env
++++++++++++++++++++
 
-Make sure you have the most recent version of faseAlign by calling the following in the terminal:
+We'll be using conda to manage our python packages and prevent other version issues. For more details on conda usage, please consult the `conda documentation`_.
+
+To build the conda environment, we'll need to download the environment.yml file, either manually or with the following command:
 
 .. code-block:: bash
 
-	pip3 install git+https://github.com/EricWilbanks/faseAlign.git --upgrade
+	wget https://raw.githubusercontent.com/EricWilbanks/faseAlign/master/environment.yml
+
+Next, we'll build the environment with conda. 
+
+.. code-block:: bash
+
+	conda env create -f environment.yml
+
+You should receive a success message along the lines of "Done. To activate this environment..."
 
 Correctly Configure UTF-8
 +++++++++++++++++++++++++
 
-At this point you likely want to ensure that accented (UTF-8) characters are correctly interpreted. To do so, enter the following to the terminal: 
+At this point you need to ensure that accented (UTF-8) characters are correctly interpreted. To do so, enter the following to the terminal: 
 
 .. code-block:: bash
 
@@ -107,6 +123,23 @@ At this point you likely want to ensure that accented (UTF-8) characters are cor
 	echo export LANGUAGE=en_US.UTF-8 >> ~/.profile
 
 	source ~/.bashrc
+
+Activating the fase environment
++++++++++++++++++++++++++++++++
+
+In order to use use faseAlign on the command line, we'll now have to activate the conda environment we've just built. You have to activate this environment each time you restart the session, using the following code:
+
+.. code-block:: bash
+
+	conda activate fase
+
+You should now see a `(fase)` to the left of your command line, indicating that the environment is active. To deactivate the environment, use the following:
+
+.. code-block:: bash
+
+	conda deactivate
+
+For more details on conda environment usage, please consult the `conda documentation`_.
 
 |
 |
@@ -127,24 +160,6 @@ Build from Source
 
 Linux Installation
 ++++++++++++++++++
-
-Making sure you have Python 3
-*****************************
-
-faseAlign is developed to run using Python 3. To check to see if you have Python 3 installed, execute the following code at the command line:
-
-.. code-block:: bash
-
-	python3 --version
-
-If this command fails, you need to install a newer version of python:
-
-.. code-block:: bash
-
-	sudo apt-get install python3.8
-
-
-.. note:: the current version of faseAlign has been tested on Python release 3.8
 
 
 Downloading HTK
@@ -187,53 +202,35 @@ If your installation was successful, the following command should print out the 
 
 	HVite -V
 
-Installing git
-**************
+Making sure you have miniconda
+******************************
 
-Package installation and configuration is taken care of by pip and git.
+We'll be using conda to build an environment for faseAlign. Follow the instructions on the `miniconda linux installation page`_ and ensure that you're following the instructions for *Miniconda - Python 3.9*. 
 
-.. code-block:: bash
 
-	sudo apt-get install git
+Build the Conda env
++++++++++++++++++++
 
-Installing audiolabel
-*********************
+We'll be using conda to manage our python packages and prevent other version issues. For more details on conda usage, please consult the `conda documentation`_.
 
-Audiolabel is the package we'll be using to interact with and create TextGrid files. To install audiolabel, use the following command:
-
-.. code-block:: bash
-
-    pip3 install git+https://github.com/rsprouse/audiolabel.git
-
-Installing faseAlign
-********************
-
-Once git is installed, you can download and install the newest version of faseAlign using the following command:
+To build the conda environment, we'll need to download the environment.yml file, either manually or with the following command:
 
 .. code-block:: bash
 
-	pip3 install git+https://github.com/EricWilbanks/faseAlign.git --upgrade
+	wget https://raw.githubusercontent.com/EricWilbanks/faseAlign/master/environment.yml
 
-Installing sox
-**************
-
-The sox utility is used to downsample and extract sound files. Try the command below to see if sox is already installed:
-
-.. code-block:: bash 
-	
-	sox --version
-
-If you receive an error message, install sox with the following command:
+Next, we'll build the environment with conda. 
 
 .. code-block:: bash
 
-	sudo apt-get install sox
+	conda env create -f environment.yml
 
+You should receive a success message along the lines of "Done. To activate this environment..."
 
 Correctly Configure UTF-8
-*************************
++++++++++++++++++++++++++
 
-At this point you likely want to ensure that accented (UTF-8) characters are correctly interpreted. To do so, enter the following to the terminal: 
+At this point you need to ensure that accented (UTF-8) characters are correctly interpreted. To do so, enter the following to the terminal: 
 
 .. code-block:: bash
 
@@ -246,6 +243,22 @@ At this point you likely want to ensure that accented (UTF-8) characters are cor
 
 	source ~/.bashrc
 
+Activating the fase environment
++++++++++++++++++++++++++++++++
+
+In order to use use faseAlign on the command line, we'll now have to activate the conda environment we've just built. You have to activate this environment each time you restart the session, using the following code:
+
+.. code-block:: bash
+
+	conda activate fase
+
+You should now see a `(fase)` to the left of your command line, indicating that the environment is active. To deactivate the environment, use the following:
+
+.. code-block:: bash
+
+	conda deactivate
+
+For more details on conda environment usage, please consult the `conda documentation`_.
 
 |
 |
@@ -282,16 +295,6 @@ Next, we need a package manager. Install Homebrew through the terminal:
 
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-Making sure you have Python 3
-*****************************
-
-Now we make sure we have a current version of Python3:
-
-.. code-block:: bash
-
-	brew install python3
-
-
 Downloading HTK
 ***************
 
@@ -332,52 +335,63 @@ If your installation was successful, the following command should print out the 
 
 	HVite -V
 
-Installing git
-**************
+Making sure you have miniconda
+******************************
 
-Package installation and configuration is taken care of by pip and git.
+We'll be using conda to build an environment for faseAlign. Follow the instructions on the `miniconda macOS installation page`_ and ensure that you're following the instructions for *Miniconda - Python 3.9*. 
 
-.. code-block:: bash
 
-	brew install git
+Build the Conda env
++++++++++++++++++++
 
-Installing audiolabel
-*********************
+We'll be using conda to manage our python packages and prevent other version issues. For more details on conda usage, please consult the `conda documentation`_.
 
-Audiolabel is the package we'll be using to interact with and create TextGrid files. To install audiolabel, use the following command:
-
-.. code-block:: bash
-
-	pip3 install git+https://github.com/rsprouse/audiolabel.git
-
-Installing faseAlign
-********************
-
-Once git is installed, you can download and install the newest version of faseAlign using the following command:
+To build the conda environment, we'll need to download the environment.yml file, either manually or with the following command:
 
 .. code-block:: bash
 
-	pip3 install git+https://github.com/EricWilbanks/faseAlign.git --upgrade
+	wget https://raw.githubusercontent.com/EricWilbanks/faseAlign/master/environment.yml
 
-
-
-
-Installing sox
-**************
-
-The sox utility is used to downsample and extract sound files. Try the command below to see if sox is already installed:
-
-.. code-block:: bash 
-	
-	sox --version
-
-If you receive an error message, install sox with the following command:
+Next, we'll build the environment with conda. 
 
 .. code-block:: bash
 
-	brew install sox
+	conda env create -f environment.yml
 
+You should receive a success message along the lines of "Done. To activate this environment..."
 
+Correctly Configure UTF-8
++++++++++++++++++++++++++
+
+At this point you need to ensure that accented (UTF-8) characters are correctly interpreted. To do so, enter the following to the terminal: 
+
+.. code-block:: bash
+
+	echo export LC_ALL=en_US.UTF-8 >> ~/.bashrc
+	echo export LC_ALL=en_US.UTF-8 >> ~/.profile
+	echo export LANG=en_US.UTF-8 >> ~/.bashrc
+	echo export LANG=en_US.UTF-8 >> ~/.profile
+	echo export LANGUAGE=en_US.UTF-8 >> ~/.bashrc
+	echo export LANGUAGE=en_US.UTF-8 >> ~/.profile
+
+	source ~/.bashrc
+
+Activating the fase environment
++++++++++++++++++++++++++++++++
+
+In order to use use faseAlign on the command line, we'll now have to activate the conda environment we've just built. You have to activate this environment each time you restart the session, using the following code:
+
+.. code-block:: bash
+
+	conda activate fase
+
+You should now see a `(fase)` to the left of your command line, indicating that the environment is active. To deactivate the environment, use the following:
+
+.. code-block:: bash
+
+	conda deactivate
+
+For more details on conda environment usage, please consult the `conda documentation`_.
 
 |
 |
@@ -388,5 +402,5 @@ If you receive an error message, install sox with the following command:
 Windows Installation
 ++++++++++++++++++++
 
-Not currently supported.
+Not supported. Please use the :ref:`install-bpm`.
 
