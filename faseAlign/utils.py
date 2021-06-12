@@ -52,6 +52,8 @@ class spanish_word(object):
 
 	def syllabify(self):
 
+		print(self.phones)
+		print(typeof(self.phones))
 		# convert to cv skeleton
 		cv = ''.join(['c' if p in spanish_word.consonants else 'v' for p in self.phones])
 

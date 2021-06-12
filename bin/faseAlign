@@ -739,6 +739,7 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words):
 					# override phones generated from spanish_word() for words defined in the custom dictionary
 					if entry[2] in custom_words:
 						print(entry[2])
+						test_tmp = spanish_word(entry[2])
 						current = spanish_word(entry[2], override = True, custom_phones = phones)
 					else:
 						current = spanish_word(entry[2])
