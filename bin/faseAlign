@@ -174,6 +174,9 @@ def prep_dir(tmppath,repos,dict_include,args_phonemicize):
 	os.mkdir(tmppath)
 	os.mkdir(os.path.join(tmppath,'chunks'))
 
+	# initialize null custom_words variable
+	custom_words = None
+
 	if dict_include == True:
 
 		# Check to see if any illegal characters are in dictionary
@@ -203,6 +206,8 @@ def prep_dir(tmppath,repos,dict_include,args_phonemicize):
 			full_lines = full_dict.readlines()
 		
 		custom_lines = set(custom_lines)
+		# create list of custom words to pass to later function checks
+		custom_words = [e.split()[0] for e in list(custom_lines)]
 		full_lines = set(full_lines)
 
 		full = list(full_lines | custom_lines)
@@ -230,7 +235,7 @@ def prep_dir(tmppath,repos,dict_include,args_phonemicize):
 	else:
 		dict_path = os.path.join(repos, "dict_sort")
 
-	return dict_path
+	return dict_path, custom_words
 
 
 def process_wav(audio,tmppath,basename,channel_type):
@@ -567,7 +572,7 @@ def call_htk(tmppath,repos,name,dict_path):
 
 
 def process_mlf_output(section,speak,output_intervals,offset,speaker_indices): # TO-DO: reincorporate triphone stripping
-
+	
 	curr = speak
 	word_index = 0
 	
@@ -702,7 +707,7 @@ def align_from_txt(speaker_indices,speaker_list,first_speaker,tmppath,repos,base
 
 
 
-def process_tg_intervals(tmppath,output_intervals,args_syllables): 
+def process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words): 
 
 	# Compute global min and max time
 	for speaker in output_intervals:
@@ -727,12 +732,21 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables):
 			output_intervals[speaker]["syllables"] = []
 			for entry in output_intervals[speaker]["words"]:
 				if entry[2] not in ['sp','{SIL}','{LG}','{BR}','{CG}','{NS}']:
-					current = spanish_word(entry[2])
 					word_s = entry[0]
 					word_e = entry[1]
 					phones  = [p for p in output_intervals[speaker]["phones"] if ((p[0] >= word_s) and (p[1] <= word_e))] # all phones which fall within word times
+
+					# override phones generated from spanish_word() for words defined in the custom dictionary
+					if entry[2] in custom_words:
+						# setting custom_phones to be just the phone label, e[2], for all entries in output phones
+						current = spanish_word(entry[2], override = True, custom_phones = [e[2] for e in phones])
+					else:
+						current = spanish_word(entry[2])
+
+					# sanity check that custom phone override process was successful
 					if len(phones) != len(current.phones):
-						print('WARNING! - unequal phone numbers: ' + str(phones) + ' - ' + str(current.phones)) # TO-DO: decide on solution for words with double entries in dictionary and functionality of spanish_word.to_phones()
+						print('WARNING! - unequal phone numbers: ' + str(phones) + ' - ' + str(current.phones))
+
 					for syll in current.syllables:
 						curr_syll = current.syllables[syll]
 						syll_s = phones[0][0] # start time of first phone in syllable
@@ -786,7 +800,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 
 	tmppath, basename, repos, outpath, transcript_type, channel_type, chan_1, chan_2, dict_include, args_tags  = process_arguments(args_wav, args_stereo, args_left, args_right, args_transcript, args_outpath, args_missing, args_tags, args_version, args_tier)
 
-	dict_path = prep_dir(tmppath,repos, dict_include,args_phonemicize)
+	dict_path, custom_words = prep_dir(tmppath,repos, dict_include,args_phonemicize)
 	audio_align = process_wav(args_wav,tmppath,basename,channel_type)
 
 	with codecs.open(dict_path,'r','utf-8') as dict_sort:
@@ -829,7 +843,7 @@ def main(args_wav, args_stereo, args_left, args_right, args_transcript, args_out
 	else:
 		output_intervals = align_from_tg(chunk_index,total_chunks,tmppath,repos,dict_path)
 		
-	out_tg = process_tg_intervals(tmppath,output_intervals,args_syllables)
+	out_tg = process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words)
 	
 	# override default output name
 	if args_name is not None: 

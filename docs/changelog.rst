@@ -3,6 +3,10 @@
 
 Changelog
 =========
+#. **Version 1.1.13**: June 12, 2021
+
+		#. Fixed bug where custom dictionary entries (-m) did not correctly interact with automatic syllabification (-y)
+
 #. **Version 1.1.12**: April 25, 2021
 
 		#. New installation instructions for conda environment method
