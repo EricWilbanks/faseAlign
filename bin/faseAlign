@@ -737,9 +737,9 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words):
 					word_e = entry[1]
 					phones  = [p for p in output_intervals[speaker]["phones"] if ((p[0] >= word_s) and (p[1] <= word_e))] # all phones which fall within word times
 					if len(phones) != len(current.phones):
-						print(current.orth.upper())
 						# override phones generated from spanish_word() for words defined in the custom dictionary
 						if current.orth.upper() in custom_words:
+							print(current)
 							current.phones = phones
 						else:
 							print('WARNING! - unequal phone numbers: ' + str(phones) + ' - ' + str(current.phones)) # TO-DO: decide on solution for words with double entries in dictionary and functionality of spanish_word.to_phones()
