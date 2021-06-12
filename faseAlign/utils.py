@@ -16,9 +16,13 @@ class spanish_word(object):
 	corr_tups = [('ll','y'), ('qu','k'), ('ce','se'), ('cé','sé'), ('ci','si'), ('cí','sí'), ('ge','xe'), ('gé','xé'), ('gi','xi'), ('gí','xí'), ('j','x'), ('v','b'), ('z','s'), ('w','u'), ('rr','R'), ('\\br','R'), ('ñ','1'), ('ch','2'), ('c','k'), ('h',''), ('ü','u'), ('gui','gi'), ('gue','ge'), ('guí','gí'), ('gué','gé')]
 	corr_tups2 = [('ú','u'), ('ó','o'), ('í','i'), ('é','e'), ('á','a')]
 
-	def __init__(self, word):
+	def __init__(self, word, override = False, custom_phones = None):
 		self.orth = word.lower()
-		self.phones = self.to_phones()
+		# overriding phone process for user-defined custom words
+		if override == True:
+			self.phones = custom_phones
+		else:
+			self.phones = self.to_phones()
 		self.syllables = self.process_syllables()
 		# Transform numbers back to digraphs
 		self.phones[:] = [re.sub('1','NY',p) for p in self.phones] 

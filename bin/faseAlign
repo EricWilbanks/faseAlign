@@ -732,17 +732,21 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words):
 			output_intervals[speaker]["syllables"] = []
 			for entry in output_intervals[speaker]["words"]:
 				if entry[2] not in ['sp','{SIL}','{LG}','{BR}','{CG}','{NS}']:
-					current = spanish_word(entry[2])
 					word_s = entry[0]
 					word_e = entry[1]
 					phones  = [p for p in output_intervals[speaker]["phones"] if ((p[0] >= word_s) and (p[1] <= word_e))] # all phones which fall within word times
+
+					# override phones generated from spanish_word() for words defined in the custom dictionary
+					if entry[2] in custom_words:
+						print(entry[2])
+						current = spanish_word(entry[2], override = True, custom_phones = phones)
+					else:
+						current = spanish_word(entry[2])
+
+					# sanity check that custom phone override process was successful
 					if len(phones) != len(current.phones):
-						# override phones generated from spanish_word() for words defined in the custom dictionary
-						if current.orth.upper() in custom_words:
-							print(current)
-							current.phones = phones
-						else:
-							print('WARNING! - unequal phone numbers: ' + str(phones) + ' - ' + str(current.phones)) # TO-DO: decide on solution for words with double entries in dictionary and functionality of spanish_word.to_phones()
+						print('WARNING! - unequal phone numbers: ' + str(phones) + ' - ' + str(current.phones))
+
 					for syll in current.syllables:
 						curr_syll = current.syllables[syll]
 						syll_s = phones[0][0] # start time of first phone in syllable
