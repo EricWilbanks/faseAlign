@@ -203,6 +203,8 @@ def prep_dir(tmppath,repos,dict_include,args_phonemicize):
 			full_lines = full_dict.readlines()
 		
 		custom_lines = set(custom_lines)
+		print('testing: remove this later')
+		print(str(custom_lines)
 		full_lines = set(full_lines)
 
 		full = list(full_lines | custom_lines)
