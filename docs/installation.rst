@@ -23,13 +23,6 @@
 Installation
 ============
 
-.. note:: 
-
-	The easiest installation uses conda environments for :ref:`install-linux` or :ref:`install-mac`.
-
-	Another option is to use a pre-compiled virtual machine image: :ref:`install-bpm` which has much of the required software already included. This option however takes up a large (~14GB) amount of disk space. This is the only supported installation options for Windows users.
-
-
 |
 |
 |
@@ -37,9 +30,12 @@ Installation
 Build from Source
 -----------------
 
-.. note::
-	
-	If you'd prefer to build from the source code instead of using the Virtual Machine, choose one of the following options: :ref:`install-linux`, :ref:`install-mac`, or :ref:`install-windows`.
+.. note:: 
+
+	The easiest installation uses conda environments for :ref:`install-linux` or :ref:`install-mac`.
+
+	Another option is to use a pre-compiled virtual machine image: :ref:`install-bpm` which has much of the required software already included. This option however takes up a large (~14GB) amount of disk space. This is the only supported installation options for Windows users.
+
 
 |
 |
