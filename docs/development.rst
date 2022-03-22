@@ -20,4 +20,4 @@ For the most part, phones correspond to their IPA symbols. Exceptions are noted 
 Notes on Development
 --------------------
 
-The acoustic models used in this tool are triphone-HMMs trained using the HTK on data from 20 spontaneous interviews from the Corpus del Español de Raleigh-Durham (CERD) created and maintained by Drs. `Jim Michnowicz`_ and `Rebecca Ronquest`_. A detailed description of the development of this tool can be found in the slides from our `NWAV 2015`_ presentation`.
+The acoustic models used in this tool are triphone-HMMs trained using the HTK on data from 20 spontaneous interviews from the Corpus del Español de Raleigh-Durham (CERD) created and maintained by Drs. `Jim Michnowicz`_ and `Rebecca Ronquest`_. A detailed description of the development of this tool can be found in the slides from our `NWAV 2015`_ presentation.
