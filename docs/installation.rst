@@ -296,7 +296,7 @@ Virtual Machine Installation
 Download BPM Image
 ++++++++++++++++++
 
-The easiest way to run faseAlign on your own computer is to use a virtual machine image with the required software already included. The image we'll be using is based on the `Berkeley Phonetics Machine (BPM)`_, in turn derived from the `Berkeley Common Environment (BCE)`_. 
+Another way to run faseAlign on your own computer is to use a virtual machine image with the required software already included. The image we'll be using is based on the `Berkeley Phonetics Machine (BPM)`_, in turn derived from the `Berkeley Common Environment (BCE)`_. 
 
 Download the `faseAlign OVA image`_.
 
