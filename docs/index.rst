@@ -39,7 +39,6 @@ If you're experiencing issues or have questions about the usage or installation 
    installation
    preparation
    aligning
-   troubleshooting
    development
    changelog
 
