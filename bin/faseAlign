@@ -737,11 +737,14 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words):
 					phones  = [p for p in output_intervals[speaker]["phones"] if ((p[0] >= word_s) and (p[1] <= word_e))] # all phones which fall within word times
 
 					# override phones generated from spanish_word() for words defined in the custom dictionary
-					if entry[2] in custom_words:
-						# setting custom_phones to be just the phone label, e[2], for all entries in output phones
-						current = spanish_word(entry[2], override = True, custom_phones = [e[2] for e in phones])
+					if custom_words is not None:
+						if entry[2] in custom_words:
+							# setting custom_phones to be just the phone label, e[2], for all entries in output phones
+							current = spanish_word(entry[2], override = True, custom_phones = [e[2] for e in phones])
+						else:
+							current = spanish_word(entry[2])
 					else:
-						current = spanish_word(entry[2])
+							current = spanish_word(entry[2])
 
 					# sanity check that custom phone override process was successful
 					if len(phones) != len(current.phones):
