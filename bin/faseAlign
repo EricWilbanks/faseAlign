@@ -738,8 +738,6 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words):
 
 					# override phones generated from spanish_word() for words defined in the custom dictionary
 					if custom_words is not None:
-						if entry[2] is None: # bug hunting; remove
-							print(entry)
 						if entry[2] in custom_words:
 							# setting custom_phones to be just the phone label, e[2], for all entries in output phones
 							current = spanish_word(entry[2], override = True, custom_phones = [e[2] for e in phones])
@@ -753,10 +751,15 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words):
 						print('WARNING! - unequal phone numbers: ' + str(phones) + ' - ' + str(current.phones))
 
 					for syll in current.syllables:
-						curr_syll = current.syllables[syll]
-						syll_s = phones[0][0] # start time of first phone in syllable
-						syll_e = phones[len(curr_syll)-1][1] # end time of last phone in syllable
-						phones[:] = phones[len(curr_syll):] # remove syllable's phones from list
+						try:
+							curr_syll = current.syllables[syll]
+							syll_s = phones[0][0] # start time of first phone in syllable
+							syll_e = phones[len(curr_syll)-1][1] # end time of last phone in syllable
+							phones[:] = phones[len(curr_syll):] # remove syllable's phones from list
+						except IndexError: # bug hunting; remove
+							print(current.syllables)
+							print(current.syllables[syll])
+							sys.exit()
 						if syll == current.stressed:
 							text = "stressed"
 						else:
