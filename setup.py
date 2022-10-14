@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='faseAlign',
-    version='1.1.13',
+    version='1.1.14',
     description='Command Line python module for Force Aligning Spanish using HTK',
     url='https://github.com/EricWilbanks/faseAlign',
     author='Eric Wilbanks',

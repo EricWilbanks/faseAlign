@@ -21,10 +21,13 @@ class spanish_word(object):
 		# overriding phone process for user-defined custom words
 		if override == True:
 			self.phones = custom_phones
+			# transform digraphs into single symbols
+			self.phones[:] = [re.sub('NY','1',p) for p in self.phones] 
+			self.phones[:] = [re.sub('CH','2',p) for p in self.phones]
 		else:
 			self.phones = self.to_phones()
 		self.syllables = self.process_syllables()
-		# Transform numbers back to digraphs
+		# transform numbers back to digraphs
 		self.phones[:] = [re.sub('1','NY',p) for p in self.phones] 
 		self.phones[:] = [re.sub('2','CH',p) for p in self.phones]
 		for key in self.syllables:
