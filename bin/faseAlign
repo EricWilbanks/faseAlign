@@ -757,10 +757,6 @@ def process_tg_intervals(tmppath,output_intervals,args_syllables,custom_words):
 							syll_s = phones[0][0] # start time of first phone in syllable
 							syll_e = phones[len(curr_syll)-1][1] # end time of last phone in syllable
 							phones[:] = phones[len(curr_syll):] # remove syllable's phones from list
-						except IndexError: # bug hunting; remove
-							print(current.syllables)
-							print(current.syllables[syll])
-							sys.exit()
 						if syll == current.stressed:
 							text = "stressed"
 						else:

@@ -3,6 +3,12 @@
 
 Changelog
 =========
+#. **Version 1.1.14**: October 13, 2022
+
+		#. Fixed issue where words in `dict_sort` whose pronunciations differ from the automatic phonemicizations would cause syllabification to fail with an IndexError.
+		#. Fixed issue where syllabification could fail when custom dictionaries weren't also enabled.
+		#. Fixed issue where digraphs (NY and CH) were not correctly treated when syllabifying words from custom dictionaries.
+
 #. **Version 1.1.13**: June 12, 2021
 
 		#. Fixed bug where custom dictionary entries (-m) did not correctly interact with automatic syllabification (-y)
