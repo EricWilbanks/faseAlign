@@ -1,5 +1,7 @@
-faseAlign
-=========
+# [ARCHIVED] faseAlign
+
+> [!WARNING]
+> **This project is no longer actively maintained.** No bug fixes, feature improvements, or pull requests will be pursued.
 
 Documentation can be found at http://fasealign.readthedocs.io/.
 
